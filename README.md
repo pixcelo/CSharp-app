@@ -8,4 +8,17 @@
 - 複雑な業務ロジックを独立した構成要素として分離する
 - アプリケーションの他の構成要素を業務ロジックを表現した構成要素に依存させる
 
-test
+## 正誤表
+341
+リスト14.8の上から4行目
+```cs
+誤	public UserGetInteractor(IUserGetPresenter presenter) 
+{
+
+正	public StubUserGetInteractor(IUserGetPresenter presenter)  
+{
+```
+
+## Reference
+- [正誤表](https://www.shoeisha.co.jp/book/detail/9784798150727#errata)
+- [Git Hub samples](https://github.com/nrslib/itddd)
