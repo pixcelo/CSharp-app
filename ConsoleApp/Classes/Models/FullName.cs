@@ -15,13 +15,17 @@
 
         public string FirstName { get; }
         public string LastName { get; }
+        // public string MiddleName { get; set; }
 
+        // もしプロパティにMiddleNameが追加されても
+        // ここに比較を追加するだけで良いためメンテナンスが簡単になる
         public bool Equals(FullName? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             return string.Equals(FirstName, other.FirstName)
                    && string.Equals(LastName, other.LastName);
+                   // && string.Equals(MiddleName, other.MiddleName);
         }
 
         public override bool Equals(object? obj)
