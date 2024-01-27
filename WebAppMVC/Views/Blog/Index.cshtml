@@ -1,0 +1,21 @@
+﻿@model IEnumerable<WebAppMVC.Models.Blog>
+
+<h2>Blogs</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model)
+        {
+            <tr>
+                <td>@blog.Id</td>
+                <td>@blog.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
