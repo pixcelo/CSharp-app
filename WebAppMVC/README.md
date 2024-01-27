@@ -92,6 +92,7 @@ app.Run();
 ```
 
 ## マイグレーション
+### DB設定
 ```
 dotnet ef migrations add InitialCreate
 ```
@@ -117,3 +118,40 @@ dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 実行すると設定したSQLServerインスタンスにマイグレーションファイルのデータベース、テーブル等が作成される
+
+### シーディング
+`DbContext`クラスにシーディングを追加
+```cs
+using Microsoft.EntityFrameworkCore;
+using WebAppMVC.Models;
+
+namespace WebAppMVC.Data
+{
+    public class BlogContext : DbContext
+    {
+        public BlogContext(DbContextOptions<BlogContext> options) : base(options)
+        {
+        }
+
+        public DbSet<Blog> Blogs { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Blog>().HasData(
+                new Blog { Id = 1, Name = "First Blog" },
+                new Blog { Id = 2, Name = "Second Blog" },
+                new Blog { Id = 3, Name = "Third Blog" }
+                // その他のシードデータを追加...
+            );
+        }
+    }
+}
+```
+
+マイグレーション追加
+```
+dotnet ef migrations add SeedBlog
+dotnet ef database update
+```
+実行すると`Blog`テーブルにインサートされる
+
