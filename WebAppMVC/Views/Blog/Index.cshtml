@@ -1,12 +1,17 @@
 ﻿@model IEnumerable<WebAppMVC.Models.Blog>
 
-<h2>Blogs</h2>
+<h2>Blog Posts</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">New Blog Post</a>
+</p>
 
 <table class="table">
     <thead>
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -15,6 +20,10 @@
             <tr>
                 <td>@blog.Id</td>
                 <td>@blog.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@blog.Id" class="btn btn-secondary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@blog.Id" class="btn btn-danger">Delete</a>
+                </td>
             </tr>
         }
     </tbody>
