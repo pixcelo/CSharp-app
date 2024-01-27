@@ -155,3 +155,89 @@ dotnet ef database update
 ```
 実行すると`Blog`テーブルにインサートされる
 
+
+## APIキーを叩く
+
+シークレット ストレージを有効にする
+```
+dotnet user-secrets init
+```
+
+シークレットマネージャーにAPIキーを保存
+```
+dotnet user-secrets set "OpenWeatherApiKey" "YOUR_API_KEY"
+```
+※参考<br>
+[ASP.NET Core での開発におけるアプリ シークレットの安全な保存](https://learn.microsoft.com/ja-jp/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=windows)
+
+アプリケーションでの読み込み
+```cs
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Text.Json;
+using WebAppMVC.Models;
+
+public class WeatherService
+{
+    private readonly HttpClient _httpClient;
+    private readonly string _apiKey;
+
+    public WeatherService(HttpClient httpClient, IConfiguration configuration)
+    {
+        _httpClient = httpClient;
+        _apiKey = configuration["OpenWeatherApiKey"];
+    }
+
+    public async Task<WeatherModel> GetCurrentWeatherAsync(string city)
+    {
+        var url = $"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={_apiKey}&units=metric";
+        var response = await _httpClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+
+        var content = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<WeatherModel>(content, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
+    }
+}
+```
+
+`Program.cs`にてDIコンテナへのサービス登録
+```cs
+using Microsoft.EntityFrameworkCore;
+using WebAppMVC.Models;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<WeatherService>(); // 追加
+```
+
+`WeatherController.cs`を作成 (ビュー、モデルも併せて作成)
+```cs
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using WebAppMVC.Models;
+using WebAppMVC.Services;
+
+namespace WebAppMVC.Controllers
+{
+    public class WeatherController : Controller
+    {
+        private readonly WeatherService _weatherService;
+
+        public WeatherController(WeatherService weatherService)
+        {
+            _weatherService = weatherService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var weather = await _weatherService.GetCurrentWeatherAsync("Tokyo");
+            return View(weather);
+        }
+    }
+}
+```

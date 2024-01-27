@@ -1,0 +1,7 @@
+﻿@model WeatherModel
+
+<h2>Current Weather</h2>
+<p>Location: @Model.Name</p>
+<p>Temperature: @Model.Main.Temp &deg;C</p>
+<p>Condition: @Model.Weather.FirstOrDefault()?.Main</p>
+<p>Description: @Model.Weather.FirstOrDefault()?.Description</p>

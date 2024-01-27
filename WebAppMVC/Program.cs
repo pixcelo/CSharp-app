@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using WebAppMVC.Models;
+using WebAppMVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<WeatherService>();
 
 // DbContext
 var connectionString = builder.Configuration.GetConnectionString("BlogContext");
