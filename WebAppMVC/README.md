@@ -443,3 +443,6 @@ public class MyEntity
 dotnet ef migrations add UpdateMyPropertySize
 dotnet ef database update
 ```
+
+## Google login
+[ASP.NET Core での Google 外部ログインのセットアップ](https://learn.microsoft.com/ja-jp/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-8.0)

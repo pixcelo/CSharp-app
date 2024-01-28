@@ -11,12 +11,23 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<WeatherService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<BlogContext>()
+    .AddDefaultTokenProviders();
+
 // 認証サービスを追加
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie(options =>
         {
             options.LoginPath = "/Account/Login";
             options.LogoutPath = "/Account/Logout";
+        })
+        .AddGoogle(googleOptions =>
+        {
+            // Google API Consoleで取得したクライアントIDとシークレットを使用
+            googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+            googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+            googleOptions.CallbackPath = new PathString("/signin-google");
         });
 
 // DbContext

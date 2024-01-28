@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebAppMVC.Models
 {
-    public class BlogContext : DbContext
+    public class BlogContext : IdentityDbContext<IdentityUser>
     {
         public BlogContext(DbContextOptions<BlogContext> options)
             : base(options)
@@ -11,10 +13,10 @@ namespace WebAppMVC.Models
 
         public DbSet<Blog> Blog { get; set; }
         public DbSet<User> User { get; set; }
-
-        // シーディング
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // シーディング
             modelBuilder.Entity<Blog>().HasData(
                 new Blog { Id = 1, Name = "First Blog" },
                 new Blog { Id = 2, Name = "Second Blog" },
@@ -25,6 +27,8 @@ namespace WebAppMVC.Models
             modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, Username = "testuser", Password = "123" }
             );
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

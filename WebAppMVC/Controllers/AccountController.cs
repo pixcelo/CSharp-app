@@ -11,11 +11,16 @@ public class AccountController : Controller
 {
     private readonly BlogContext _context;
     private readonly IPasswordHasher<User> _passwordHasher;
+    private readonly SignInManager<IdentityUser> _signInManager;
 
-    public AccountController(BlogContext context, IPasswordHasher<User> passwordHasher)
+    public AccountController(
+        BlogContext context, 
+        IPasswordHasher<User> passwordHasher, 
+        SignInManager<IdentityUser> signInManager)
     {
         _context = context;
         _passwordHasher = passwordHasher;
+        _signInManager = signInManager;
     }
 
     // GET: Account/Register
@@ -118,5 +123,44 @@ public class AccountController : Controller
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToAction("Index", "Home");
+    }
+
+    public IActionResult GoogleLogin()
+    {
+        var redirectUrl = Url.Action("GoogleResponse", "Account");
+        var properties = _signInManager.ConfigureExternalAuthenticationProperties("Google", redirectUrl);
+        return new ChallengeResult("Google", properties);
+    }
+
+    public async Task<IActionResult> GoogleResponse()
+    {
+        var info = await _signInManager.GetExternalLoginInfoAsync();
+        if (info == null)
+        {
+            return RedirectToAction(nameof(Login));
+        }
+
+        var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+        if (result.Succeeded)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        else
+        {
+            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+            var user = new User { Username = email, Email = email };
+            var identityResult = await _userManager.CreateAsync(user);
+            if (identityResult.Succeeded)
+            {
+                identityResult = await _userManager.AddLoginAsync(user, info);
+                if (identityResult.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            return RedirectToAction(nameof(Register));
+        }
     }
 }
