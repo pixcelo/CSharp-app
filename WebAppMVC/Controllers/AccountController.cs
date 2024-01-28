@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -9,10 +10,54 @@ using WebAppMVC.ViewModels;
 public class AccountController : Controller
 {
     private readonly BlogContext _context;
+    private readonly IPasswordHasher<User> _passwordHasher;
 
-    public AccountController(BlogContext context)
+    public AccountController(BlogContext context, IPasswordHasher<User> passwordHasher)
     {
         _context = context;
+        _passwordHasher = passwordHasher;
+    }
+
+    // GET: Account/Register
+    public IActionResult Register()
+    {
+        return View();
+    }
+
+    // POST: Account/Register
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Register(RegisterViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {            
+            ModelState.AddModelError(string.Empty, "登録に失敗しました。入力内容を確認してください。");
+            return View(model);
+        }
+
+        // データベースに同じメールアドレスがあるか確認
+        if (_context.User.Any(u => u.Email == model.Email))
+        {
+            ModelState.AddModelError("Email", "An account with this email already exists.");
+            return View(model);
+        }
+
+        var user = new User { Email = model.Email, Username = model.Username };
+        user.Password = _passwordHasher.HashPassword(user, model.Password);
+        _context.User.Add(user);
+        await _context.SaveChangesAsync();
+        // 登録後の処理（ログイン処理など）
+        var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email, user.Email)
+            };
+
+        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var principal = new ClaimsPrincipal(identity);
+
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+        return RedirectToAction("Index", "Home");
     }
 
     // GET: Account/Login
@@ -30,16 +75,17 @@ public class AccountController : Controller
             return View(model);
         }
 
-        // ユーザー認証ロジック（仮）
+        // ユーザー認証ロジック
         var user = await _context.User
-            .FirstOrDefaultAsync(u => u.Username == model.Username && u.Password == model.Password); // 本来はハッシュを比較
+            .SingleOrDefaultAsync(u => u.Email == model.Email);
 
-        if (user != null)
+        if (user != null && 
+            _passwordHasher.VerifyHashedPassword(user, user.Password, model.Password) == PasswordVerificationResult.Success)
         {
             // 認証成功
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Username)
+                new Claim(ClaimTypes.Email, user.Email)
                 // その他のクレーム
             };
 

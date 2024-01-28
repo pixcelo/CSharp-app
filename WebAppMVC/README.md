@@ -419,3 +419,27 @@ View作成
     <button type="submit" class="btn btn-primary">Login</button>
 </form>
 ```
+
+## 既存のモデルを変更
+### カラム追加
+`dotnet ef migrations add Add{追加したプロパティ}To{モデル名}`
+```
+dotnet ef migrations add AddEmailToUser
+dotnet ef database update
+```
+
+### データサイズ変更
+アノテーションを付与
+```cs
+public class MyEntity
+{
+    [StringLength(200)]
+    public string MyProperty { get; set; }
+}
+```
+
+マイグレーションで更新
+```
+dotnet ef migrations add UpdateMyPropertySize
+dotnet ef database update
+```
