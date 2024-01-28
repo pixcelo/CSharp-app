@@ -4,23 +4,28 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using WebAppMVC.Models;
 using WebAppMVC.ViewModels;
 
 public class AccountController : Controller
 {
     private readonly BlogContext _context;
-    private readonly IPasswordHasher<User> _passwordHasher;
-    private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly IPasswordHasher<ApplicationUser> _passwordHasher;
+    private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly UserManager<ApplicationUser> _userManager;
+
 
     public AccountController(
         BlogContext context, 
-        IPasswordHasher<User> passwordHasher, 
-        SignInManager<IdentityUser> signInManager)
+        IPasswordHasher<ApplicationUser> passwordHasher, 
+        SignInManager<ApplicationUser> signInManager,
+        UserManager<ApplicationUser> userManager)
     {
         _context = context;
         _passwordHasher = passwordHasher;
         _signInManager = signInManager;
+        _userManager = userManager;
     }
 
     // GET: Account/Register
@@ -47,8 +52,8 @@ public class AccountController : Controller
             return View(model);
         }
 
-        var user = new User { Email = model.Email, Username = model.Username };
-        user.Password = _passwordHasher.HashPassword(user, model.Password);
+        var user = new ApplicationUser { Email = model.Email, UserName = model.Username };
+        user.PasswordHash = _passwordHasher.HashPassword(user, model.Password);
         _context.User.Add(user);
         await _context.SaveChangesAsync();
         // 登録後の処理（ログイン処理など）
@@ -85,7 +90,7 @@ public class AccountController : Controller
             .SingleOrDefaultAsync(u => u.Email == model.Email);
 
         if (user != null && 
-            _passwordHasher.VerifyHashedPassword(user, user.Password, model.Password) == PasswordVerificationResult.Success)
+            _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, model.Password) == PasswordVerificationResult.Success)
         {
             // 認証成功
             var claims = new List<Claim>
@@ -148,7 +153,10 @@ public class AccountController : Controller
         else
         {
             var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-            var user = new User { Username = email, Email = email };
+            var username = email?.Split('@')[0]; // メールアドレスの＠記号の前をユーザーネームとして使用
+            username = Regex.Replace(username, @"\W", ""); // 非英数字の文字を削除
+
+            var user = new ApplicationUser { UserName = username, Email = email};
             var identityResult = await _userManager.CreateAsync(user);
             if (identityResult.Succeeded)
             {

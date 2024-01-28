@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebAppMVC.Models
 {
-    public class BlogContext : IdentityDbContext<IdentityUser>
+    public class BlogContext : IdentityDbContext<ApplicationUser>
     {
         public BlogContext(DbContextOptions<BlogContext> options)
             : base(options)
@@ -12,7 +11,7 @@ namespace WebAppMVC.Models
         }
 
         public DbSet<Blog> Blog { get; set; }
-        public DbSet<User> User { get; set; }
+        public DbSet<ApplicationUser> User { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,8 +23,8 @@ namespace WebAppMVC.Models
             );
 
             // パスワードは実際には安全なハッシュを生成して使用する
-            modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, Username = "testuser", Password = "123" }
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser { UserName = "testuser", PasswordHash = "123", FirstName = "Tom", LastName = "Smith" }
             );
 
             base.OnModelCreating(modelBuilder);
