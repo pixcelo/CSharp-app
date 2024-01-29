@@ -12,7 +12,7 @@ builder.Services.AddHttpClient<WeatherService>();
 builder.Services.AddScoped<IPasswordHasher<ApplicationUser>, PasswordHasher<ApplicationUser>>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-    options.SignIn.RequireConfirmedAccount = true)
+    options.SignIn.RequireConfirmedAccount = false) // 外部ログインではアカウント確認を求めない
     .AddEntityFrameworkStores<BlogContext>()
     .AddDefaultTokenProviders();
 

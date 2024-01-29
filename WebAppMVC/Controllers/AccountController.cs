@@ -126,7 +126,7 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> Logout()
     {
-        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");
     }
 
@@ -151,24 +151,33 @@ public class AccountController : Controller
             return RedirectToAction("Index", "Home");
         }
         else
-        {
+        {            
             var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-            var username = email?.Split('@')[0]; // メールアドレスの＠記号の前をユーザーネームとして使用
-            username = Regex.Replace(username, @"\W", ""); // 非英数字の文字を削除
-
-            var user = new ApplicationUser { UserName = username, Email = email};
-            var identityResult = await _userManager.CreateAsync(user);
-            if (identityResult.Succeeded)
+            var dbUser = await _userManager.FindByEmailAsync(email);
+            if (dbUser == null)
             {
-                identityResult = await _userManager.AddLoginAsync(user, info);
+                var username = email?.Split('@')[0]; // メールアドレスの＠記号の前をユーザーネームとして使用
+                username = Regex.Replace(username, @"\W", ""); // 非英数字の文字を削除
+
+                var user = new ApplicationUser { UserName = username, Email = email, FirstName = username, LastName = "" };
+                var identityResult = await _userManager.CreateAsync(user);
                 if (identityResult.Succeeded)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    identityResult = await _userManager.AddLoginAsync(user, info);
+                    if (identityResult.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
-            }
 
-            return RedirectToAction(nameof(Register));
+                return RedirectToAction(nameof(Register));
+            }
+            else
+            {
+                // ここでエラーハンドリングを行う
+                return RedirectToAction(nameof(Register));
+            }
         }
     }
 }
