@@ -25,5 +25,12 @@
             this.id = id;
             this.name = name;
         }
+
+        public bool Equals(User other)
+        {
+            if (ReferenceEquals(null, other)) return false; 
+            if (ReferenceEquals (this, other)) return true;
+            return Equals(id, other.id);
+        }
     }
 }
