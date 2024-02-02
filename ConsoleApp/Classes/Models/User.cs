@@ -33,6 +33,8 @@
             this.name = name;
         }
 
+        // ユーザー名は可変なので、識別子だけを比較して等価であるかを判断するため、
+        // 属性の違いに囚われず、同一性の比較が可能になる
         public bool Equals(User other)
         {
             if (ReferenceEquals(null, other)) return false; 
@@ -51,6 +53,19 @@
         public override int GetHashCode()
         {
             return (id != null ? id.GetHashCode() : 0);
+        }
+
+        // エンティティの比較
+        void Check(User leftUser, User rightUser)
+        {
+            if (leftUser.Equals(rightUser))
+            {
+                Console.WriteLine("同一のユーザーです");
+            }
+            else
+            {
+                Console.WriteLine("別のユーザーです");
+            }
         }
     }
 }
