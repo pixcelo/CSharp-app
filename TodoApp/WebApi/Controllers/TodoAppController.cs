@@ -39,6 +39,30 @@ namespace WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("AddNotes")]
+        public JsonResult GetNotes([FromForm] string newNotes)
+        {
+            string query = "insert into dbo.notes values(@newNotes)";
+            var table = new DataTable();
+            string sqlDatasource = _configuration.GetConnectionString("todoAppDBCon");
+            SqlDataReader reader;
+            using (var con = new SqlConnection(sqlDatasource))
+            {
+                con.Open();
+                using (var command = new SqlCommand(query, con))
+                {
+                    command.Parameters.AddWithValue("@newNotes", newNotes);
+                    reader = command.ExecuteReader();
+                    table.Load(reader);
+                    reader.Close();
+                    con.Close();
+                }
+
+                return new JsonResult("Added Successfully");
+            }
+        }
+
         [HttpDelete]
         [Route("DeleteNotes")]
         public JsonResult DeleteNotes(int id)
