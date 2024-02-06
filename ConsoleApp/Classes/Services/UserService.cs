@@ -1,12 +1,22 @@
 ﻿using ConsoleApp.Classes.Models;
+using ConsoleApp.Classes.Repositories.Interfaces;
 
 namespace ConsoleApp.Classes.Services
 {
     public class UserService
     {
-        internal bool Exists(AppUser user)
+        private IUserRepository userRepository;
+
+        public UserService(IUserRepository userRepository)
         {
-            throw new NotImplementedException();
+            this.userRepository = userRepository;
+        }
+
+        public bool Exists(AppUser user)
+        {
+            var found = userRepository.Find(user.Name);
+
+            return found != null;
         }
     }
 }
