@@ -31,7 +31,7 @@ namespace WebAppMvcStripe.Controllers
             return View(products);
         }
 
-        public IActionResult ChgeckOut()
+        public IActionResult CheckOut()
         {
             var products = new List<ProductEntity>();
 
