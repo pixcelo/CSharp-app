@@ -1,24 +1,31 @@
 ﻿using ConsoleApp.Classes.Models;
+using ConsoleApp.Classes.Repositories.Interfaces;
 using ConsoleApp.Classes.Services;
-using System.Configuration;
 
 class Program
-{   
+{
+    private IUserRepository userRepository;
+
+    public Program(IUserRepository userRepository) 
+    {
+        this.userRepository = userRepository;
+    }
+
     public static void Main(string[] args)
     {
-        var MyMoney = new Money(1000, "JPY");
-        var allowance = new Money(3000, "JPY");
-        var result = MyMoney.Add(allowance);
+        //var MyMoney = new Money(1000, "JPY");
+        //var allowance = new Money(3000, "JPY");
+        //var result = MyMoney.Add(allowance);
 
-        // ユーザー作成のユースケース
-
+        // リポジトリを利用したユーザー作成処理
+        
     }
 
     public void CreateUser(string userName)
     {
         var user = new AppUser(
             new AppUser.UserName(userName)
-        );
+            );
 
         var userService = new UserService();
         if (userService.Exists(user))
@@ -26,7 +33,6 @@ class Program
             throw new Exception($"{userName}は既に存在しています");
         }
 
-        //var connectionString = ConfigurationManager.ConnectionStrings["FooConection"].ConnectionString;
-        // ...
+        userRepository.Save(user);
     }
 }
