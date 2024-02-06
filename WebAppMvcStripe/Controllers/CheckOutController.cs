@@ -31,6 +31,38 @@ namespace WebAppMvcStripe.Controllers
             return View(products);
         }
 
+        /// <summary>
+        /// 注文の成功確認ページ
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult OrderConfirmation()
+        {
+            var sercice = new SessionService();
+            Session session = sercice.Get(TempData["session"].ToString());
+
+            if (session.PaymentStatus == "Paid")
+            {
+                var transaction = session.PaymentStatus.ToString();
+
+                return View("Success");
+            }
+            return View("Login");
+        }
+
+        public IActionResult Success()
+        {
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 決済
+        /// </summary>
+        /// <returns></returns>
         public IActionResult CheckOut()
         {
             var products = new List<ProductEntity>();
@@ -61,6 +93,7 @@ namespace WebAppMvcStripe.Controllers
                 CancelUrl = url + "CheckOut/Login",
                 LineItems = new List<SessionLineItemOptions>(),                
                 Mode = "payment",
+                CustomerEmail = "sampleShop@gmail.com"
             };
 
             foreach (var item in products)
@@ -83,6 +116,9 @@ namespace WebAppMvcStripe.Controllers
 
             var service = new SessionService();
             Session session = service.Create(options);
+
+            // 成功確認ページで使用するためsessionを保存する
+            TempData["session"] = session.Id;
 
             Response.Headers.Add("Location", session.Url);
 
