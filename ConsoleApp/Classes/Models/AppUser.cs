@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace ConsoleApp.Classes.Models
+﻿namespace ConsoleApp.Classes.Models
 {
     public class AppUser
     {
