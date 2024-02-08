@@ -1,23 +1,41 @@
 ﻿using ConsoleApp.Classes.Models;
+using ConsoleApp.Classes.Repositories.Implementations;
 using ConsoleApp.Classes.Repositories.Interfaces;
-using ConsoleApp.Classes.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 class Program
 {
-    private IUserRepository userRepository;
+    public static void Main(string[] args)
+    {        
+        // 依存性注入コンテナの設定
+        var services = new ServiceCollection();
+        ConfigureServices(services);
 
-    public Program(IUserRepository userRepository) 
-    {
-        this.userRepository = userRepository;
+        // サービスプロバイダのビルド
+        using (var serviceProvider = services.BuildServiceProvider())
+        {
+            // サービスの取得と使用
+            var userRepository = serviceProvider.GetService<IUserRepository>();
+
+            var user = new User(
+                new UserId("T001"),
+                new UserName("Tom")
+            );
+
+            // リポジトリを利用したユーザー作成処理
+            userRepository.Save(user);
+
+            // インメモリのリポジトリでテスト
+            var head = userRepository.Find(user.Name);
+            Console.WriteLine(head.Name);
+        }
+
     }
 
-    public static void Main(string[] args)
+    private static void ConfigureServices(ServiceCollection services)
     {
-        //var MyMoney = new Money(1000, "JPY");
-        //var allowance = new Money(3000, "JPY");
-        //var result = MyMoney.Add(allowance);
-
-        // リポジトリを利用したユーザー作成処理
-        
+        // サービスの登録
+        // services.AddTransient<IUserRepository, UserRepository>();
+        services.AddTransient<IUserRepository, InMemoryUserRepository>();
     }
 }

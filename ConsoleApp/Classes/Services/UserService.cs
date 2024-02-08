@@ -12,7 +12,7 @@ namespace ConsoleApp.Classes.Services
             this.userRepository = userRepository;
         }
 
-        public bool Exists(AppUser user)
+        public bool Exists(User user)
         {
             var found = userRepository.Find(user.Name);
 
