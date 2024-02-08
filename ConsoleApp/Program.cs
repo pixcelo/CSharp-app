@@ -20,19 +20,4 @@ class Program
         // リポジトリを利用したユーザー作成処理
         
     }
-
-    public void CreateUser(string userName)
-    {
-        var user = new AppUser(
-            new AppUser.UserName(userName)
-            );
-
-        var userService = new UserService();
-        if (userService.Exists(user))
-        {
-            throw new Exception($"{userName}は既に存在しています");
-        }
-
-        userRepository.Save(user);
-    }
 }

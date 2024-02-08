@@ -1,36 +1,49 @@
 ﻿namespace ConsoleApp.Classes.Models
 {
-    class UserId
+    public class UserId
     {
-        private string value;
+        public string Value;
 
         public UserId(string value)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 
-            this.value = value;
+            this.Value = value;
         }
     }
 
-    class User
+    public class UserName
     {
-        private readonly UserId id; // 識別子
-        private string name;
-
-        public User(UserId id, string name)
+        public UserName(string value)
         {
-            if (id == null) throw new ArgumentNullException(nameof(id));            
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value.Length < 3) throw new ArgumentException("ユーザー名は3文字以上です。", nameof(value));
 
-            this.id = id;
+            this.Value = value;
+        }
+
+        public string Value { get; }
+    }
+
+    public class User
+    {
+        public UserId Id; // 識別子
+        public UserName Name;
+
+        public User(UserId id, UserName name)
+        {
+            if (id == null) throw new ArgumentNullException(nameof(Id));            
+
+            this.Id = id;
             ChangeUserName(name);
         }
 
-        public void ChangeUserName(string name)
+        public void ChangeUserName(UserName name)
         {
             if (name == null) throw new ArgumentNullException(nameof(name));
-            if (name.Length < 3) throw new ArgumentException("ユーザー名は3文字以上です。", nameof(name));
+            if (name.Value.Length < 3) throw new ArgumentException("ユーザー名は3文字以上です。", nameof(name));
 
-            this.name = name;
+            this.Name = name;
         }
 
         // ユーザー名は可変なので、識別子だけを比較して等価であるかを判断するため、
@@ -39,7 +52,7 @@
         {
             if (ReferenceEquals(null, other)) return false; 
             if (ReferenceEquals (this, other)) return true;
-            return Equals(id, other.id); // 比較は識別子である id 同士で行われる
+            return Equals(Id, other.Id); // 比較は識別子である id 同士で行われる
         }
 
         public override bool Equals(object? obj)
@@ -52,7 +65,7 @@
 
         public override int GetHashCode()
         {
-            return (id != null ? id.GetHashCode() : 0);
+            return (Id != null ? Id.GetHashCode() : 0);
         }
 
         // エンティティの比較

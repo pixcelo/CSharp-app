@@ -9,12 +9,7 @@ namespace ConsoleApp.Classes.Repositories.Implementations
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
-        public AppUser Find(AppUser.UserName name)
-        {            
-            throw new NotImplementedException();
-        }
-
-        public void Save(AppUser user)
+        public void Save(User user)
         {
             using (var connection = new SqlConnection(connectionString))
             using (var command = connection.CreateCommand())
@@ -38,5 +33,35 @@ namespace ConsoleApp.Classes.Repositories.Implementations
                 command.ExecuteNonQuery();
             }
         }
+
+        public User Find(UserName userName)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText = "SELECT * FROM users WHERE name = @name";
+                command.Parameters.Add(new SqlParameter("@name", userName.Value));
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        var id = reader["id"] as string;
+                        var name = reader["name"] as string;
+
+                        return new User(
+                            new UserId(id),
+                            new UserName(name)
+                        );
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
+
     }
 }
