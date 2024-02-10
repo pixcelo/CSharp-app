@@ -1,7 +1,9 @@
 ﻿using ConsoleApp.Classes.Models;
 using ConsoleApp.Classes.Repositories.Implementations;
 using ConsoleApp.Classes.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Configuration;
 
 class Program
 {
@@ -27,7 +29,7 @@ class Program
 
             // インメモリのリポジトリでテスト
             var head = userRepository.Find(user.Name);
-            Console.WriteLine(head.Name);
+            Console.WriteLine(head.Name.Value);
         }
 
     }
@@ -37,5 +39,10 @@ class Program
         // サービスの登録
         // services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<IUserRepository, InMemoryUserRepository>();
+
+        // EntityFrameworkCoreのORMサービスを使用する場合
+        var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        services.AddDbContext<ApplicationContext>(options =>
+            options.UseSqlServer(connectionString));
     }
 }
