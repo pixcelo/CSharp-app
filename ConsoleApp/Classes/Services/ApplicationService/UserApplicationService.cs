@@ -56,5 +56,25 @@ namespace ConsoleApp.Classes.Services.ApplicationService
             // 直接ユーザーを返さず、DTOを返すことでドメインオブジェクトを隠ぺいする
             return new UserData(user);
         }
+
+        /// <summary>
+        /// ユーザー更新
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="mailAddress"></param>
+        /// <exception cref="Exception"></exception>
+        public void Update(string userName, string mailAddress)
+        {
+            var targetUserName = new UserName(userName);
+            var user = userRepository.Find(targetUserName);
+
+            if (user == null)
+            {
+                throw new Exception("ユーザーが見つかりませんでした。");
+            }
+
+            user.MailAddress = mailAddress;
+            userRepository.Save(user);
+        }
     }
 }

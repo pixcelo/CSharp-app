@@ -29,6 +29,7 @@
     {
         public UserId Id; // 識別子
         public UserName Name;
+        public string MailAddress;
 
         public User(UserId id, UserName name)
         {
