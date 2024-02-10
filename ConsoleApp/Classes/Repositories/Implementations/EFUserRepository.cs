@@ -43,6 +43,19 @@ namespace ConsoleApp.Classes.Repositories.Implementations
             context.SaveChanges();
         }
 
+        public void Delete(User user)
+        {
+            var found = context.Users.Find(user.Id.Value);
+
+            if (found == null)
+            {
+                throw new Exception("ユーザーが見つかりませんでした。");
+            }
+            
+            context.Users.Remove(found);
+            context.SaveChanges();
+        }
+
         private User ToModel(UserDataModel from)
         {
             return new User(

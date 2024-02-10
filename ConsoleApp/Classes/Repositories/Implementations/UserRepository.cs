@@ -34,6 +34,18 @@ namespace ConsoleApp.Classes.Repositories.Implementations
             }
         }
 
+        public void Delete(User user)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText = "DELETE FROM users WHERE id = @id";
+                command.Parameters.Add(new SqlParameter("@id", user.Id.Value));
+                command.ExecuteNonQuery();
+            }
+        }
+
         public User Find(UserName userName)
         {
             using (var connection = new SqlConnection(connectionString))
@@ -62,6 +74,5 @@ namespace ConsoleApp.Classes.Repositories.Implementations
                 }
             }
         }
-
     }
 }

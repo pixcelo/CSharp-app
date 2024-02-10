@@ -32,6 +32,11 @@ namespace ConsoleApp.Classes.Repositories.Implementations
             Store[user.Id] = Clone(user);
         }
 
+        public void Delete(User user)
+        {
+            Store[user.Id] = null;
+        }
+
         // ディープコピーを行うメソッド
         private User Clone(User user)
         {

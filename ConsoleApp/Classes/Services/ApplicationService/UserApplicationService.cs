@@ -76,5 +76,18 @@ namespace ConsoleApp.Classes.Services.ApplicationService
             user.MailAddress = mailAddress;
             userRepository.Save(user);
         }
+
+        public void Delete(string userName)
+        {
+            var targetUserName = new UserName(userName);
+            var user = userRepository.Find(targetUserName);
+
+            if (user == null)
+            {
+                throw new Exception("ユーザーが見つかりませんでした。");
+            }
+
+            userRepository.Delete(user);
+        }
     }
 }
