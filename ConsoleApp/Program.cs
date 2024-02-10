@@ -17,7 +17,7 @@ class Program
         using (var serviceProvider = services.BuildServiceProvider())
         {
             // サービスの取得と使用
-            var userRepository = serviceProvider.GetService<IUserRepository>();
+            var userRepository = serviceProvider.GetRequiredService<IUserRepository>();
 
             var user = new User(
                 new UserId("T001"),
@@ -41,8 +41,8 @@ class Program
         services.AddTransient<IUserRepository, InMemoryUserRepository>();
 
         // EntityFrameworkCoreのORMサービスを使用する場合
-        var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        services.AddDbContext<ApplicationContext>(options =>
-            options.UseSqlServer(connectionString));
+        //var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        //services.AddDbContext<ApplicationContext>(options =>
+        //    options.UseSqlServer(connectionString));
     }
 }
