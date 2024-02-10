@@ -14,6 +14,11 @@ namespace ConsoleApp.Classes.Services.ApplicationService
             this.userService = userService;
         }
 
+        /// <summary>
+        /// ユーザー登録
+        /// </summary>
+        /// <param name="name"></param>
+        /// <exception cref="Exception"></exception>
         public void Register(string name)
         {
             var user = new User(
@@ -29,6 +34,19 @@ namespace ConsoleApp.Classes.Services.ApplicationService
             
             // リポジトリにインスタンスの永続化を依頼
             userRepository.Save(user);
+        }
+
+        /// <summary>
+        /// ユーザー情報取得
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public User Get(string userName)
+        {
+            var targetUserName = new UserName(userName);
+            var user = userRepository.Find(targetUserName);
+
+            return user;
         }
     }
 }
