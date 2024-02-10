@@ -41,12 +41,20 @@ namespace ConsoleApp.Classes.Services.ApplicationService
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public User Get(string userName)
+        public UserData Get(string userName)
         {
             var targetUserName = new UserName(userName);
             var user = userRepository.Find(targetUserName);
 
-            return user;
+            //return user;
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            // 直接ユーザーを返さず、DTOを返すことでドメインオブジェクトを隠ぺいする
+            return new UserData(user);
         }
     }
 }
