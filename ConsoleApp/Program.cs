@@ -21,7 +21,7 @@ class Program
 
         // サービスの登録
         // serviceCollection.AddTransient<IUserRepository, UserRepository>();
-        serviceCollection.AddTransient<IUserRepository, InMemoryUserRepository>();
+        serviceCollection.AddSingleton<IUserRepository, InMemoryUserRepository>();
         serviceCollection.AddTransient<UserService>();
         serviceCollection.AddTransient<UserApplicationService>();
 
