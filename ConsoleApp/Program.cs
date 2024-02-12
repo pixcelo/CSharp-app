@@ -1,20 +1,32 @@
 ﻿using ConsoleApp.Classes.Models;
 using ConsoleApp.Classes.Repositories.Implementations;
 using ConsoleApp.Classes.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using ConsoleApp.Classes.Services.DomainService;
+using ConsoleApp.Classes.Services.ApplicationService;
 using Microsoft.Extensions.DependencyInjection;
-using System.Configuration;
 
 class Program
 {
+    private static ServiceProvider serviceProvider;
+
     public static void Main(string[] args)
-    {        
+    {
+        StartUp();
+    }
+
+    private static void StartUp()
+    {
         // 依存性注入コンテナの設定
-        var services = new ServiceCollection();
-        ConfigureServices(services);
+        var serviceCollection = new ServiceCollection();
+
+        // サービスの登録
+        // serviceCollection.AddTransient<IUserRepository, UserRepository>();
+        serviceCollection.AddTransient<IUserRepository, InMemoryUserRepository>();
+        serviceCollection.AddTransient<UserService>();
+        serviceCollection.AddTransient<UserApplicationService>();
 
         // サービスプロバイダのビルド
-        using (var serviceProvider = services.BuildServiceProvider())
+        using (serviceProvider = serviceCollection.BuildServiceProvider())
         {
             // サービスの取得と使用
             var userRepository = serviceProvider.GetRequiredService<IUserRepository>();
@@ -31,18 +43,5 @@ class Program
             var head = userRepository.Find(user.Name);
             Console.WriteLine(head.Name.Value);
         }
-
-    }
-
-    private static void ConfigureServices(ServiceCollection services)
-    {
-        // サービスの登録
-        // services.AddTransient<IUserRepository, UserRepository>();
-        services.AddTransient<IUserRepository, InMemoryUserRepository>();
-
-        // EntityFrameworkCoreのORMサービスを使用する場合
-        //var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        //services.AddDbContext<ApplicationContext>(options =>
-        //    options.UseSqlServer(connectionString));
     }
 }

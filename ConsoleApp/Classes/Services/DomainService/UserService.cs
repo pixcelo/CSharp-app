@@ -1,7 +1,7 @@
 ﻿using ConsoleApp.Classes.Models;
 using ConsoleApp.Classes.Repositories.Interfaces;
 
-namespace ConsoleApp.Classes.Services
+namespace ConsoleApp.Classes.Services.DomainService
 {
     public class UserService
     {

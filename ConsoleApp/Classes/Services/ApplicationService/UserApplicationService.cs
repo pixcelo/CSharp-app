@@ -1,5 +1,6 @@
 ﻿using ConsoleApp.Classes.Models;
 using ConsoleApp.Classes.Repositories.Interfaces;
+using ConsoleApp.Classes.Services.DomainService;
 
 namespace ConsoleApp.Classes.Services.ApplicationService
 {
