@@ -4,6 +4,8 @@ using ConsoleApp.Classes.Repositories.Interfaces;
 using ConsoleApp.Classes.Services.DomainService;
 using ConsoleApp.Classes.Services.ApplicationService;
 using Microsoft.Extensions.DependencyInjection;
+using System.Runtime.InteropServices;
+using ConsoleApp.Classes.Command;
 
 class Program
 {
@@ -12,6 +14,31 @@ class Program
     public static void Main(string[] args)
     {
         StartUp();
+
+        while (true)
+        {
+            Console.WriteLine("Input user name");
+            Console.Write(">");
+            var input = Console.ReadLine();
+            var userApplicationService = serviceProvider.GetRequiredService<UserApplicationService>();
+            var command = new UserRegisterCommand(input);
+            userApplicationService.Register(command);
+
+            Console.WriteLine("----------------");
+            Console.WriteLine("user created:");
+            Console.WriteLine("----------------");
+            Console.WriteLine("user name:");
+            Console.WriteLine("- " + input);
+            Console.WriteLine("----------------");
+
+            Console.WriteLine("continue? (y/n)");
+            Console.WriteLine(">");
+            var yesOrNo = Console.ReadLine();
+            if (yesOrNo == "n")
+            {
+                break;
+            }
+        }
     }
 
     private static void StartUp()
@@ -26,22 +53,6 @@ class Program
         serviceCollection.AddTransient<UserApplicationService>();
 
         // サービスプロバイダのビルド
-        using (serviceProvider = serviceCollection.BuildServiceProvider())
-        {
-            // サービスの取得と使用
-            var userRepository = serviceProvider.GetRequiredService<IUserRepository>();
-
-            var user = new User(
-                new UserId("T001"),
-                new UserName("Tom")
-            );
-
-            // リポジトリを利用したユーザー作成処理
-            userRepository.Save(user);
-
-            // インメモリのリポジトリでテスト
-            var head = userRepository.Find(user.Name);
-            Console.WriteLine(head.Name.Value);
-        }
+        serviceProvider = serviceCollection.BuildServiceProvider();
     }
 }

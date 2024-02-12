@@ -1,4 +1,5 @@
-﻿using ConsoleApp.Classes.Models;
+﻿using ConsoleApp.Classes.Command;
+using ConsoleApp.Classes.Models;
 using ConsoleApp.Classes.Repositories.Interfaces;
 using ConsoleApp.Classes.Services.DomainService;
 
@@ -20,11 +21,11 @@ namespace ConsoleApp.Classes.Services.ApplicationService
         /// </summary>
         /// <param name="name"></param>
         /// <exception cref="Exception"></exception>
-        public void Register(string name)
+        public void Register(UserRegisterCommand command)
         {
             var user = new User(
                 new UserId(Guid.NewGuid().ToString()),
-                new UserName(name)
+                new UserName(command.Name)
             );
 
             // ユーザーの重複確認をドメインサービスに依頼
