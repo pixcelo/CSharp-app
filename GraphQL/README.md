@@ -19,16 +19,100 @@ dotnet watch --no-hot-reload
 URLにアクセス
 http://localhost:5165/graphql/
 
-GraphQL クエリ
+## GraphQL クエリ
+
+Operations
 ```
 {
     hello
 }
 ```
 
+Response
+```json
+{
+  "data": {
+    "hello": "Hello, World!"
+  }
+}
+```
+
+Operations
 ```
 {
     hello(name "Tom")
+}
+```
+
+Response
+```json
+{
+  "data": {
+    "hello": "Hello, Tom!"
+  }
+}
+```
+
+Operations
+```
+{
+    hello(name: "Tom")
+    books {
+        title
+    }
+}
+```
+
+Response
+```json
+{
+  "data": {
+    "hello": "Hello, Tom!",
+    "books": [
+      {
+        "title": "C# in Depth"
+      },
+      {
+        "title": "C# in Depth 2nd Edition"
+      }
+    ]
+  }
+}
+```
+
+Operations
+```
+{
+    hello(name: "Tom")
+    books {
+        title
+        author {            
+          name
+        }
+    }
+}
+```
+
+Response
+```json
+{
+  "data": {
+    "hello": "Hello, Tom!",
+    "books": [
+      {
+        "title": "C# in Depth",
+        "author": {
+          "name": "Jon Skeet"
+        }
+      },
+      {
+        "title": "C# in Depth 2nd Edition",
+        "author": {
+          "name": "Jon Skeet"
+        }
+      }
+    ]
+  }
 }
 ```
 
