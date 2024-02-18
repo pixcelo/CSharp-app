@@ -7,3 +7,11 @@ npx create-react-app . --template typescript
 ```bash
 npm start
 ```
+
+ライブラリ
+```
+npm install recharts --save
+```
+
+## Reference
+- [Recharts](https://recharts.org/en-US/)
