@@ -180,4 +180,32 @@ public class AccountController : Controller
             }
         }
     }
+
+    public IActionResult FacebookLogin()
+    {
+        string redirectUrl = Url.Action("ExternalLoginCallback", "Account");
+        var properties = _signInManager.ConfigureExternalAuthenticationProperties("Facebook", redirectUrl);
+        return Challenge(properties, "Facebook");
+    }
+
+    public async Task<IActionResult> ExternalLoginCallback()
+    {
+        var info = await _signInManager.GetExternalLoginInfoAsync();
+        if (info == null)
+        {
+            return RedirectToAction(nameof(Login));
+        }
+
+        var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+        if (result.Succeeded)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        else
+        {            
+            var email = info.Principal.FindFirstValue(ClaimTypes.Email);         
+            return RedirectToAction(nameof(Register));
+        }
+    }
+
 }

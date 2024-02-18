@@ -20,6 +20,7 @@ namespace WebAppMVC.Services
         {
             var url = $"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={_apiKey}&units=metric";
             var response = await _httpClient.GetAsync(url);
+
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();

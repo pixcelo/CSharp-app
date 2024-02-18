@@ -23,6 +23,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
             options.LoginPath = "/Account/Login";
             options.LogoutPath = "/Account/Logout";
         })
+        .AddFacebook(options =>
+        {
+            options.ClientId = "";
+            options.ClientSecret = "";
+        })
         .AddGoogle(googleOptions =>
         {
             // Google API Consoleで取得したクライアントIDとシークレットを使用
