@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WebApiJwt.Services
 {
-    public class TokenService
+    public static class TokenService
     {
         public static string GenerateToken(string key, string issuer, string audience, string userName, string email)
         {
