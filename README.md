@@ -1,28 +1,23 @@
-## NVM
-Node.js version manager for Windows.
-[NVM for Windows](https://github.com/coreybutler/nvm-windows)
+# C#の研究
 
-`nvm-setup.zip`をダウンロードしてPCにインストールする
+## ConsoleApp
+- DDDの調査
+- 値オブジェクトの確認
 
-### Usage
-インストールできるバージョンのリストアップ
-```
-nvm list available
-```
+## WebAppMVC
+- OAuth実装の確認
 
-特定のバージョンのNode.jsをインストール
-```
-nvm install <バージョン>
-```
-例：nvm install 14.17.0
+## GraphQL・ConferencePlanner
+- GraphQLの実装・ライブラリ等の調査
 
-インストールされているNode.jsのバージョンをリストアップ
-```
-nvm list
-```
+## TodoApp
+- WebApi・Docker環境構築
+- Reactで色々試す場所
 
-使用するNode.jsのバージョンを切り替える
-```
-nvm use <バージョン>
-```
-例：nvm use 14.17.0
+## JenkinsDocker
+- Jenkins触って試す
+- TODO: 他のリポジトリに移す
+
+## GcpApp
+- GCPでSQLServer
+- TODO:Cloudでの環境構築の実践
