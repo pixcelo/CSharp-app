@@ -25,8 +25,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         })
         .AddFacebook(options =>
         {
-            options.ClientId = "";
-            options.ClientSecret = "";
+            options.ClientId = builder.Configuration["Authentication:Facebook:ClientId"];
+            options.ClientSecret = builder.Configuration["Authentication:Facebook:ClientSecret"];
         })
         .AddGoogle(googleOptions =>
         {
