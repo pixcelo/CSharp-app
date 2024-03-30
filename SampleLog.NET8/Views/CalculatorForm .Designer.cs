@@ -1,6 +1,6 @@
 ﻿namespace SampleLog.NET8
 {
-    partial class Form1
+    partial class CalculatorForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -39,15 +39,19 @@
             btn9 = new Button();
             btn8 = new Button();
             btn7 = new Button();
-            textBox1 = new TextBox();
+            TextBoxDisplay = new TextBox();
             btnRedo = new Button();
             btnDot = new Button();
-            button1 = new Button();
+            btnEqual = new Button();
+            btnAddition = new Button();
+            btnSubtraction = new Button();
+            btnMultiplication = new Button();
+            btnDivision = new Button();
             SuspendLayout();
             // 
             // btnUndo
             // 
-            btnUndo.Location = new Point(611, 373);
+            btnUndo.Location = new Point(652, 454);
             btnUndo.Name = "btnUndo";
             btnUndo.Size = new Size(150, 46);
             btnUndo.TabIndex = 0;
@@ -56,7 +60,7 @@
             // 
             // btn0
             // 
-            btn0.Location = new Point(209, 496);
+            btn0.Location = new Point(211, 578);
             btn0.Name = "btn0";
             btn0.Size = new Size(123, 95);
             btn0.TabIndex = 1;
@@ -65,17 +69,16 @@
             // 
             // btn1
             // 
-            btn1.Location = new Point(64, 373);
+            btn1.Location = new Point(66, 455);
             btn1.Name = "btn1";
             btn1.Size = new Size(123, 95);
             btn1.TabIndex = 2;
             btn1.Text = "1";
             btn1.UseVisualStyleBackColor = true;
-            btn1.Click += btn1_Click;
             // 
             // btn2
             // 
-            btn2.Location = new Point(209, 373);
+            btn2.Location = new Point(211, 455);
             btn2.Name = "btn2";
             btn2.Size = new Size(123, 95);
             btn2.TabIndex = 3;
@@ -84,7 +87,7 @@
             // 
             // btn3
             // 
-            btn3.Location = new Point(361, 373);
+            btn3.Location = new Point(363, 455);
             btn3.Name = "btn3";
             btn3.Size = new Size(123, 95);
             btn3.TabIndex = 4;
@@ -93,7 +96,7 @@
             // 
             // btn6
             // 
-            btn6.Location = new Point(361, 260);
+            btn6.Location = new Point(363, 342);
             btn6.Name = "btn6";
             btn6.Size = new Size(123, 95);
             btn6.TabIndex = 7;
@@ -102,7 +105,7 @@
             // 
             // btn5
             // 
-            btn5.Location = new Point(209, 260);
+            btn5.Location = new Point(211, 342);
             btn5.Name = "btn5";
             btn5.Size = new Size(123, 95);
             btn5.TabIndex = 6;
@@ -111,7 +114,7 @@
             // 
             // btn4
             // 
-            btn4.Location = new Point(64, 260);
+            btn4.Location = new Point(66, 342);
             btn4.Name = "btn4";
             btn4.Size = new Size(123, 95);
             btn4.TabIndex = 5;
@@ -120,7 +123,7 @@
             // 
             // btn9
             // 
-            btn9.Location = new Point(361, 146);
+            btn9.Location = new Point(363, 228);
             btn9.Name = "btn9";
             btn9.Size = new Size(123, 95);
             btn9.TabIndex = 10;
@@ -129,33 +132,32 @@
             // 
             // btn8
             // 
-            btn8.Location = new Point(209, 146);
+            btn8.Location = new Point(211, 228);
             btn8.Name = "btn8";
             btn8.Size = new Size(123, 95);
             btn8.TabIndex = 9;
             btn8.Text = "8";
             btn8.UseVisualStyleBackColor = true;
-            btn8.Click += button3_Click;
             // 
             // btn7
             // 
-            btn7.Location = new Point(64, 146);
+            btn7.Location = new Point(66, 228);
             btn7.Name = "btn7";
             btn7.Size = new Size(123, 95);
             btn7.TabIndex = 8;
             btn7.Text = "7";
             btn7.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // TextBoxDisplay
             // 
-            textBox1.Location = new Point(77, 52);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(568, 39);
-            textBox1.TabIndex = 11;
+            TextBoxDisplay.Location = new Point(66, 32);
+            TextBoxDisplay.Name = "TextBoxDisplay";
+            TextBoxDisplay.Size = new Size(568, 39);
+            TextBoxDisplay.TabIndex = 11;
             // 
             // btnRedo
             // 
-            btnRedo.Location = new Point(611, 296);
+            btnRedo.Location = new Point(652, 377);
             btnRedo.Name = "btnRedo";
             btnRedo.Size = new Size(150, 46);
             btnRedo.TabIndex = 12;
@@ -164,31 +166,71 @@
             // 
             // btnDot
             // 
-            btnDot.Location = new Point(361, 496);
+            btnDot.Location = new Point(363, 578);
             btnDot.Name = "btnDot";
             btnDot.Size = new Size(123, 95);
             btnDot.TabIndex = 13;
             btnDot.Text = ".";
             btnDot.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnEqual
             // 
-            button1.Location = new Point(504, 496);
-            button1.Name = "button1";
-            button1.Size = new Size(123, 95);
-            button1.TabIndex = 14;
-            button1.Text = "=";
-            button1.UseVisualStyleBackColor = true;
+            btnEqual.Location = new Point(506, 578);
+            btnEqual.Name = "btnEqual";
+            btnEqual.Size = new Size(123, 95);
+            btnEqual.TabIndex = 14;
+            btnEqual.Text = "=";
+            btnEqual.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // btnAddition
+            // 
+            btnAddition.Location = new Point(506, 455);
+            btnAddition.Name = "btnAddition";
+            btnAddition.Size = new Size(123, 95);
+            btnAddition.TabIndex = 15;
+            btnAddition.Text = "+";
+            btnAddition.UseVisualStyleBackColor = true;
+            // 
+            // btnSubtraction
+            // 
+            btnSubtraction.Location = new Point(506, 342);
+            btnSubtraction.Name = "btnSubtraction";
+            btnSubtraction.Size = new Size(123, 95);
+            btnSubtraction.TabIndex = 16;
+            btnSubtraction.Text = "-";
+            btnSubtraction.UseVisualStyleBackColor = true;
+            // 
+            // btnMultiplication
+            // 
+            btnMultiplication.Location = new Point(506, 230);
+            btnMultiplication.Name = "btnMultiplication";
+            btnMultiplication.Size = new Size(123, 95);
+            btnMultiplication.TabIndex = 17;
+            btnMultiplication.Text = "x";
+            btnMultiplication.UseVisualStyleBackColor = true;
+            // 
+            // btnDivision
+            // 
+            btnDivision.Location = new Point(506, 113);
+            btnDivision.Name = "btnDivision";
+            btnDivision.Size = new Size(123, 95);
+            btnDivision.TabIndex = 18;
+            btnDivision.Text = "÷";
+            btnDivision.UseVisualStyleBackColor = true;
+            // 
+            // CalculatorForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 617);
-            Controls.Add(button1);
+            ClientSize = new Size(827, 700);
+            Controls.Add(btnDivision);
+            Controls.Add(btnMultiplication);
+            Controls.Add(btnSubtraction);
+            Controls.Add(btnAddition);
+            Controls.Add(btnEqual);
             Controls.Add(btnDot);
             Controls.Add(btnRedo);
-            Controls.Add(textBox1);
+            Controls.Add(TextBoxDisplay);
             Controls.Add(btn9);
             Controls.Add(btn8);
             Controls.Add(btn7);
@@ -200,9 +242,9 @@
             Controls.Add(btn1);
             Controls.Add(btn0);
             Controls.Add(btnUndo);
-            Name = "Form1";
-            Text = "Form1";
-            Load += Form1_Load;
+            Name = "CalculatorForm";
+            Text = "電卓";
+            Load += CalculatorForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -220,9 +262,13 @@
         private Button btn9;
         private Button btn8;
         private Button btn7;
-        private TextBox textBox1;
+        private TextBox TextBoxDisplay;
         private Button btnRedo;
         private Button btnDot;
-        private Button button1;
+        private Button btnEqual;
+        private Button btnAddition;
+        private Button btnSubtraction;
+        private Button btnMultiplication;
+        private Button btnDivision;
     }
 }
