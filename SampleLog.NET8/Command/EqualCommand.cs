@@ -15,12 +15,13 @@ namespace SampleLog.NET8.Command
         }
 
         public void Invoke()
-        {            
+        {
             var currentValue = _form.GetTextBoxDisplay();
             _previousValue = currentValue;
 
             var expression = ConvertExpression(currentValue);
-            var newValue = _dataTable.Compute(expression, null);            
+            var newValue = _dataTable.Compute(expression, null);
+            newValue = Math.Round((double)newValue, 5);
             _form.SetTextBoxDisplay(newValue.ToString());
         }
 
