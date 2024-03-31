@@ -15,6 +15,13 @@ namespace SampleLog.NET8.Command
 
         public void Invoke()
         {
+            var currentValue = _form.GetTextBoxDisplay();
+
+            if (ValidateMaxDigits(currentValue))
+            {
+                return;
+            }
+
             _form.AddValueToTextBoxDisplay(_number);
         }
 
@@ -28,7 +35,31 @@ namespace SampleLog.NET8.Command
         public void Redo()
         {
             Invoke();
-        }        
+        }
+
+        /// <summary>
+        /// 小数点以下の桁数が既定の数値を超えている場合は True
+        /// </summary>
+        /// <param name="currentValue"></param>
+        /// <returns></returns>
+        private bool ValidateMaxDigits(string currentValue)
+        {
+            if (currentValue.Length == 0)
+            {
+                return false;
+            }
+
+            var input = SplitByOperators(currentValue).Last();            
+
+            if (!input.Contains("."))
+            {
+                return false;
+            }
+
+            const int MAX_DECIMAL_PLACES = 5;
+            var decimalPart = input.Split('.').LastOrDefault();
+            return decimalPart.Length >= MAX_DECIMAL_PLACES;
+        }
 
         /// <summary>
         /// 項の配列を取得
@@ -38,9 +69,8 @@ namespace SampleLog.NET8.Command
         private static string[] SplitByOperators(string input)
         {
             // 数値または小数点以外
-            var pattern = @"[^0-9.]+";
-            
-            return Regex.Split(input, pattern, RegexOptions.IgnoreCase);            
+            var pattern = @"[^0-9.]+";            
+            return Regex.Split(input, pattern, RegexOptions.IgnoreCase);
         }
     }
 }
