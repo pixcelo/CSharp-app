@@ -4,13 +4,11 @@
     {
         private readonly CalculatorForm _form;
         private readonly string _number;
-        private string _previousValue;
 
         public NumberCommand(CalculatorForm form, string number)
         {
             _form = form;
-            _number = number;
-            _previousValue = _form.GetTextBoxDisplay();
+            _number = number;            
         }
 
         public void Invoke()
@@ -20,13 +18,14 @@
 
         public void Undo()
         {
-            //_form.TextboxDisplay.Text = _form.TextboxDisplay.Text.Substring(0, _form.TextboxDisplay.Text.Length - _number.Length);
-            //_form.
+            var currentValue = _form.GetTextBoxDisplay();
+            var newValue = currentValue.Remove(currentValue.Length - 1);
+            _form.SetTextBoxDisplay(newValue);
         }
 
         public void Redo()
         {
-            throw new NotImplementedException();
+            Invoke();
         }
     }
 }

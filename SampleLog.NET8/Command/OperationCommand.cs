@@ -2,49 +2,47 @@
 {
     public class OperationCommand : ICommand
     {
-        private CalculatorForm _form;
-        private string _operation;
-        private decimal _operand;
+        private readonly CalculatorForm _form;
+        private readonly string _operand;
+        private string _previousValue;
 
-        public OperationCommand(CalculatorForm form, string operation, decimal operand)
+        public OperationCommand(CalculatorForm form, string operand)
         {
             _form = form;
-            _operation = operation;
             _operand = operand;
         }
 
         public void Invoke()
         {
-            decimal result = 0;
-            decimal currentValue = decimal.Parse(_form.GetTextBoxDisplay());
+            var currentValue = _form.GetTextBoxDisplay();
+            _previousValue = currentValue;
 
-            switch (_operation)
+            if (currentValue.Length == 0)
             {
-                case "+":
-                    result = currentValue + _operand;
-                    break;
-                case "-":
-                    result = currentValue - _operand;
-                    break;
-                case "*":
-                    result = currentValue * _operand;
-                    break;
-                case "/":
-                    result = currentValue / _operand;
-                    break;
+                return;
             }
+        
+            var lastChar = currentValue[^1];            
 
-            _form.AddValueToTextBoxDisplay(result.ToString());
+            if (char.IsDigit(lastChar))
+            {
+                _form.SetTextBoxDisplay(currentValue + _operand);
+            }
+            else
+            {
+                var newValue = currentValue.Remove(currentValue.Length - 1);
+                _form.SetTextBoxDisplay(newValue + _operand);
+            }       
         }
 
         public void Undo()
         {
-            // 
+            _form.SetTextBoxDisplay(_previousValue);
         }
 
         public void Redo()
         {
-            // 
+            Invoke();
         }
     }
 }
