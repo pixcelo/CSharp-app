@@ -51,7 +51,7 @@
             // 
             // btnUndo
             // 
-            btnUndo.Location = new Point(652, 454);
+            btnUndo.Location = new Point(652, 308);
             btnUndo.Name = "btnUndo";
             btnUndo.Size = new Size(150, 46);
             btnUndo.TabIndex = 0;

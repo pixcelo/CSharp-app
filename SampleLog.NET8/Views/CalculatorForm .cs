@@ -5,10 +5,7 @@ namespace SampleLog.NET8
     public partial class CalculatorForm : Form
     {
         private static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);        
-
         private CommandManager _commandManager = new CommandManager();
-        private decimal _operand;
-        private string _operation;
 
         public CalculatorForm()
         {
@@ -17,17 +14,17 @@ namespace SampleLog.NET8
 
         public string GetTextBoxDisplay()
         {
-            return this.TextBoxDisplay.Text;
+            return TextBoxDisplay.Text;
         }
 
         public void SetTextBoxDisplay(string value)
         {
-            this.TextBoxDisplay.Text = value;
+            TextBoxDisplay.Text = value;
         }
 
         public void AddValueToTextBoxDisplay(string value)
         {
-            this.TextBoxDisplay.Text += value;
+            TextBoxDisplay.Text += value;
         }
 
         private void CalculatorForm_Load(object sender, EventArgs e)
@@ -43,6 +40,10 @@ namespace SampleLog.NET8
             btn8.Click += NumberButton_Click;
             btn9.Click += NumberButton_Click;
 
+            btnUndo.Click += UndoButton_Click;
+            btnRedo.Click += RedoButton_Click;
+
+            btnEqual.Click += EqualButton_Click;
             btnAddition.Click += OperationButton_Click;
             btnSubtraction.Click += OperationButton_Click;
             btnMultiplication.Click += OperationButton_Click;
@@ -51,28 +52,55 @@ namespace SampleLog.NET8
 
         private void NumberButton_Click(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-            ICommand command = new NumberCommand(this, button.Text);
-            _commandManager.Invoke(command);
-        }
-
-        private void OperationButton_Click(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            _operand = TextBoxDisplay.Text;
-            _operation = button.Text;
-            TextBoxDisplay.Text = "";
+            try
+            {
+                Button button = (Button)sender;
+                ICommand command = new NumberCommand(this, button.Text);
+                _commandManager.Invoke(command);
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.Message + e.StackTrace);
+            }
         }
 
         private void EqualButton_Click(object sender, EventArgs e)
         {
-            ICommand command = new OperationCommand(this, _operation, _operand);
-            _commandManager.Invoke(command);
+            try
+            {
+                ICommand command = new EqualCommand(this);
+                _commandManager.Invoke(command);
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.Message + e.StackTrace);
+            }
+        }
+
+        private void OperationButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button button = (Button)sender;
+                ICommand command = new OperationCommand(this, button.Text);
+                _commandManager.Invoke(command);
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.Message + e.StackTrace);
+            }
         }
 
         private void UndoButton_Click(object sender, EventArgs e)
         {
-            _commandManager.Undo();
+            try
+            {
+                _commandManager.Undo();
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.Message + e.StackTrace);
+            }
         }
 
         private void RedoButton_Click(object sender, EventArgs e)
