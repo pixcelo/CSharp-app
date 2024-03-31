@@ -58,9 +58,9 @@ namespace SampleLog.NET8
                 ICommand command = new NumberCommand(this, button.Text);
                 _commandManager.Invoke(command);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                logger.Error(e.Message + e.StackTrace);
+                logger.Error(ex.Message + ex.StackTrace);
             }
         }
 
@@ -71,9 +71,9 @@ namespace SampleLog.NET8
                 ICommand command = new EqualCommand(this);
                 _commandManager.Invoke(command);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                logger.Error(e.Message + e.StackTrace);
+                logger.Error(ex.Message + ex.StackTrace);
             }
         }
 
@@ -85,9 +85,9 @@ namespace SampleLog.NET8
                 ICommand command = new OperationCommand(this, button.Text);
                 _commandManager.Invoke(command);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                logger.Error(e.Message + e.StackTrace);
+                logger.Error(ex.Message + ex.StackTrace);
             }
         }
 
@@ -97,9 +97,9 @@ namespace SampleLog.NET8
             {
                 _commandManager.Undo();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                logger.Error(e.Message + e.StackTrace);
+                logger.Error(ex.Message + ex.StackTrace);
             }
         }
 
