@@ -39,6 +39,7 @@ namespace SampleLog.NET8
             btn7.Click += NumberButton_Click;
             btn8.Click += NumberButton_Click;
             btn9.Click += NumberButton_Click;
+            btnDot.Click += DotButton_Click;
 
             btnUndo.Click += UndoButton_Click;
             btnRedo.Click += RedoButton_Click;
@@ -56,6 +57,20 @@ namespace SampleLog.NET8
             {
                 Button button = (Button)sender;
                 ICommand command = new NumberCommand(this, button.Text);
+                _commandManager.Invoke(command);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void DotButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button button = (Button)sender;
+                ICommand command = new DotCommand(this, button.Text);
                 _commandManager.Invoke(command);
             }
             catch (Exception ex)

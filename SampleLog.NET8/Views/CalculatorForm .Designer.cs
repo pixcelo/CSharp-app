@@ -47,29 +47,38 @@
             btnSubtraction = new Button();
             btnMultiplication = new Button();
             btnDivision = new Button();
+            btnClear = new Button();
+            panelExpression = new Panel();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            panelCurrent = new Panel();
+            flowLayoutPanel2 = new FlowLayoutPanel();
+            panelExpression.SuspendLayout();
+            panelCurrent.SuspendLayout();
             SuspendLayout();
             // 
             // btnUndo
             // 
-            btnUndo.Location = new Point(652, 308);
+            btnUndo.Location = new Point(71, 252);
             btnUndo.Name = "btnUndo";
-            btnUndo.Size = new Size(150, 46);
+            btnUndo.Size = new Size(123, 95);
             btnUndo.TabIndex = 0;
-            btnUndo.Text = "戻る";
+            btnUndo.Text = "Undo";
             btnUndo.UseVisualStyleBackColor = true;
             // 
             // btn0
             // 
-            btn0.Location = new Point(211, 578);
+            btn0.Font = new Font("Yu Gothic UI", 15F);
+            btn0.Location = new Point(71, 717);
             btn0.Name = "btn0";
-            btn0.Size = new Size(123, 95);
+            btn0.Size = new Size(268, 95);
             btn0.TabIndex = 1;
             btn0.Text = "0";
             btn0.UseVisualStyleBackColor = true;
             // 
             // btn1
             // 
-            btn1.Location = new Point(66, 455);
+            btn1.Font = new Font("Yu Gothic UI", 15F);
+            btn1.Location = new Point(71, 594);
             btn1.Name = "btn1";
             btn1.Size = new Size(123, 95);
             btn1.TabIndex = 2;
@@ -78,7 +87,8 @@
             // 
             // btn2
             // 
-            btn2.Location = new Point(211, 455);
+            btn2.Font = new Font("Yu Gothic UI", 15F);
+            btn2.Location = new Point(216, 594);
             btn2.Name = "btn2";
             btn2.Size = new Size(123, 95);
             btn2.TabIndex = 3;
@@ -87,7 +97,8 @@
             // 
             // btn3
             // 
-            btn3.Location = new Point(363, 455);
+            btn3.Font = new Font("Yu Gothic UI", 15F);
+            btn3.Location = new Point(368, 594);
             btn3.Name = "btn3";
             btn3.Size = new Size(123, 95);
             btn3.TabIndex = 4;
@@ -96,7 +107,8 @@
             // 
             // btn6
             // 
-            btn6.Location = new Point(363, 342);
+            btn6.Font = new Font("Yu Gothic UI", 15F);
+            btn6.Location = new Point(368, 481);
             btn6.Name = "btn6";
             btn6.Size = new Size(123, 95);
             btn6.TabIndex = 7;
@@ -105,7 +117,8 @@
             // 
             // btn5
             // 
-            btn5.Location = new Point(211, 342);
+            btn5.Font = new Font("Yu Gothic UI", 15F);
+            btn5.Location = new Point(216, 481);
             btn5.Name = "btn5";
             btn5.Size = new Size(123, 95);
             btn5.TabIndex = 6;
@@ -114,7 +127,8 @@
             // 
             // btn4
             // 
-            btn4.Location = new Point(66, 342);
+            btn4.Font = new Font("Yu Gothic UI", 15F);
+            btn4.Location = new Point(71, 481);
             btn4.Name = "btn4";
             btn4.Size = new Size(123, 95);
             btn4.TabIndex = 5;
@@ -123,7 +137,8 @@
             // 
             // btn9
             // 
-            btn9.Location = new Point(363, 228);
+            btn9.Font = new Font("Yu Gothic UI", 15F);
+            btn9.Location = new Point(368, 367);
             btn9.Name = "btn9";
             btn9.Size = new Size(123, 95);
             btn9.TabIndex = 10;
@@ -132,7 +147,8 @@
             // 
             // btn8
             // 
-            btn8.Location = new Point(211, 228);
+            btn8.Font = new Font("Yu Gothic UI", 15F);
+            btn8.Location = new Point(216, 367);
             btn8.Name = "btn8";
             btn8.Size = new Size(123, 95);
             btn8.TabIndex = 9;
@@ -141,7 +157,8 @@
             // 
             // btn7
             // 
-            btn7.Location = new Point(66, 228);
+            btn7.Font = new Font("Yu Gothic UI", 15F);
+            btn7.Location = new Point(71, 367);
             btn7.Name = "btn7";
             btn7.Size = new Size(123, 95);
             btn7.TabIndex = 8;
@@ -150,23 +167,24 @@
             // 
             // TextBoxDisplay
             // 
-            TextBoxDisplay.Location = new Point(66, 32);
+            TextBoxDisplay.Location = new Point(66, 185);
             TextBoxDisplay.Name = "TextBoxDisplay";
             TextBoxDisplay.Size = new Size(568, 39);
             TextBoxDisplay.TabIndex = 11;
             // 
             // btnRedo
             // 
-            btnRedo.Location = new Point(652, 377);
+            btnRedo.Location = new Point(216, 252);
             btnRedo.Name = "btnRedo";
-            btnRedo.Size = new Size(150, 46);
+            btnRedo.Size = new Size(123, 95);
             btnRedo.TabIndex = 12;
-            btnRedo.Text = "進む";
+            btnRedo.Text = "Redo";
             btnRedo.UseVisualStyleBackColor = true;
             // 
             // btnDot
             // 
-            btnDot.Location = new Point(363, 578);
+            btnDot.Font = new Font("Yu Gothic UI", 15F);
+            btnDot.Location = new Point(368, 717);
             btnDot.Name = "btnDot";
             btnDot.Size = new Size(123, 95);
             btnDot.TabIndex = 13;
@@ -175,7 +193,8 @@
             // 
             // btnEqual
             // 
-            btnEqual.Location = new Point(506, 578);
+            btnEqual.Font = new Font("Yu Gothic UI", 15F);
+            btnEqual.Location = new Point(511, 717);
             btnEqual.Name = "btnEqual";
             btnEqual.Size = new Size(123, 95);
             btnEqual.TabIndex = 14;
@@ -184,7 +203,8 @@
             // 
             // btnAddition
             // 
-            btnAddition.Location = new Point(506, 455);
+            btnAddition.Font = new Font("Yu Gothic UI", 15F);
+            btnAddition.Location = new Point(511, 594);
             btnAddition.Name = "btnAddition";
             btnAddition.Size = new Size(123, 95);
             btnAddition.TabIndex = 15;
@@ -193,7 +213,8 @@
             // 
             // btnSubtraction
             // 
-            btnSubtraction.Location = new Point(506, 342);
+            btnSubtraction.Font = new Font("Yu Gothic UI", 15F);
+            btnSubtraction.Location = new Point(511, 481);
             btnSubtraction.Name = "btnSubtraction";
             btnSubtraction.Size = new Size(123, 95);
             btnSubtraction.TabIndex = 16;
@@ -202,7 +223,8 @@
             // 
             // btnMultiplication
             // 
-            btnMultiplication.Location = new Point(506, 230);
+            btnMultiplication.Font = new Font("Yu Gothic UI", 15F);
+            btnMultiplication.Location = new Point(511, 369);
             btnMultiplication.Name = "btnMultiplication";
             btnMultiplication.Size = new Size(123, 95);
             btnMultiplication.TabIndex = 17;
@@ -211,18 +233,64 @@
             // 
             // btnDivision
             // 
-            btnDivision.Location = new Point(506, 113);
+            btnDivision.Font = new Font("Yu Gothic UI", 15F);
+            btnDivision.Location = new Point(511, 252);
             btnDivision.Name = "btnDivision";
             btnDivision.Size = new Size(123, 95);
             btnDivision.TabIndex = 18;
             btnDivision.Text = "÷";
             btnDivision.UseVisualStyleBackColor = true;
             // 
+            // btnClear
+            // 
+            btnClear.Font = new Font("Yu Gothic UI", 15F);
+            btnClear.Location = new Point(368, 252);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(123, 95);
+            btnClear.TabIndex = 19;
+            btnClear.Text = "C";
+            btnClear.UseVisualStyleBackColor = true;
+            // 
+            // panelExpression
+            // 
+            panelExpression.Controls.Add(flowLayoutPanel1);
+            panelExpression.Location = new Point(66, 12);
+            panelExpression.Margin = new Padding(0);
+            panelExpression.Name = "panelExpression";
+            panelExpression.Size = new Size(568, 70);
+            panelExpression.TabIndex = 20;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Location = new Point(286, 34);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(8, 8);
+            flowLayoutPanel1.TabIndex = 0;
+            // 
+            // panelCurrent
+            // 
+            panelCurrent.Controls.Add(flowLayoutPanel2);
+            panelCurrent.Location = new Point(66, 81);
+            panelCurrent.Margin = new Padding(0);
+            panelCurrent.Name = "panelCurrent";
+            panelCurrent.Size = new Size(568, 70);
+            panelCurrent.TabIndex = 21;
+            // 
+            // flowLayoutPanel2
+            // 
+            flowLayoutPanel2.Location = new Point(286, 34);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new Size(8, 8);
+            flowLayoutPanel2.TabIndex = 0;
+            // 
             // CalculatorForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(827, 700);
+            ClientSize = new Size(698, 846);
+            Controls.Add(panelCurrent);
+            Controls.Add(panelExpression);
+            Controls.Add(btnClear);
             Controls.Add(btnDivision);
             Controls.Add(btnMultiplication);
             Controls.Add(btnSubtraction);
@@ -245,6 +313,8 @@
             Name = "CalculatorForm";
             Text = "電卓";
             Load += CalculatorForm_Load;
+            panelExpression.ResumeLayout(false);
+            panelCurrent.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -270,5 +340,10 @@
         private Button btnSubtraction;
         private Button btnMultiplication;
         private Button btnDivision;
+        private Button btnClear;
+        private Panel panelExpression;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Panel panelCurrent;
+        private FlowLayoutPanel flowLayoutPanel2;
     }
 }
