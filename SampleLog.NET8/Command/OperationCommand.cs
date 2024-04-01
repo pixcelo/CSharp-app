@@ -14,7 +14,8 @@
 
         public void Invoke()
         {
-            var currentValue = _form.GetTextBoxDisplay();
+            var textBoxData = _form.GetTextBoxData();
+            var currentValue = textBoxData.DisplayText;
             _previousValue = currentValue;
 
             if (currentValue.Length == 0)

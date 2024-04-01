@@ -7,6 +7,7 @@ namespace SampleLog.NET8.Command
         private readonly CalculatorForm _form;        
         private readonly DataTable _dataTable;
         private string _previousValue;
+        private string _previousExpression;
 
         public EqualCommand(CalculatorForm form)
         {
@@ -16,8 +17,10 @@ namespace SampleLog.NET8.Command
 
         public void Invoke()
         {
-            var currentValue = _form.GetTextBoxDisplay();
+            var textBoxData = _form.GetTextBoxData();
+            var currentValue = textBoxData.DisplayText;
             _previousValue = currentValue;
+            _previousExpression = textBoxData.ExpressionText;
 
             if (string.IsNullOrEmpty(currentValue))
             {
@@ -31,12 +34,12 @@ namespace SampleLog.NET8.Command
                 return;
             }
 
-            var newValue = _dataTable.Compute(expression, null);            
+            var newValue = _dataTable.Compute(expression, null);
             var decimalValue = ConvertStringToDecimal(newValue.ToString());
 
             if (decimalValue != null)
             {
-                newValue = Math.Round((decimal)decimalValue, 5);                
+                newValue = Math.Round((decimal)decimalValue, 5);
             }
                         
             _form.SetTextBoxDisplay(newValue.ToString());
@@ -47,6 +50,7 @@ namespace SampleLog.NET8.Command
         public void Undo()
         {            
             _form.SetTextBoxDisplay(_previousValue);
+            _form.SetTextBoxDisplay(_previousExpression);
         }
 
         public void Redo()
@@ -65,7 +69,7 @@ namespace SampleLog.NET8.Command
 
             var operands = new Dictionary<string, string>()
             {
-                { "x", "*" },
+                { "×", "*" },
                 { "÷", "/" }
             };
 

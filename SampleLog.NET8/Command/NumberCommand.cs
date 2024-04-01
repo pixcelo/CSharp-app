@@ -6,6 +6,7 @@ namespace SampleLog.NET8.Command
     {
         private readonly CalculatorForm _form;
         private readonly string _number;
+        private string _previousValue;
 
         public NumberCommand(CalculatorForm form, string number)
         {
@@ -15,7 +16,9 @@ namespace SampleLog.NET8.Command
 
         public void Invoke()
         {
-            var currentValue = _form.GetTextBoxDisplay();
+            var textBoxData = _form.GetTextBoxData();
+            var currentValue = textBoxData.DisplayText;
+            _previousValue = currentValue;
 
             if (ValidateMaxDigits(currentValue))
             {
@@ -27,9 +30,7 @@ namespace SampleLog.NET8.Command
 
         public void Undo()
         {
-            var currentValue = _form.GetTextBoxDisplay();
-            var newValue = currentValue.Remove(currentValue.Length - 1);
-            _form.SetTextBoxDisplay(newValue);
+            _form.SetTextBoxDisplay(_previousValue);
         }
 
         public void Redo()

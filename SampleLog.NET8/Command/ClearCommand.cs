@@ -12,10 +12,12 @@
 
         public void Invoke()
         {
-            var currentValue = _form.GetTextBoxDisplay();
+            var textBoxData = _form.GetTextBoxData();
+            var currentValue = textBoxData.DisplayText;
             _previousValue = currentValue;
 
             _form.SetTextBoxDisplay("");
+            _form.SetTextBoxExpression("");
         }
 
         public void Undo()
