@@ -19,7 +19,18 @@ namespace SampleLog.NET8.Command
             var currentValue = _form.GetTextBoxDisplay();
             _previousValue = currentValue;
 
+            if (string.IsNullOrEmpty(currentValue))
+            {
+                return;
+            }
+
             var expression = ConvertExpression(currentValue);
+
+            if (!char.IsDigit(expression.Last()))
+            {
+                return;
+            }
+
             var newValue = _dataTable.Compute(expression, null);            
             var decimalValue = ConvertStringToDecimal(newValue.ToString());
 
@@ -28,7 +39,8 @@ namespace SampleLog.NET8.Command
                 newValue = Math.Round((decimal)decimalValue, 5);                
             }
                         
-            _form.SetTextBoxDisplay(newValue.ToString());                        
+            _form.SetTextBoxDisplay(newValue.ToString());
+            _form.SetTextBoxExpression(_previousValue + "=");
         }
 
 
@@ -42,6 +54,11 @@ namespace SampleLog.NET8.Command
             Invoke();
         }
 
+        /// <summary>
+        /// 演算子の文字列を変換
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
         private string ConvertExpression(string expression)
         {
             var result = expression;
