@@ -20,9 +20,15 @@ namespace SampleLog.NET8.Command
             _previousValue = currentValue;
 
             var expression = ConvertExpression(currentValue);
-            var newValue = _dataTable.Compute(expression, null);
-            newValue = Math.Round((double)newValue, 5);
-            _form.SetTextBoxDisplay(newValue.ToString());
+            var newValue = _dataTable.Compute(expression, null);            
+            var decimalValue = ConvertStringToDecimal(newValue.ToString());
+
+            if (decimalValue != null)
+            {
+                newValue = Math.Round((decimal)decimalValue, 5);                
+            }
+                        
+            _form.SetTextBoxDisplay(newValue.ToString());                        
         }
 
 
@@ -52,6 +58,11 @@ namespace SampleLog.NET8.Command
             }
 
             return result;
+        }
+
+        private decimal? ConvertStringToDecimal(string value)
+        {
+            return decimal.TryParse(value, out decimal result) ? result : null;
         }
     }    
 }
