@@ -28,7 +28,7 @@ namespace SampleLog.NET8
         }
 
         private void CalculatorForm_Load(object sender, EventArgs e)
-        {            
+        {
             btn0.Click += NumberButton_Click;
             btn1.Click += NumberButton_Click;
             btn2.Click += NumberButton_Click;
@@ -43,6 +43,7 @@ namespace SampleLog.NET8
 
             btnUndo.Click += UndoButton_Click;
             btnRedo.Click += RedoButton_Click;
+            btnClear.Click += ClearButton_Click;
 
             btnEqual.Click += EqualButton_Click;
             btnAddition.Click += OperationButton_Click;
@@ -120,7 +121,28 @@ namespace SampleLog.NET8
 
         private void RedoButton_Click(object sender, EventArgs e)
         {
-            _commandManager.Redo();
+            try
+            {
+                _commandManager.Redo();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button button = (Button)sender;
+                ICommand command = new ClearCommand(this);
+                _commandManager.Invoke(command);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message + ex.StackTrace);
+            }
         }
 
         //private void btnRedo_Click(object sender, EventArgs e)
