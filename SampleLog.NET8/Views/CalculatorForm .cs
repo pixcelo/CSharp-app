@@ -7,14 +7,24 @@ namespace SampleLog.NET8
         private static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);        
         private CommandManager _commandManager = new CommandManager();
 
+        public class TextBoxData
+        {
+            public string DisplayText { get; set; }
+            public string ExpressionText { get; set; }
+        }
+
         public CalculatorForm()
         {
             InitializeComponent();
         }
 
-        public string GetTextBoxDisplay()
+        public TextBoxData GetTextBoxData()
         {
-            return TextBoxDisplay.Text;
+            return new TextBoxData
+            {
+                DisplayText = TextBoxDisplay.Text,
+                ExpressionText = TextBoxExpression.Text,
+            };
         }
 
         public void SetTextBoxDisplay(string value)
@@ -25,6 +35,11 @@ namespace SampleLog.NET8
         public void AddValueToTextBoxDisplay(string value)
         {
             TextBoxDisplay.Text += value;
+        }
+
+        public void SetTextBoxExpression(string value)
+        {
+            TextBoxExpression.Text = value;
         }
 
         private void CalculatorForm_Load(object sender, EventArgs e)

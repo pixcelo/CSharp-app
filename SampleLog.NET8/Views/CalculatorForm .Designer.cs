@@ -47,7 +47,7 @@
             btnMultiplication = new Button();
             btnDivision = new Button();
             btnClear = new Button();
-            textBoxExpression = new TextBox();
+            TextBoxExpression = new TextBox();
             TextBoxDisplay = new TextBox();
             SuspendLayout();
             // 
@@ -284,7 +284,7 @@
             btnMultiplication.Name = "btnMultiplication";
             btnMultiplication.Size = new Size(123, 95);
             btnMultiplication.TabIndex = 17;
-            btnMultiplication.Text = "x";
+            btnMultiplication.Text = "×";
             btnMultiplication.UseVisualStyleBackColor = false;
             // 
             // btnDivision
@@ -315,18 +315,18 @@
             btnClear.Text = "C";
             btnClear.UseVisualStyleBackColor = false;
             // 
-            // textBoxExpression
+            // TextBoxExpression
             // 
-            textBoxExpression.BackColor = Color.FromArgb(32, 32, 32);
-            textBoxExpression.BorderStyle = BorderStyle.None;
-            textBoxExpression.ForeColor = Color.DarkGray;
-            textBoxExpression.Location = new Point(13, 67);
-            textBoxExpression.Margin = new Padding(4, 2, 4, 2);
-            textBoxExpression.Multiline = true;
-            textBoxExpression.Name = "textBoxExpression";
-            textBoxExpression.Size = new Size(503, 55);
-            textBoxExpression.TabIndex = 22;
-            textBoxExpression.TextAlign = HorizontalAlignment.Right;
+            TextBoxExpression.BackColor = Color.FromArgb(32, 32, 32);
+            TextBoxExpression.BorderStyle = BorderStyle.None;
+            TextBoxExpression.ForeColor = Color.DarkGray;
+            TextBoxExpression.Location = new Point(13, 67);
+            TextBoxExpression.Margin = new Padding(4, 2, 4, 2);
+            TextBoxExpression.Multiline = true;
+            TextBoxExpression.Name = "TextBoxExpression";
+            TextBoxExpression.Size = new Size(503, 55);
+            TextBoxExpression.TabIndex = 22;
+            TextBoxExpression.TextAlign = HorizontalAlignment.Right;
             // 
             // TextBoxDisplay
             // 
@@ -348,7 +348,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(32, 32, 32);
             ClientSize = new Size(533, 709);
-            Controls.Add(textBoxExpression);
+            Controls.Add(TextBoxExpression);
             Controls.Add(TextBoxDisplay);
             Controls.Add(btnClear);
             Controls.Add(btnDivision);
@@ -397,7 +397,7 @@
         private Button btnMultiplication;
         private Button btnDivision;
         private Button btnClear;
-        private TextBox textBoxExpression;
+        private TextBox TextBoxExpression;
         private TextBox TextBoxDisplay;
     }
 }
