@@ -5,6 +5,7 @@ namespace SampleLog.NET8.Calculator.Command
 {
     public class EqualCommand : ICommand
     {
+        private static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
         private CalculatorViewModel _viewModel;
         private readonly DataTable _dataTable;
         private string _previousValue;
@@ -17,8 +18,7 @@ namespace SampleLog.NET8.Calculator.Command
         }
 
         public void Invoke()
-        {
-            //var textBoxData = _form.GetTextBoxData();
+        {            
             var currentValue = _viewModel.DisplayText;
             _previousValue = currentValue;
             _previousExpression = _viewModel.ExpressionText;
@@ -45,6 +45,8 @@ namespace SampleLog.NET8.Calculator.Command
             
             _viewModel.DisplayText = newValue.ToString();
             _viewModel.ExpressionText = _previousValue + "=";
+
+            logger.Info($"Result: {_viewModel.DisplayText}");
         }
 
 
@@ -71,7 +73,7 @@ namespace SampleLog.NET8.Calculator.Command
             var operands = new Dictionary<string, string>()
             {
                 { "×", "*" },
-                { "÷", "/" }
+                { "÷", "/" }                
             };
 
             foreach (var operand in operands)

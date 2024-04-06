@@ -4,6 +4,7 @@ namespace SampleLog.NET8.Calculator.Command
 {
     public class DotCommand : ICommand
     {
+        private static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
         private CalculatorViewModel _viewModel;
         private readonly string _value;
         private string _previousValue;
@@ -44,6 +45,8 @@ namespace SampleLog.NET8.Calculator.Command
             {                
                 _viewModel.DisplayText = currentValue + _value;
             }
+
+            logger.Info($"Result: {_viewModel.DisplayText}");
         }
 
         public void Undo()

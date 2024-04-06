@@ -2,7 +2,7 @@
 {
     public class CommandManager
     {
-        private static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
         private Stack<ICommand> _undoBuffer = new Stack<ICommand>();
         private Stack<ICommand> _redoBuffer = new Stack<ICommand>();
 
@@ -12,7 +12,7 @@
             {                
                 command.Invoke();
                 _undoBuffer.Push(command);
-                _redoBuffer.Clear();
+                _redoBuffer.Clear();                
             }
             catch (Exception ex)
             {
@@ -29,6 +29,8 @@
                     ICommand command = _undoBuffer.Pop();
                     command.Undo();
                     _redoBuffer.Push(command);
+
+                    logger.Info($"Undo: {command.GetType().Name}");
                 }
             }
             catch (Exception ex)
@@ -44,8 +46,10 @@
                 if (_redoBuffer.Count > 0)
                 {
                     ICommand command = _redoBuffer.Pop();
+                    logger.Info($"Redo: {command.GetType().Name}");
+
                     command.Invoke();
-                    _undoBuffer.Push(command);
+                    _undoBuffer.Push(command);                    
                 }
             }
             catch (Exception ex)

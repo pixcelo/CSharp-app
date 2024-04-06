@@ -4,6 +4,7 @@ namespace SampleLog.NET8.Calculator.Command
 {
     public class ClearCommand : ICommand
     {
+        private static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
         private CalculatorViewModel _viewModel;
         private string _previousValue;
 
@@ -19,6 +20,8 @@ namespace SampleLog.NET8.Calculator.Command
             
             _viewModel.DisplayText = "";
             _viewModel.ExpressionText = "";
+
+            logger.Info($"Result: {_viewModel.DisplayText}");
         }
 
         public void Undo()
