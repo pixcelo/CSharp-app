@@ -33,6 +33,7 @@ namespace SampleLog.NET8
         {
             services.AddSingleton<CalculatorForm>();
             services.AddTransient<CommandManager>();
+            //services.AddTransient<IHistoryRepository, HistoryRepository>();
             services.AddSingleton<IHistoryRepository, InMemoryHistoryRepository>();
         }
 
