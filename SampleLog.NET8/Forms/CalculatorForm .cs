@@ -1,19 +1,22 @@
 using SampleLog.NET8.Calculator.Command;
 using SampleLog.NET8.Models;
+using SampleLog.NET8.Repositories;
 using System.Runtime.InteropServices;
 
 namespace SampleLog.NET8
 {
     public partial class CalculatorForm : Form
     {
+        private IHistoryRepository _historyRepository;
         private CommandManager _commandManager;
         private CalculatorViewModel _viewModel;
 
-        public CalculatorForm(CommandManager commandManager)
+        public CalculatorForm(CommandManager commandManager, IHistoryRepository historyRepository)
         {
             InitializeComponent();
             Setup();
 
+            _historyRepository = historyRepository;
             _commandManager = commandManager;
         }
 
@@ -42,7 +45,7 @@ namespace SampleLog.NET8
 
         private void EqualButton_Click(object sender, EventArgs e)
         {
-            ICommand command = new EqualCommand(_viewModel);
+            ICommand command = new EqualCommand(_historyRepository, _viewModel);
             _commandManager.Invoke(command);
         }
 

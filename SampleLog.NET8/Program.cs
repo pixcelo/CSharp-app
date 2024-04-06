@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using SampleLog.NET8.Calculator.Command;
+using SampleLog.NET8.Repositories;
 using System.Runtime.InteropServices;
 
 namespace SampleLog.NET8
@@ -32,6 +33,7 @@ namespace SampleLog.NET8
         {
             services.AddSingleton<CalculatorForm>();
             services.AddTransient<CommandManager>();
+            services.AddSingleton<IHistoryRepository, InMemoryHistoryRepository>();
         }
 
     }

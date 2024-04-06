@@ -1,4 +1,5 @@
 ﻿using SampleLog.NET8.Models;
+using SampleLog.NET8.Repositories;
 using System.Data;
 
 namespace SampleLog.NET8.Calculator.Command
@@ -6,13 +7,15 @@ namespace SampleLog.NET8.Calculator.Command
     public class EqualCommand : ICommand
     {
         private static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
+        private IHistoryRepository _historyRepository;
         private CalculatorViewModel _viewModel;
         private readonly DataTable _dataTable;
         private string _previousValue;
         private string _previousExpression;
 
-        public EqualCommand(CalculatorViewModel viewModel)
+        public EqualCommand(IHistoryRepository historyRepository, CalculatorViewModel viewModel)
         {
+            _historyRepository = historyRepository;
             _viewModel = viewModel;
             _dataTable = new DataTable();
         }
@@ -44,7 +47,15 @@ namespace SampleLog.NET8.Calculator.Command
             }
             
             _viewModel.DisplayText = newValue.ToString();
-            _viewModel.ExpressionText = _previousValue + "=";
+            _viewModel.ExpressionText = _previousValue + "=";            
+
+            var history = new History
+            {                
+                Operation = _viewModel.ExpressionText,
+                Result = _viewModel.DisplayText
+            };
+
+            _historyRepository.Save(history);
 
             logger.Info($"Result: {_viewModel.DisplayText}");
         }
@@ -73,7 +84,7 @@ namespace SampleLog.NET8.Calculator.Command
             var operands = new Dictionary<string, string>()
             {
                 { "×", "*" },
-                { "÷", "/" }                
+                { "÷", "/" }
             };
 
             foreach (var operand in operands)
