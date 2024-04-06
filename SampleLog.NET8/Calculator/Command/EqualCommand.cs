@@ -46,7 +46,7 @@ namespace SampleLog.NET8.Calculator.Command
                 newValue = Math.Round((decimal)decimalValue, 5);
             }
             
-            _viewModel.DisplayText = newValue.ToString();
+            _viewModel.DisplayText = Convert.ToDouble(newValue).ToString("#,##0.#####");
             _viewModel.ExpressionText = _previousValue + "=";            
 
             var history = new History
@@ -84,7 +84,8 @@ namespace SampleLog.NET8.Calculator.Command
             var operands = new Dictionary<string, string>()
             {
                 { "×", "*" },
-                { "÷", "/" }
+                { "÷", "/" },
+                { ",", "" }
             };
 
             foreach (var operand in operands)

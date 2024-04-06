@@ -348,6 +348,7 @@
             TextBoxExpression.Margin = new Padding(4, 2, 4, 2);
             TextBoxExpression.Multiline = true;
             TextBoxExpression.Name = "TextBoxExpression";
+            TextBoxExpression.ReadOnly = true;
             TextBoxExpression.Size = new Size(503, 55);
             TextBoxExpression.TabIndex = 22;
             TextBoxExpression.TextAlign = HorizontalAlignment.Right;
@@ -362,6 +363,7 @@
             TextBoxDisplay.Margin = new Padding(4, 2, 4, 2);
             TextBoxDisplay.Multiline = true;
             TextBoxDisplay.Name = "TextBoxDisplay";
+            TextBoxDisplay.ReadOnly = true;
             TextBoxDisplay.Size = new Size(510, 69);
             TextBoxDisplay.TabIndex = 21;
             TextBoxDisplay.TextAlign = HorizontalAlignment.Right;
