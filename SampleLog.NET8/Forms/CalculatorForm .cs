@@ -23,7 +23,6 @@ namespace SampleLog.NET8
             TextBoxExpression.DataBindings.Add(nameof(TextBoxExpression.Text), _viewModel, nameof(_viewModel.ExpressionText));
         }
 
-
         private void NumberButton_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;                
@@ -62,8 +61,7 @@ namespace SampleLog.NET8
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
+        {            
             ICommand command = new ClearCommand(_viewModel);
             _commandManager.Invoke(command);
         }     

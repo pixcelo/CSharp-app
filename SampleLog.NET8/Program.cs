@@ -1,7 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using SampleLog.NET8.Calculator;
 using SampleLog.NET8.Calculator.Command;
-using System;
 using System.Runtime.InteropServices;
 
 namespace SampleLog.NET8
@@ -33,7 +31,7 @@ namespace SampleLog.NET8
         private static void ConfigureServices(ServiceCollection services)
         {
             services.AddSingleton<CalculatorForm>();
-            services.AddTransient<CommandManager>();            
+            services.AddTransient<CommandManager>();
         }
 
     }
