@@ -1,3 +1,5 @@
+using log4net.Config;
+using log4net;
 using Microsoft.Extensions.DependencyInjection;
 using SampleLog.NET8.Calculator.Command;
 using SampleLog.NET8.Repositories;
@@ -16,7 +18,13 @@ namespace SampleLog.NET8
         {
 #if DEBUG
             AllocConsole();
+            XmlConfigurator.Configure(new FileInfo("log4net.config"));
+            ((log4net.Repository.Hierarchy.Hierarchy)LogManager.GetRepository()).Root.RemoveAppender("FileAppender");
+#else
+            XmlConfigurator.Configure(new FileInfo("log4net.config"));
+            ((log4net.Repository.Hierarchy.Hierarchy)LogManager.GetRepository()).Root.RemoveAppender("ConsoleAppender");
 #endif
+
             var services = new ServiceCollection();
             ConfigureServices(services);
 
@@ -33,8 +41,8 @@ namespace SampleLog.NET8
         {
             services.AddSingleton<CalculatorForm>();
             services.AddTransient<CommandManager>();
-            //services.AddTransient<IHistoryRepository, HistoryRepository>();
-            services.AddSingleton<IHistoryRepository, InMemoryHistoryRepository>();
+            services.AddTransient<IHistoryRepository, HistoryRepository>();
+            //services.AddSingleton<IHistoryRepository, InMemoryHistoryRepository>();
         }
 
     }
