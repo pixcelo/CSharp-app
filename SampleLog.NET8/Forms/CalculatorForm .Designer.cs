@@ -49,6 +49,10 @@
             btnClear = new Button();
             TextBoxExpression = new TextBox();
             TextBoxDisplay = new TextBox();
+            PanelHeader = new Panel();
+            BtnClose = new Button();
+            label1 = new Label();
+            PanelHeader.SuspendLayout();
             SuspendLayout();
             // 
             // btnUndo
@@ -362,12 +366,48 @@
             TextBoxDisplay.TabIndex = 21;
             TextBoxDisplay.TextAlign = HorizontalAlignment.Right;
             // 
+            // PanelHeader
+            // 
+            PanelHeader.Controls.Add(BtnClose);
+            PanelHeader.Controls.Add(label1);
+            PanelHeader.Location = new Point(13, -4);
+            PanelHeader.Name = "PanelHeader";
+            PanelHeader.Size = new Size(509, 53);
+            PanelHeader.TabIndex = 23;
+            PanelHeader.MouseDown += FormMouseDown;
+            // 
+            // BtnClose
+            // 
+            BtnClose.BackColor = Color.Transparent;
+            BtnClose.FlatAppearance.BorderSize = 0;
+            BtnClose.FlatStyle = FlatStyle.Flat;
+            BtnClose.Font = new Font("Meiryo UI", 9F);
+            BtnClose.ForeColor = Color.White;
+            BtnClose.Location = new Point(454, 5);
+            BtnClose.Name = "BtnClose";
+            BtnClose.Size = new Size(41, 40);
+            BtnClose.TabIndex = 1;
+            BtnClose.Text = "×";
+            BtnClose.UseVisualStyleBackColor = false;
+            BtnClose.Click += CloseButton_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(14, 12);
+            label1.Name = "label1";
+            label1.Size = new Size(120, 32);
+            label1.TabIndex = 0;
+            label1.Text = "Calculator";
+            // 
             // CalculatorForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(32, 32, 32);
             ClientSize = new Size(533, 709);
+            Controls.Add(PanelHeader);
             Controls.Add(TextBoxExpression);
             Controls.Add(TextBoxDisplay);
             Controls.Add(btnClear);
@@ -389,8 +429,11 @@
             Controls.Add(btn1);
             Controls.Add(btn0);
             Controls.Add(btnUndo);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "CalculatorForm";
             Text = "電卓";
+            PanelHeader.ResumeLayout(false);
+            PanelHeader.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -418,5 +461,8 @@
         private Button btnClear;
         private TextBox TextBoxExpression;
         private TextBox TextBoxDisplay;
+        private Panel PanelHeader;
+        private Label label1;
+        private Button BtnClose;
     }
 }
