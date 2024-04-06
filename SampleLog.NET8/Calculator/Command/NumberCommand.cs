@@ -1,36 +1,36 @@
-﻿using System.Text.RegularExpressions;
+﻿using SampleLog.NET8.Models;
+using System.Text.RegularExpressions;
 
-namespace SampleLog.NET8.Command
+namespace SampleLog.NET8.Calculator.Command
 {
     public class NumberCommand : ICommand
     {
-        private readonly CalculatorForm _form;
+        private CalculatorViewModel _viewModel;
         private readonly string _number;
         private string _previousValue;
 
-        public NumberCommand(CalculatorForm form, string number)
+        public NumberCommand(CalculatorViewModel viewModel, string number)
         {
-            _form = form;
+            _viewModel = viewModel;
             _number = number;
         }
 
         public void Invoke()
-        {
-            var textBoxData = _form.GetTextBoxData();
-            var currentValue = textBoxData.DisplayText;
+        {            
+            var currentValue = _viewModel.DisplayText;
             _previousValue = currentValue;
 
             if (ValidateMaxDigits(currentValue))
             {
                 return;
             }
-
-            _form.AddValueToTextBoxDisplay(_number);
+            
+            _viewModel.DisplayText = currentValue + _number;
         }
 
         public void Undo()
-        {
-            _form.SetTextBoxDisplay(_previousValue);
+        {            
+            _viewModel.DisplayText = _previousValue;
         }
 
         public void Redo()
@@ -45,12 +45,12 @@ namespace SampleLog.NET8.Command
         /// <returns></returns>
         private bool ValidateMaxDigits(string currentValue)
         {
-            if (currentValue.Length == 0)
+            if (string.IsNullOrEmpty(currentValue))
             {
                 return false;
             }
 
-            var input = SplitByOperators(currentValue).Last();            
+            var input = SplitByOperators(currentValue).Last();
 
             if (!input.Contains("."))
             {
@@ -70,7 +70,7 @@ namespace SampleLog.NET8.Command
         private static string[] SplitByOperators(string input)
         {
             // 数値または小数点以外
-            var pattern = @"[^0-9.]+";            
+            var pattern = @"[^0-9.]+";
             return Regex.Split(input, pattern, RegexOptions.IgnoreCase);
         }
     }

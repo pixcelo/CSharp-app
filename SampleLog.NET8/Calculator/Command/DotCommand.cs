@@ -1,29 +1,30 @@
-﻿namespace SampleLog.NET8.Command
+﻿using SampleLog.NET8.Models;
+
+namespace SampleLog.NET8.Calculator.Command
 {
     public class DotCommand : ICommand
     {
-        private readonly CalculatorForm _form;
+        private CalculatorViewModel _viewModel;
         private readonly string _value;
         private string _previousValue;
 
-        public DotCommand(CalculatorForm form, string value)
+        public DotCommand(CalculatorViewModel viewModel, string value)
         {
-            _form = form;
+            _viewModel = viewModel;
             _value = value;
         }
 
         public void Invoke()
-        {
-            var textBoxData = _form.GetTextBoxData();
-            var currentValue = textBoxData.DisplayText;
+        {            
+            var currentValue = _viewModel.DisplayText;
             _previousValue = currentValue;
 
             if (currentValue.Length == 0)
-            {                
+            {
                 return;
             }
 
-            var operandIndex = FindNonNumericIndex(currentValue);            
+            var operandIndex = FindNonNumericIndex(currentValue);
 
             if (operandIndex != -1)
             {
@@ -36,18 +37,18 @@
                 {
                     return;
                 }
-
-                _form.SetTextBoxDisplay(currentValue + _value);
+                
+                _viewModel.DisplayText = currentValue + _value;
             }
             else if (!currentValue.Contains(_value))
-            {
-                _form.SetTextBoxDisplay(currentValue + _value);
+            {                
+                _viewModel.DisplayText = currentValue + _value;
             }
         }
 
         public void Undo()
         {
-            _form.SetTextBoxDisplay(_previousValue);
+            _viewModel.DisplayText = _previousValue;
         }
 
         public void Redo()

@@ -1,26 +1,27 @@
-﻿using System.Data;
+﻿using SampleLog.NET8.Models;
+using System.Data;
 
-namespace SampleLog.NET8.Command
+namespace SampleLog.NET8.Calculator.Command
 {
     public class EqualCommand : ICommand
     {
-        private readonly CalculatorForm _form;        
+        private CalculatorViewModel _viewModel;
         private readonly DataTable _dataTable;
         private string _previousValue;
         private string _previousExpression;
 
-        public EqualCommand(CalculatorForm form)
+        public EqualCommand(CalculatorViewModel viewModel)
         {
-            _form = form;            
+            _viewModel = viewModel;
             _dataTable = new DataTable();
         }
 
         public void Invoke()
         {
-            var textBoxData = _form.GetTextBoxData();
-            var currentValue = textBoxData.DisplayText;
+            //var textBoxData = _form.GetTextBoxData();
+            var currentValue = _viewModel.DisplayText;
             _previousValue = currentValue;
-            _previousExpression = textBoxData.ExpressionText;
+            _previousExpression = _viewModel.ExpressionText;
 
             if (string.IsNullOrEmpty(currentValue))
             {
@@ -41,16 +42,16 @@ namespace SampleLog.NET8.Command
             {
                 newValue = Math.Round((decimal)decimalValue, 5);
             }
-                        
-            _form.SetTextBoxDisplay(newValue.ToString());
-            _form.SetTextBoxExpression(_previousValue + "=");
+            
+            _viewModel.DisplayText = newValue.ToString();
+            _viewModel.ExpressionText = _previousValue + "=";
         }
 
 
         public void Undo()
         {            
-            _form.SetTextBoxDisplay(_previousValue);
-            _form.SetTextBoxDisplay(_previousExpression);
+            _viewModel.DisplayText = _previousValue;
+            _viewModel.ExpressionText = _previousExpression;
         }
 
         public void Redo()
@@ -85,5 +86,5 @@ namespace SampleLog.NET8.Command
         {
             return decimal.TryParse(value, out decimal result) ? result : null;
         }
-    }    
+    }
 }

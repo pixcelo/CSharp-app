@@ -1,4 +1,4 @@
-﻿namespace SampleLog.NET8.Command
+﻿namespace SampleLog.NET8.Calculator.Command
 {
     public interface ICommand
     {
