@@ -21,7 +21,7 @@ namespace SampleLog.NET8.Calculator.Command
         }
 
         public void Invoke()
-        {
+        {            
             var currentValue = _viewModel.DisplayText;
             _previousValue = currentValue;
             _previousExpression = _viewModel.ExpressionText;
@@ -33,8 +33,7 @@ namespace SampleLog.NET8.Calculator.Command
 
             var expression = ConvertExpression(currentValue);
 
-            if ((expression.First() != '-' && !char.IsDigit(expression.First())) ||
-                !char.IsDigit(expression.Last()))
+            if (!char.IsDigit(expression.Last()))
             {
                 return;
             }

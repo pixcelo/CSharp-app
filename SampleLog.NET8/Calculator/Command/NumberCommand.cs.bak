@@ -62,7 +62,7 @@ namespace SampleLog.NET8.Calculator.Command
 
             const int MAX_DECIMAL_PLACES = 5;
             var decimalPart = input.Split('.').LastOrDefault();
-            return decimalPart?.Length >= MAX_DECIMAL_PLACES;
+            return decimalPart.Length >= MAX_DECIMAL_PLACES;
         }
 
         /// <summary>

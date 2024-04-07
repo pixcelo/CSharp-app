@@ -21,7 +21,7 @@ namespace SampleLog.NET8.Calculator.Command
             var currentValue = _viewModel.DisplayText;
             _previousValue = currentValue;
 
-            if (string.IsNullOrEmpty(currentValue))
+            if (currentValue.Length == 0)
             {
                 return;
             }
