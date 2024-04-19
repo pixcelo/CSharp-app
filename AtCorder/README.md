@@ -21,6 +21,7 @@ int[] input = Console.ReadLine().Split().Select(int.Parse).ToArray();
 - AC = Accepted(正解)
 - WA = Wrong Answer(不正解)
 - CE = Compile Error（コンパイルエラー）
+- RE = Runtime Error（実行時エラー）
 
 ## Reference
 - [AtCorder](https://atcoder.jp/home)

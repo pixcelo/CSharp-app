@@ -4,7 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var p = new A03();
+        var p = new A04();
         p.Run();
     }
 }
