@@ -47,7 +47,7 @@ namespace AtCorder.Classes
                 int[] q = Console.ReadLine().Split().Select(int.Parse).ToArray();
 
                 string result = "No";
-
+                 
                 for (int i = 0; i < n; i++)
                 {
                     for (int j = 0; j < n; j++)
