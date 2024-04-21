@@ -57,7 +57,28 @@ namespace AtCorder.Classes
         {
             while (true)
             {
-               
+                int[] l1 = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                int N = l1[0];
+                int Q = l1[1];
+
+                int[] l2 = Console.ReadLine().Split().Select(int.Parse).ToArray();
+
+                var list = new List<int[]>();
+                int counter = 0;
+
+                while (counter < Q)
+                {
+                    var arry = new int[2];
+                    arry = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                    list.Add(arry);
+                    counter++;
+                }
+
+                foreach (var item in list)
+                {
+                    Console.WriteLine(item);
+                }
+
             }
         }
         
