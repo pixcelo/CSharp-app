@@ -76,7 +76,9 @@ namespace AtCorder.Classes
 
                 foreach (var item in list)
                 {
-                    Console.WriteLine(item);
+                    var skipCount = item[0] - 1;
+                    var takeCount = (item[1] + 1) - item[0];
+                    Console.WriteLine(l2.Skip(skipCount).Take(takeCount).Sum());
                 }
 
             }

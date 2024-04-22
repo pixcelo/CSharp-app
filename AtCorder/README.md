@@ -22,6 +22,7 @@ int[] input = Console.ReadLine().Split().Select(int.Parse).ToArray();
 - WA = Wrong Answer(不正解)
 - CE = Compile Error（コンパイルエラー）
 - RE = Runtime Error（実行時エラー）
+- TLE = Time Limit Exceeded（時間制限超過）
 
 ## Reference
 - [AtCorder](https://atcoder.jp/home)
