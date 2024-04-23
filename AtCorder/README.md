@@ -32,3 +32,8 @@ int[] input = Console.ReadLine().Split().Select(int.Parse).ToArray();
 ## コーディングテスト・試験関連
 - [LeetCode](https://leetcode.com/)
 - [Codility](https://www.codility.com/)
+
+## 勉強になりそうな書籍・サイトのリンク
+- [Atcoder入緑したのでまとめ ~競技プログラミングは個人的には役に立ってる~](https://zenn.dev/sojiro/articles/a9bb4852598aa2)
+- [AtCoder　凡人が『緑』になるための精選50問詳細解説 ](https://www.amazon.co.jp/gp/product/B09C3TPQYV/ref=kinw_myk_ro_title)
+- [アルゴ式](https://algo-method.com/)

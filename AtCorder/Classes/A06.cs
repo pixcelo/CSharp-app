@@ -65,7 +65,7 @@ namespace AtCorder.Classes
 
                 var list = new List<int[]>();
                 int counter = 0;
-
+                
                 while (counter < Q)
                 {
                     var arry = new int[2];
@@ -74,11 +74,28 @@ namespace AtCorder.Classes
                     counter++;
                 }
 
+                // このやり方では、時間制限超過となってしまう
+                //foreach (var item in list)
+                //{
+                //    var skipCount = item[0] - 1;
+                //    var takeCount = (item[1] + 1) - item[0];
+                //    Console.WriteLine(l2.Skip(skipCount).Take(takeCount).Sum());
+                //}
+                
+
+                // 累積和を求めるため、予め各インデックスまでの総和を格納したリストを作成する
+                long[] s = new long[N + 1];
+                s[0] = l2[0];
+
+                for (int i = 0; i < N; i++)
+                {
+                    s[i + 1] = s[i] + l2[i];
+                }
+
                 foreach (var item in list)
                 {
-                    var skipCount = item[0] - 1;
-                    var takeCount = (item[1] + 1) - item[0];
-                    Console.WriteLine(l2.Skip(skipCount).Take(takeCount).Sum());
+                    // 例えば3～4番目の総和を求める場合、2番目（1つ前）までの累積和を引けば良い
+                    Console.WriteLine(s[item[1]] - s[item[0] - 1]);
                 }
 
             }
