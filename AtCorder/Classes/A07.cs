@@ -40,8 +40,35 @@ namespace AtCorder.Classes
         {
             while (true)
             {
-                
+                int D = int.Parse(Console.ReadLine());
+                int N = int.Parse(Console.ReadLine());
+                int[] L = new int[D];
+                int[] R = new int[D];
 
+                for (int i = 0; i < N; i++)
+                {
+                    int[] list = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                    L[i] = list[0];
+                    R[i] = list[1];
+                }
+
+                // 各実施日の出席者数を配列にする
+                int[] s = new int[D];
+ 
+                for (int i = 0; i < N; i++)
+                {
+                    var nums = Enumerable.Range(L[i], (R[i] - L[i] + 1));
+
+                    foreach (var num in nums)
+                    {
+                        s[num - 1] += 1;
+                    }
+                }
+
+                foreach (var item in s)
+                {
+                    Console.WriteLine(item);
+                }
             }
         }
         
