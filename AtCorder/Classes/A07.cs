@@ -80,6 +80,7 @@ namespace AtCorder.Classes
                 //    Console.WriteLine(item);
                 //}
 
+                // 解法メモ https://qiita.com/te-k/items/5423b98c6e15a75023cb
 
                 int D = int.Parse(Console.ReadLine());
                 int N = int.Parse(Console.ReadLine());
