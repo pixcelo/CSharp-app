@@ -34,41 +34,76 @@ namespace AtCorder.Classes
         出力
         D行にわたって出力してください．d行目には，d日目の出席者数を出力してください．
 
+        入力例
+        8
+        5
+        2 3
+        3 6
+        5 7
+        3 7
+        1 5
+
         */
 
         public void Run()
         {
             while (true)
             {
+                // このやり方では、時間制限超過となってしまう
+                //int D = int.Parse(Console.ReadLine());
+                //int N = int.Parse(Console.ReadLine());
+                //int[] L = new int[D];
+                //int[] R = new int[D];
+
+                //for (int i = 0; i < N; i++)
+                //{
+                //    int[] list = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                //    L[i] = list[0];
+                //    R[i] = list[1];
+                //}
+
+                // 各実施日の出席者数を配列にする 
+                //int[] s = new int[D];
+
+                //for (int i = 0; i < N; i++)
+                //{
+                //    var nums = Enumerable.Range(L[i], (R[i] - L[i] + 1));
+
+                //    foreach (var num in nums)
+                //    {
+                //        s[num - 1] += 1;
+                //    }
+                //}
+
+                //foreach (var item in s)
+                //{
+                //    Console.WriteLine(item);
+                //}
+
+
                 int D = int.Parse(Console.ReadLine());
                 int N = int.Parse(Console.ReadLine());
-                int[] L = new int[D];
-                int[] R = new int[D];
+
+                int[] diff = new int[D + 2]; // 差分配列 (両端に番兵を設ける)
 
                 for (int i = 0; i < N; i++)
                 {
-                    int[] list = Console.ReadLine().Split().Select(int.Parse).ToArray();
-                    L[i] = list[0];
-                    R[i] = list[1];
+                    string[] input = Console.ReadLine().Split();
+                    int Li = int.Parse(input[0]);
+                    int Ri = int.Parse(input[1]);
+                    diff[Li]++;     // 出席開始日に+1
+                    diff[Ri + 1]--; // 出席終了日の翌日に-1
                 }
 
-                // 各実施日の出席者数を配列にする
-                int[] s = new int[D];
- 
-                for (int i = 0; i < N; i++)
+                int[] attendance = new int[D + 1]; // 各日の出席者数を格納する配列
+                int sum = 0;
+                for (int i = 1; i <= D; i++)
                 {
-                    var nums = Enumerable.Range(L[i], (R[i] - L[i] + 1));
-
-                    foreach (var num in nums)
-                    {
-                        s[num - 1] += 1;
-                    }
+                    sum += diff[i]; // 差分配列の累積和を計算
+                    attendance[i] = sum; // 出席者数を格納
+                    Console.WriteLine(attendance[i]);
                 }
 
-                foreach (var item in s)
-                {
-                    Console.WriteLine(item);
-                }
             }
         }
         
