@@ -62,8 +62,20 @@ namespace AtCorder.Classes
         {
             while (true)
             {
-                
+                int[] hw = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                int h = hw[0];
+                int w = hw[1];
+                int[,] grid = new int[h, w];
 
+                for (int i = 0; i < h; i++)
+                {
+                    int[] row = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                    for (int j = 0; j < w; j++)
+                    {
+                        grid[i, j] = row[j];
+                    }
+                }
+                
             }
         }
         
