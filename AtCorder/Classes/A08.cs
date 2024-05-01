@@ -65,17 +65,62 @@ namespace AtCorder.Classes
                 int[] hw = Console.ReadLine().Split().Select(int.Parse).ToArray();
                 int h = hw[0];
                 int w = hw[1];
-                int[,] grid = new int[h, w];
 
-                for (int i = 0; i < h; i++)
+                int[,] grid = new int[h + 1, w + 1];
+                int[,] sum = new int[h + 1, w + 1]; // 累積和の二次元配列
+
+                for (int i = 1; i <= h; i++)
                 {
                     int[] row = Console.ReadLine().Split().Select(int.Parse).ToArray();
-                    for (int j = 0; j < w; j++)
+                    for (int j = 1; j <= w; j++)
                     {
-                        grid[i, j] = row[j];
+                        grid[i, j] = row[j - 1];
+                        sum[i, j] = sum[i - 1, j] + sum[i, j - 1] - sum[i - 1, j - 1] + grid[i, j];
                     }
                 }
                 
+                // 受け取った値の確認
+                //for (int i = 1; i <= h; i++)
+                //{                    
+                //    for (int j = 1; j <= w; j++)
+                //    {
+                //        Console.Write(grid[i, j] + " ");
+                //    }
+                //    Console.WriteLine();
+                //}
+                //Console.WriteLine();
+
+                // 累積和の確認
+                //for (int i = 1; i <= h; i++)
+                //{
+                //    for (int j = 1; j <= w; j++)
+                //    {
+                //        Console.Write(sum[i, j] + " ");
+                //    }
+                //    Console.WriteLine();
+                //}
+
+                // 回答
+                int q = int.Parse(Console.ReadLine());
+                var inputs = new List<int[]?>();
+
+                for (int i = 0; i < q; i++)
+                {
+                    var input = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                    inputs.Add(input);
+                }
+
+                foreach (var input in inputs)
+                {                    
+                    int a = input[0];
+                    int b = input[1];
+                    int c = input[2];
+                    int d = input[3];
+                    int result = sum[c, d] - sum[c, b - 1] - sum[a - 1, d] + sum[a - 1, b - 1];
+
+                    Console.WriteLine(result);
+                }
+
             }
         }
         
