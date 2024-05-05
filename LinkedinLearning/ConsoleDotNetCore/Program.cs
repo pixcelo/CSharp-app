@@ -3,5 +3,5 @@
 
 using ConsoleDotNetCore.Basis;
 
-var model = new ListTips();
+var model = new LinqTips();
 model.Run();
