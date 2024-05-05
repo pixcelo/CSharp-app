@@ -15,7 +15,7 @@ namespace ConsoleDotNetFramework
             Console.WriteLine("Hello World");
             Console.WriteLine("===========");
 
-            var model = new SwitchTips();
+            var model = new LiteralTips();
             model.Run();
 
             // 動的な変数の宣言 
