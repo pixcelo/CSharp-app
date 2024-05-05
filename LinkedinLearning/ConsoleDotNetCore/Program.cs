@@ -3,5 +3,5 @@
 
 using ConsoleDotNetCore.Basis;
 
-var model = new ArrayTips();
+var model = new ThreadTips();
 model.Run();

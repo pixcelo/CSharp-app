@@ -25,10 +25,37 @@ namespace ConsoleDotNetCore.Basis
 
             var items = array[range];
 
-            foreach (var item in items )
+            //foreach (var item in items )
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+
+            // 数値に変換できる文字列だけ出力する
+            var stringList = new List<string>()
             {
-                Console.WriteLine(item);
+                "123",
+                "456",
+                "abc",
+                "def",
+            };
+
+            foreach (var strValue in stringList)
+            {
+                // out の値は使用しないので _ で破棄する
+                if (int.TryParse(strValue, out _))
+                {
+                    Console.WriteLine(strValue);
+                }
             }
+
+            // 変数の値を明示的に使用しない場合
+            var (x, _) = GetPosition("Japan");
+        }
+
+        (int, int) GetPosition(string name)
+        {
+            return (10, 15);
         }
     }
 }
