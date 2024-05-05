@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Basis\ArrayTips.cs" />
     <Compile Include="Basis\DictionaryTips.cs" />
     <Compile Include="Basis\LiteralTips.cs" />
     <Compile Include="Basis\SwitchTips.cs" />

@@ -12,10 +12,10 @@ namespace ConsoleDotNetFramework
         static void Main(string[] args)
         {
             // コンソールアプリは Ctr + F5 で起動
-            Console.WriteLine("Hello World");
-            Console.WriteLine("===========");
+            //Console.WriteLine("Hello World");
+            //Console.WriteLine("===========");
 
-            var model = new LiteralTips();
+            var model = new ArrayTips();
             model.Run();
 
             // 動的な変数の宣言 
