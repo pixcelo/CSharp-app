@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleDotNetFramework.Basis
 {
-    public class Dictionary01
+    public class DictionaryTips
     {
         public void Run()
         {

@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Basis\Dictionary01.cs" />
+    <Compile Include="Basis\DictionaryTips.cs" />
+    <Compile Include="Basis\SwitchTips.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
