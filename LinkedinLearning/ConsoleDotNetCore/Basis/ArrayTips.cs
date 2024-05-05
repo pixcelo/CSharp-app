@@ -19,7 +19,16 @@ namespace ConsoleDotNetCore.Basis
 
             str = array[^2]; // 最後から2番目を取得
 
-            Console.WriteLine(str);
+            //Console.WriteLine(str);
+
+            Range range = 0..^1; // 0番目～最後から1番目を配列から取り出す
+
+            var items = array[range];
+
+            foreach (var item in items )
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }
