@@ -3,5 +3,5 @@
 
 using ConsoleDotNetCore.Basis;
 
-var model = new ThreadTips();
+var model = new ListTips();
 model.Run();
