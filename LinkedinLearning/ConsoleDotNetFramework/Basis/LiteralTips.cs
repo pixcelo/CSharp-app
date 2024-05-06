@@ -11,18 +11,26 @@ namespace ConsoleDotNetFramework.Basis
     {
         public void Run()
         {
-            long longValue;
+            try
+            {
+                long longValue;
 
-            // 3桁区切りで見やすくしたいが、こちらの書き方はコンパイルエラー
-            //longValue = 123,456;
+                // 3桁区切りで見やすくしたいが、こちらの書き方はコンパイルエラー
+                //longValue = 123,456;
 
-            // 個の書き方でもいける
-            //longValue = long.Parse("123,456", System.Globalization.NumberStyles.Any);
-            //Console.WriteLine(longValue.ToString()); // 123456
+                // 個の書き方でもいける
+                //longValue = long.Parse("123,456", System.Globalization.NumberStyles.Any);
+                //Console.WriteLine(longValue.ToString()); // 123456
 
-            // アンダーバーであれば冗長にならない C#6~
-            longValue = 123_456;
-            Console.WriteLine(longValue.ToString()); // 123456
+                // アンダーバーであれば冗長にならない C#6~
+                longValue = 123_456;
+                Console.WriteLine(longValue.ToString()); // 123456
+            }
+            catch (Exception ex) when (ex.InnerException != null)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
     }
 }

@@ -18,14 +18,14 @@ namespace ConsoleDotNetCore.Basis
             Console.WriteLine("start");
 
             // 非同期処理を挟む
-            await SomeAsync();
+            //await SomeAsync();
 
             Console.WriteLine("end");
         }
 
-        Task SomeAsync()
-        {
-            Console.WriteLine("test");
-        }
+        //Task SomeAsync()
+        //{
+        //    Console.WriteLine("test");
+        //}
     }
 }
