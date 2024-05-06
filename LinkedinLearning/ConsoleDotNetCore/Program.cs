@@ -7,7 +7,7 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        var model = new ParallelTips();
+        var model = new AsyncTips();
         model.Run();
     }
 }
