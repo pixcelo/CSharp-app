@@ -11,6 +11,14 @@ namespace ConsoleDotNetCore.Basis
         public void Run()
         {
             SomeMethod();
+
+            // 匿名型の宣言
+            var person = new { name = "Tom", age = 20 };
+            Console.WriteLine(person.name); // メンバーは読み取り専用
+
+            // 匿名型の使いどころ
+            int[] intArray = { 1, 3, 5, 6 };
+            var list = intArray.Select((v, i) => new { value = v, index = i });
         }
 
 
@@ -25,6 +33,17 @@ namespace ConsoleDotNetCore.Basis
             Console.WriteLine(result);
             　
             return;
+        }
+
+        private int[] _intArray = { 3, 4, 8, 7 };
+
+        // インデクサ 配列のように添え字でアクセス可能にする　例： ClassTips[0]
+        // 使いどころ：自作のコレクションクラスを作成する
+        // 公式が詳しい　https://learn.microsoft.com/ja-jp/dotnet/csharp/indexers
+        public int this[int i]
+        {
+            set { _intArray[i] = value; }
+            get { return _intArray[i];}
         }
 
         // propf tab tabで入力できる

@@ -37,6 +37,6 @@ namespace ConsoleDotNetCore.Basis
             {
                 Console.WriteLine(item);
             }
-        }
+        }   
     }
 }
