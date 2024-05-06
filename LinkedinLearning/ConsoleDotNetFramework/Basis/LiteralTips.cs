@@ -25,6 +25,13 @@ namespace ConsoleDotNetFramework.Basis
                 // アンダーバーであれば冗長にならない C#6~
                 longValue = 123_456;
                 Console.WriteLine(longValue.ToString()); // 123456
+
+#if DEBUG
+                Console.WriteLine("debug");
+#else
+                Console.WriteLine("not debug");
+#endif
+
             }
             catch (Exception ex) when (ex.InnerException != null)
             {
