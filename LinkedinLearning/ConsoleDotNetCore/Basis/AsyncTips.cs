@@ -10,18 +10,18 @@ namespace ConsoleDotNetCore.Basis
     {
         public void Run()
         {
-            SomeMethod();
+            //SomeMethod();
         }
 
-        private async Task SomeMethod()
-        {
-            Console.WriteLine("start");
+        //private async Task SomeMethod()
+        //{
+        //    Console.WriteLine("start");
 
-            // 非同期処理を挟む
-            //await SomeAsync();
+        //    // 非同期処理を挟む
+        //    //await SomeAsync();
 
-            Console.WriteLine("end");
-        }
+        //    Console.WriteLine("end");
+        //}
 
         //Task SomeAsync()
         //{

@@ -2,12 +2,13 @@
 //Console.WriteLine("Hello, World!");
 
 using ConsoleDotNetCore.Basis;
+using ConsoleDotNetCore.Generic;
 
 internal class Program
 {
     static void Main(string[] args)
     {
-        var model = new AsyncTips();
+        var model = new GenericTips();
         model.Run();
     }
 }
