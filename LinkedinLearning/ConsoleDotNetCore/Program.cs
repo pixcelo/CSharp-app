@@ -3,5 +3,11 @@
 
 using ConsoleDotNetCore.Basis;
 
-var model = new LinqTips();
-model.Run();
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        var model = new ClassTips();
+        model.Run();
+    }
+}
