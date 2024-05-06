@@ -7,7 +7,7 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        var model = new ListTips();
+        var model = new TaskTips();
         model.Run();
     }
 }
