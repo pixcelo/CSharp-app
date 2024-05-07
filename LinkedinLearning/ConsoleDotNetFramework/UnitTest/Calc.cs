@@ -13,6 +13,13 @@ namespace ConsoleDotNetFramework.UnitTest
     {
         public int Add(int a, int b)
         {
+            const int max_result = 999;
+
+            if ((a + b) > max_result)
+            {
+                return max_result;
+            }
+
             return a + b;
         }
     }

@@ -20,5 +20,29 @@ namespace ConsoleDotNetFramework.UnitTest.Tests
 
             Assert.AreEqual(5, actual);
         }
+
+        [TestMethod]
+        public void Add_OverNumber_ReturnsMaxNumber()
+        {
+            var calc = new Calc();
+
+            var actual = calc.Add(999, 1);
+
+            Assert.AreEqual(999, actual);
+        }
+
+        [DataTestMethod]
+        [DataRow(3, 1, 2)]
+        [DataRow(5, -1, 6)]
+        [DataRow(999, 999, 1)]
+        public void Add_ParamNumbers_ReturnsTotalNumber(
+            int expected, int a, int b)
+        {
+            var calc = new Calc();
+
+            var actual = calc.Add(a, b);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
