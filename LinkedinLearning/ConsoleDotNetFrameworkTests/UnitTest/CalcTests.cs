@@ -11,6 +11,9 @@ namespace ConsoleDotNetFramework.UnitTest.Tests
     [TestClass()]
     public class CalcTests
     {
+        /// <summary>
+        /// 値の比較
+        /// </summary>
         [TestMethod()]
         public void Add_Number_ReturnsTotalNumber()
         {
@@ -31,6 +34,12 @@ namespace ConsoleDotNetFramework.UnitTest.Tests
             Assert.AreEqual(999, actual);
         }
 
+        /// <summary>
+        /// 複数の値を比較
+        /// </summary>
+        /// <param name="expected"></param>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
         [DataTestMethod]
         [DataRow(3, 1, 2)]
         [DataRow(5, -1, 6)]
@@ -43,6 +52,32 @@ namespace ConsoleDotNetFramework.UnitTest.Tests
             var actual = calc.Add(a, b);
 
             Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// 参照元が同じかどうかを比較
+        /// </summary>
+        [TestMethod]
+        public void Compare_SameClass()
+        {
+            var calc = new Calc();
+            
+            var calc2 = calc;
+            
+            Assert.AreSame(calc, calc2);
+        }
+
+        /// <summary>
+        /// 参照元が異なるかどうかを比較
+        /// </summary>
+        [TestMethod]
+        public void Compare_NotSameClass()
+        {
+            var calc = new Calc();
+
+            var calc2 = new Calc();            
+
+            Assert.AreNotSame(calc, calc2);
         }
     }
 }
