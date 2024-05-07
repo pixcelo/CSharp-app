@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleDotNetFramework", "ConsoleDotNetFramework.csproj", "{9E764D34-A797-4EC0-9C9E-6EB987B8481B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleDotNetFrameworkTests", "..\ConsoleDotNetFrameworkTests\ConsoleDotNetFrameworkTests.csproj", "{3104E447-A826-4A87-A3AA-F259E4B54A2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9E764D34-A797-4EC0-9C9E-6EB987B8481B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E764D34-A797-4EC0-9C9E-6EB987B8481B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E764D34-A797-4EC0-9C9E-6EB987B8481B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3104E447-A826-4A87-A3AA-F259E4B54A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3104E447-A826-4A87-A3AA-F259E4B54A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3104E447-A826-4A87-A3AA-F259E4B54A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3104E447-A826-4A87-A3AA-F259E4B54A2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
