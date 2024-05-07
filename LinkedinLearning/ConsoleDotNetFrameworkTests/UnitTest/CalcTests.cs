@@ -79,5 +79,67 @@ namespace ConsoleDotNetFramework.UnitTest.Tests
 
             Assert.AreNotSame(calc, calc2);
         }
+
+        /// <summary>
+        /// コレクションの要素を比較
+        /// </summary>
+        [TestMethod]
+        public void Compare_ListValues()
+        {
+            var list = new List<int>() { 1, 2 };
+
+            var list2 = new List<int>() { 1, 2 };
+
+            CollectionAssert.AreEqual(list, list2);
+        }
+
+        /// <summary>
+        /// コレクションの要素を比較（インデックスが異なる場合）
+        /// </summary>
+        [TestMethod]
+        public void Compare_ListValues_differentIndex()
+        {
+            var list = new List<int>() { 1, 2 };
+
+            var list2 = new List<int>() { 2, 1 };
+
+            CollectionAssert.AreNotEqual(list, list2);
+        }
+
+        /// <summary>
+        /// コレクションの要素を比較（インデックスが異なる場合）
+        /// </summary>
+        [TestMethod]
+        public void Compare_ListValues_Equivalent()
+        {
+            var list = new List<int>() { 1, 2 };
+
+            var list2 = new List<int>() { 2, 1 };
+
+            // AreEquivalentは、インデックスが異なる場合でもテスト成功とする
+            CollectionAssert.AreEquivalent(list, list2);
+        }
+
+        /// <summary>
+        /// コレクションの要素を比較（一意かどうか）
+        /// </summary>
+        [TestMethod]
+        public void Compare_ListValues_IsUnique()
+        {
+            var list = new List<int>() { 1, 2 };
+            
+            CollectionAssert.AllItemsAreUnique(list);
+        }
+
+        /// <summary>
+        /// コレクションの要素を比較（含まれているか）
+        /// </summary>
+        [TestMethod]
+        public void Compare_ListValues_Contains()
+        {
+            var list = new List<int>() { 1, 2 };
+
+            CollectionAssert.Contains(list, 1);
+        }
     }
 }
