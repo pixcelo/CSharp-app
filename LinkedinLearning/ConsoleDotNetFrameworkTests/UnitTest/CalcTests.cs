@@ -141,5 +141,55 @@ namespace ConsoleDotNetFramework.UnitTest.Tests
 
             CollectionAssert.Contains(list, 1);
         }
+
+        /// <summary>
+        /// 例外が発生するかどうかをテスト
+        /// </summary>
+        [TestMethod]
+        public void Throw_InvalidOperationException()
+        {
+            var calc = new Calc();
+
+            int? num = null;
+
+            // 例外の型を厳密に判断する
+            Assert.ThrowsException<InvalidOperationException>(() => calc.Add((int)num, 1));
+        }
+
+        /// <summary>
+        /// 文字列が含まれているかをテスト
+        /// </summary>
+        [TestMethod]
+        public void Contains_value()
+        {
+            var value = "abcd";
+            var subString = "abc";
+
+            StringAssert.Contains(value, subString);
+        }
+
+        /// <summary>
+        /// 指定した文字列で始まるかをテスト（プレフィックスの確認）
+        /// </summary>
+        [TestMethod]
+        public void StartWith_value()
+        {
+            var value = "abcd";
+            var subString = "abc";
+
+            StringAssert.StartsWith(value, subString);
+        }
+
+        /// <summary>
+        /// 指定した文字列で終わるかをテスト（サフィックスの確認）
+        /// </summary>
+        [TestMethod]
+        public void EndsWith_value()
+        {
+            var value = "abcd";
+            var subString = "cd";
+
+            StringAssert.EndsWith(value, subString);
+        }
     }
 }
