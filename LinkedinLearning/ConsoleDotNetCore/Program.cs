@@ -2,13 +2,14 @@
 //Console.WriteLine("Hello, World!");
 
 using ConsoleDotNetCore.Basis;
+using ConsoleDotNetCore.Delegate;
 using ConsoleDotNetCore.Generic;
 
 internal class Program
 {
     static void Main(string[] args)
     {
-        var model = new GenericTips();
+        var model = new DelegeteTips();
         model.Run();
     }
 }

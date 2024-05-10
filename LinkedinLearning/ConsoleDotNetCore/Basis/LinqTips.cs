@@ -11,6 +11,11 @@ namespace ConsoleDotNetCore.Basis
     {
         public void Run()
         {
+            
+        }
+
+        public void SelectCalender()
+        {
             var calenders = new List<HistoryCalender>();
 
             var cal = new HistoryCalender();

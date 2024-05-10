@@ -52,5 +52,11 @@ namespace ConsoleDotNetCore.Generic
             return i * 2;
         }
 
+        public void SampleFunc<T, V>(T x, V y)
+        {
+            Console.WriteLine(typeof(T).FullName);
+            Console.WriteLine(typeof(V).FullName);
+        }
+
     }
 }
