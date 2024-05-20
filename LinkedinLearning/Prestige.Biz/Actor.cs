@@ -72,5 +72,11 @@ namespace Prestige.Biz
 
             return "Actor " + ActorName + " is booked on " + theDate + ". " + details;
         }
+
+        public string GetAgency()
+        {
+            var currentAgency = new Agency();
+            return currentAgency.Name;
+        }
     }
 }
