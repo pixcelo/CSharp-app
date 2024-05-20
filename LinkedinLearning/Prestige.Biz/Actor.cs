@@ -39,6 +39,8 @@ namespace Prestige.Biz
             set { jobTitle = value; }
         }
 
+        public int ActorAge { get; set; }
+        public string ActorDescription { get; set; } = "Regular actor";
 
         /// <summary>
         /// Will return title ※XML doc コメントであればIDEのインテリセンスが効く

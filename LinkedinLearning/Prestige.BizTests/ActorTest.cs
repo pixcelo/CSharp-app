@@ -65,5 +65,33 @@ namespace Prestige.BizTests
             // Assert
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        public void TestAutoPropActorDescription()
+        {
+            // Arange
+            var currentActor = new Actor { ActorName = "Sandy Love" };
+            var expected = "Regular actor";
+
+            // Act
+            string result = currentActor.ActorDescription;
+
+            // Assert
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void TestAutoPropInitActorAge()
+        {
+            // Arange
+            var currentActor = new Actor { ActorName = "Sandy Love", ActorAge = 46 };
+            var expected = 46;
+
+            // Act
+            int result = currentActor.ActorAge;
+
+            // Assert
+            Assert.AreEqual(expected, result);
+        }
     }
 }
