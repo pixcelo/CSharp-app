@@ -11,7 +11,7 @@ namespace Prestige.Biz
         // ctor と入力することで簡単に記述できる
         public Actor()
         {
-            Console.WriteLine("An actor is born.");
+            Console.WriteLine("An actor is born.");            
         }
 
         // this()をつけると引数なしコンストラクタが最初に呼ばれる
@@ -41,6 +41,21 @@ namespace Prestige.Biz
 
         public int ActorAge { get; set; }
         public string ActorDescription { get; set; } = "Regular actor";
+
+        private Agency currentAgency;
+
+        public Agency CurrentAgency
+        {
+            get
+            {
+                if (currentAgency == null)
+                {
+                    currentAgency = new Agency();
+                }
+                return currentAgency; 
+            }
+            set { currentAgency = value; }
+        }
 
         /// <summary>
         /// Will return title ※XML doc コメントであればIDEのインテリセンスが効く
@@ -75,8 +90,8 @@ namespace Prestige.Biz
 
         public string GetAgency()
         {
-            var currentAgency = new Agency();
-            return currentAgency.Name;
+            //var currentAgency = new Agency();
+            return CurrentAgency.Name;
         }
     }
 }
