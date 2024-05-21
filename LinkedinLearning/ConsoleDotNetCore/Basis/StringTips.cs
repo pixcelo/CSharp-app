@@ -61,5 +61,17 @@ namespace ConsoleDotNetCore.Basis
 
             return false;
         }
+
+        /// <summary>
+        /// 文字列を反転させる
+        /// </summary>
+        public static string ReveseString(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return input;
+
+            char[] chars = input.ToCharArray();
+            Array.Reverse(chars);
+            return new string(chars);
+        }
     }
 }

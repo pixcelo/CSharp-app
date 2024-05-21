@@ -75,8 +75,8 @@ namespace ConsoleDotNetCore.Basis.Tests
         }
 
         [DataTestMethod]
-        [DataRow("HeLLo", 'L')]        
-        [DataRow("HeLLo", 'H')]        
+        [DataRow("HeLLo", 'L')]
+        [DataRow("HeLLo", 'H')]
         public void TestIsAtEvenIndexReturnTrue(string input, char item)
         {
             var actual = StringTips.IsAtEvenIndex(input, item);
@@ -84,8 +84,8 @@ namespace ConsoleDotNetCore.Basis.Tests
             Assert.IsTrue(actual);
         }
 
-        [DataTestMethod]        
-        [DataRow("HeLLo", 'T')]        
+        [DataTestMethod]
+        [DataRow("HeLLo", 'T')]
         [DataRow("", 'H')]
         [DataRow(null, 'H')]
         public void TestIsAtEvenIndexReturnFalse(string input, char item)
@@ -93,6 +93,16 @@ namespace ConsoleDotNetCore.Basis.Tests
             var actual = StringTips.IsAtEvenIndex(input, item);
 
             Assert.IsFalse(actual);
+        }
+
+        [TestMethod]
+        public void TestReverseString()
+        {
+            var actual = StringTips.ReveseString("hello");
+
+            var expected = "olleh";
+
+            Assert.AreEqual(expected, actual);
         }
     }
 }
