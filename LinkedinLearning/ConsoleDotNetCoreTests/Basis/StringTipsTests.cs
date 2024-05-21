@@ -73,5 +73,26 @@ namespace ConsoleDotNetCore.Basis.Tests
 
             Assert.IsFalse(actual);
         }
+
+        [DataTestMethod]
+        [DataRow("HeLLo", 'L')]        
+        [DataRow("HeLLo", 'H')]        
+        public void TestIsAtEvenIndexReturnTrue(string input, char item)
+        {
+            var actual = StringTips.IsAtEvenIndex(input, item);
+
+            Assert.IsTrue(actual);
+        }
+
+        [DataTestMethod]        
+        [DataRow("HeLLo", 'T')]        
+        [DataRow("", 'H')]
+        [DataRow(null, 'H')]
+        public void TestIsAtEvenIndexReturnFalse(string input, char item)
+        {
+            var actual = StringTips.IsAtEvenIndex(input, item);
+
+            Assert.IsFalse(actual);
+        }
     }
 }

@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleDotNetCore.Basis
 {
+    /// <summary>
+    /// 文字列のパース・検索
+    /// </summary>
     public static class StringTips
     {
+        /// <summary>
+        /// 文字列を正規化する
+        /// </summary>        
         public static string NormalizeString(string input)
         {
             return input.ToLower().Trim().Replace(",", "");
@@ -37,6 +43,23 @@ namespace ConsoleDotNetCore.Basis
         {
             return s.Any(char.IsUpper) && s.Any(char.IsLower)
                 && s.Any(char.IsDigit);
+        }
+
+        /// <summary>
+        /// 文字が偶数インデックスに存在するかを判定する
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="item"></param>        
+        public static bool IsAtEvenIndex(string s, char item)
+        {
+            if (string.IsNullOrEmpty(s)) return false;
+
+            for (int i = 0; i < s.Length / 2 + 1; i=i+2)
+            {
+                if (s[i] == item) return true;
+            }
+
+            return false;
         }
     }
 }
