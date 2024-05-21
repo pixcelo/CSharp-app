@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Reflection.Metadata;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -26,7 +27,47 @@ namespace ConsoleDotNetCore.Basis
             //RunInto();
             //RunJoin();
             //RunLet();
-            RunSkipTake();
+            //RunSkipTake();
+            RunCheckString();
+        }
+
+        private void RunCheckString()
+        {            
+            //Console.WriteLine(IsUppercase("HELLO"));            
+            //Console.WriteLine(IsLowercase("hello"));
+
+            Console.WriteLine(IsPasswordComplex("Hell0"));
+            Console.WriteLine(IsPasswordComplex("Hello"));
+            Console.WriteLine(IsPasswordComplex("HellO"));
+            Console.WriteLine(IsPasswordComplex("HeLlo"));
+            Console.WriteLine(IsPasswordComplex("hello"));
+            Console.WriteLine(IsPasswordComplex(" "));
+        }
+
+        /// <summary>
+        /// 文字列がすべて大文字かを判定する
+        /// </summary>
+        static bool IsUppercase(string s)
+        {
+            return s.All(char.IsUpper);
+        }
+
+        /// <summary>
+        /// 文字列がすべて小文字かを判定する
+        /// </summary>
+        static bool IsLowercase(string s)
+        {
+            return s.All(char.IsLower);
+        }
+
+        /// <summary>
+        /// 文字列が、大文字、小文字、数字のいずれかを
+        /// 少なくとも1つ含む複雑なパスワードかどうかを判定
+        /// </summary>       
+        static bool IsPasswordComplex(string s)
+        {
+            return s.Any(char.IsUpper) && s.Any(char.IsLower)
+                && s.Any(char.IsDigit);
         }
 
         private void RunSkipTake()
