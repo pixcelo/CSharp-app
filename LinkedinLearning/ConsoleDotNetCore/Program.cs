@@ -3,13 +3,14 @@
 
 using ConsoleDotNetCore.Basis;
 using ConsoleDotNetCore.Delegate;
+using ConsoleDotNetCore.DesignPattern;
 using ConsoleDotNetCore.Generic;
 
 internal class Program
 {
     static void Main(string[] args)
     {
-        var model = new LinqTips();
+        var model = new Iterator();
         model.Run();
     }
 }
