@@ -22,5 +22,16 @@ namespace ConsoleDotNetCore.Delegate.Tests
 
             Assert.AreEqual(expected, actual());
         }
+
+        [TestMethod]
+        public void MultiCastDelegeteMethodTest()
+        {
+            var delegeteTips = new DelegeteTips();
+            var expected = 9;
+
+            int actual = delegeteTips.RunMultiCast();
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace ConsoleDotNetCore.Delegate
 {
     public class DelegeteTips
     {
         // デリゲート型の宣言
-        public delegate void SampleDel(string m);
+        public delegate void SampleDel(string m);        
 
         public void Run()
         {
@@ -49,5 +50,40 @@ namespace ConsoleDotNetCore.Delegate
             return "DeletegeFunc";
         }
 
+        /// <summary>
+        /// マルチキャストデリゲートの確認用 
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public delegate int intDel(int n);
+        public intDel? del;
+
+        public int RunMultiCast()
+        {
+            // マルチキャストデリゲートの宣言
+            del = DelegateMethod1;
+            del += DelegateMethod2;
+
+            var list = del.GetInvocationList();
+            var result = 0;
+
+            // マルチキャストデリゲートの実行
+            foreach (var method in list)
+            {
+                result += ((intDel)method)(1);
+            }
+            
+            return result;
+        }
+
+        public int DelegateMethod1(int n)
+        {
+            return n += 3;
+        }
+
+        public int DelegateMethod2(int n)
+        {
+            return n += 4;
+        }
     }
 }
