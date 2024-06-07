@@ -51,11 +51,22 @@ namespace DDD.WinForm
                 }
 
                 this.DataDateLabel.Text = dataTable.Rows[0]["DataDate"].ToString();
-                this.ConditionLabel.Text = dataTable.Rows[0]["Condition"].ToString();
-                // 小数点以下2桁で表示する
-                this.TemperatureLabel.Text = 
-                    Math.Round(Convert.ToSingle(dataTable.Rows[0]["Temperature"]), 2) + "℃";
+                this.ConditionLabel.Text = dataTable.Rows[0]["Condition"].ToString();               
+                this.TemperatureLabel.Text =
+                    RoundString(Convert.ToSingle(dataTable.Rows[0]["Temperature"]), 2) + "℃";
             }
+        }
+
+        /// <summary>
+        /// 小数点2桁までの文字列に変換
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="digit"></param>
+        /// <returns></returns>
+        private string RoundString(float value, int digit)
+        {
+            var temp = Convert.ToSingle(Math.Round(value, digit));
+            return temp.ToString($"F{digit}");
         }
     }
 }
