@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DDD.WinForm.Common;
+using DDD.WinForm.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,8 +15,6 @@ namespace DDD.WinForm
 {
     public partial class WeatherLatestView : Form
     {
-        private readonly string ConnectionString = @"Data Source=C:\Users\bodom\Documents\csharp\DDD\DDD.db;Version=3;";
-
         public WeatherLatestView()
         {
             InitializeComponent();
@@ -22,51 +22,24 @@ namespace DDD.WinForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string sql = @"
-                SELECT DataDate, Condition, Temperature
-                FROM Weather
-                WHERE AreaId = @AreaId
-                ORDER BY DataDate DESC
-                LIMIT 1
-                ";
+            if (string.IsNullOrEmpty(this.AreaIdTextBox.Text)) return;
 
-            var dataTable = new DataTable();
-            using (var connection = new SQLiteConnection(this.ConnectionString))
-            using (var command = new SQLiteCommand(sql, connection))
+            var dataTable = WeatherSQLite.GetLatest(Convert.ToInt32(this.AreaIdTextBox.Text));
+
+            if (dataTable.Rows.Count == 0)
             {
-                connection.Open();
-
-                command.Parameters.AddWithValue("@AreaId", this.AreaIdTextBox.Text);
-                using (var adapter = new SQLiteDataAdapter(command))
-                {
-                    adapter.Fill(dataTable);
-                }
-
-                if (dataTable.Rows.Count == 0)
-                {
-                    this.DataDateLabel.Text = "データなし";
-                    this.ConditionLabel.Text = string.Empty;
-                    this.TemperatureLabel.Text = string.Empty;
-                    return;
-                }
-
-                this.DataDateLabel.Text = dataTable.Rows[0]["DataDate"].ToString();
-                this.ConditionLabel.Text = dataTable.Rows[0]["Condition"].ToString();               
-                this.TemperatureLabel.Text =
-                    RoundString(Convert.ToSingle(dataTable.Rows[0]["Temperature"]), 2) + "℃";
+                this.DataDateLabel.Text = "データなし";
+                this.ConditionLabel.Text = string.Empty;
+                this.TemperatureLabel.Text = string.Empty;
+                return;
             }
-        }
 
-        /// <summary>
-        /// 小数点2桁までの文字列に変換
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="digit"></param>
-        /// <returns></returns>
-        private string RoundString(float value, int digit)
-        {
-            var temp = Convert.ToSingle(Math.Round(value, digit));
-            return temp.ToString($"F{digit}");
-        }
+            this.DataDateLabel.Text = dataTable.Rows[0]["DataDate"].ToString();
+            this.ConditionLabel.Text = dataTable.Rows[0]["Condition"].ToString();               
+            this.TemperatureLabel.Text =
+                CommonFunc.RoundString(Convert.ToSingle(dataTable.Rows[0]["Temperature"]),
+                CommonConst.TemperatureDigit)
+                + CommonConst.TemperatureUnitName;            
+        }        
     }
 }
