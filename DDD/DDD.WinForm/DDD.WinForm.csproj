@@ -68,10 +68,11 @@
     <Compile Include="Common\CommonConst.cs" />
     <Compile Include="Common\CommonFunc.cs" />
     <Compile Include="Data\WeatherSQLite.cs" />
-    <Compile Include="WeatherLatestView.cs">
+    <Compile Include="ViewModels\WeatherLatestViewModel.cs" />
+    <Compile Include="Views\WeatherLatestView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WeatherLatestView.Designer.cs">
+    <Compile Include="Views\WeatherLatestView.Designer.cs">
       <DependentUpon>WeatherLatestView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -85,7 +86,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="WeatherLatestView.resx">
+    <EmbeddedResource Include="Views\WeatherLatestView.resx">
       <DependentUpon>WeatherLatestView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
