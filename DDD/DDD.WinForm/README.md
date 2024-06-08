@@ -9,5 +9,9 @@ WindowsForms 構成
 - Domain(ビジネスロジック)
 - Test(xUnit)
 
+Domainはどこも参照しない
+
+他のプロジェクトはビジネスロジックを外から参照する
+
 ## データベース
 SQLite (System.Data.SQLite)
