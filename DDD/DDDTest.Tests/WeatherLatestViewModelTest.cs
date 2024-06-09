@@ -35,6 +35,14 @@ namespace DDDTest.Tests
     /// </summary>
     internal class WeatherMock : IWeatherRepository
     {
+        /// <summary>
+        /// DataTableを使う方法の問題点
+        /// 1. パフォーマンス (1万件を超えると遅い)
+        /// 2. カラムに文字リテラルでアクセスする為タイポしてもコンパイルエラーで検知できない
+        /// 3. テストコード実装が面倒
+        /// </summary>
+        /// <param name="areaId"></param>
+        /// <returns></returns>
         public DataTable GetLatest(int areaId)
         {
             var dataTable = new DataTable();
