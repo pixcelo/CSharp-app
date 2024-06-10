@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDD.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace DDD.Domain.Repositoriers
 {
     public interface IWeatherRepository
     {
-        DataTable GetLatest(int areaId);
+        WeatherEntity GetLatest(int areaId);
     }
 }

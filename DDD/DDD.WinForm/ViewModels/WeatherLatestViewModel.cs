@@ -32,9 +32,9 @@ namespace DDD.WinForm.ViewModels
         /// </summary>
         public void Search()
         {
-            var dataTable = this.weather.GetLatest(Convert.ToInt32(this.AreaIdText));
+            var entity = this.weather.GetLatest(Convert.ToInt32(this.AreaIdText));
 
-            if (dataTable.Rows.Count == 0)
+            if (entity is null)
             {
                 this.DataDateText = "データなし";
                 this.ConditionText = string.Empty;
@@ -42,12 +42,35 @@ namespace DDD.WinForm.ViewModels
                 return;
             }
 
-            this.DataDateText = dataTable.Rows[0]["DataDate"].ToString();
-            this.ConditionText = dataTable.Rows[0]["Condition"].ToString();
+            this.DataDateText = entity.DataDate.ToString();
+            this.ConditionText = entity.Condition.ToString();
             this.TemperatureText =
-                CommonFunc.RoundString(Convert.ToSingle(dataTable.Rows[0]["Temperature"]),
+                CommonFunc.RoundString(entity.Temperature,
                 CommonConst.TemperatureDigit) + " "
                 + CommonConst.TemperatureUnitName;
         }
+
+        /// <summary>
+        /// 直近の情報を取得する
+        /// </summary>
+        //public void Search()
+        //{
+        //    var dataTable = this.weather.GetLatest(Convert.ToInt32(this.AreaIdText));
+
+        //    if (dataTable.Rows.Count == 0)
+        //    {
+        //        this.DataDateText = "データなし";
+        //        this.ConditionText = string.Empty;
+        //        this.TemperatureText = string.Empty;
+        //        return;
+        //    }
+
+        //    this.DataDateText = dataTable.Rows[0]["DataDate"].ToString();
+        //    this.ConditionText = dataTable.Rows[0]["Condition"].ToString();
+        //    this.TemperatureText =
+        //        CommonFunc.RoundString(Convert.ToSingle(dataTable.Rows[0]["Temperature"]),
+        //        CommonConst.TemperatureDigit) + " "
+        //        + CommonConst.TemperatureUnitName;
+        //}
     }
 }
