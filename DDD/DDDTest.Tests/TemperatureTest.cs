@@ -14,5 +14,23 @@ namespace DDDTest.Tests
 
             Assert.AreEqual("12.30 ℃", temperature.DisplayValue);
         }
+
+        [TestMethod]
+        public void 値オブジェクト同士が等しい()
+        {
+            var temperature1 = new Temperature(12.3f);
+            var temperature2 = new Temperature(12.3f);
+
+            Assert.IsTrue(temperature1.Equals(temperature2));
+        }
+
+        [TestMethod]
+        public void 値オブジェクト同士がイコールで等しい()
+        {
+            var temperature1 = new Temperature(12.3f);
+            var temperature2 = new Temperature(12.3f);
+
+            Assert.AreEqual(true, temperature1 == temperature2);
+        }
     }
 }
