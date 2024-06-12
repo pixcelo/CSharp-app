@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDD.Domain.ValueObjects;
+using System;
 
 namespace DDD.Domain.Entities
 {
@@ -23,13 +24,13 @@ namespace DDD.Domain.Entities
             this.AreaId = areaId;
             this.DataDate = dataDate;
             this.Condition = condition;
-            this.Temperature = temperature;
+            this.Temperature = new Temperature(temperature);
         }
 
         // プロパティはインスタンス生成時に設定された値を変更できないようにする
         public int AreaId { get; }        
         public DateTime DataDate { get; }
         public int Condition { get; }
-        public float Temperature { get; }
+        public Temperature Temperature { get; }
     }
 }

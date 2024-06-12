@@ -44,10 +44,10 @@ namespace DDD.WinForm.ViewModels
 
             this.DataDateText = entity.DataDate.ToString();
             this.ConditionText = entity.Condition.ToString();
-            this.TemperatureText =
-                CommonFunc.RoundString(entity.Temperature,
-                CommonConst.TemperatureDigit) + " "
-                + CommonConst.TemperatureUnitName;
+            this.TemperatureText = entity.Temperature.DisplayValueWithUnitSpace;
+                //CommonFunc.RoundString(entity.Temperature,
+                //CommonConst.TemperatureDigit) + " "
+                //+ CommonConst.TemperatureUnitName;
         }
 
         /// <summary>

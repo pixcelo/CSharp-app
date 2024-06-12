@@ -11,7 +11,34 @@
         }
 
         public float Value { get; }
+
+        /// <summary>
+        /// 例：12.30
+        /// </summary>
         public string DisplayValue
+        {
+            get
+            {
+                return CommonFunc.RoundString(Value, this.Digit);
+            }
+        }
+
+        /// <summary>
+        /// 例：12.30℃
+        /// </summary>
+        public string DisplayValueWithUnit
+        {
+            get
+            {
+                return CommonFunc.RoundString(Value, this.Digit)
+                        + this.UnitName;
+            }
+        }
+
+        /// <summary>
+        /// 例：12.30 ℃
+        /// </summary>
+        public string DisplayValueWithUnitSpace
         {
             get
             {
