@@ -32,6 +32,10 @@ namespace SampleLog.NET8
 
             using (var serviceProvider = services.BuildServiceProvider())
             {
+                // レイアウト練習用のフォームを表示
+                var subForm = new Forms.SubForm();
+                subForm.Show();
+
                 var form = serviceProvider.GetRequiredService<CalculatorForm>();
                 Application.Run(form);
             }
