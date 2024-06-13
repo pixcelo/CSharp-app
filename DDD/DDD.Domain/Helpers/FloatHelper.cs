@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DDD.Domain
+namespace DDD.Domain.Helpers
 {
     /// <summary>
-    /// 共通の機能クラス
+    /// Float処理用のクラス
     /// </summary>
-    public static class CommonFunc
+    public static class FloatHelper
     {
         /// <summary>
         /// 小数点N桁までの文字列に変換
