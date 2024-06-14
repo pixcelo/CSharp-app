@@ -12,12 +12,12 @@ namespace DDD.Domain.Helpers
     public static class FloatHelper
     {
         /// <summary>
-        /// 小数点N桁までの文字列に変換
+        /// 小数点N桁までの文字列に変換 (拡張メソッド)
         /// </summary>
         /// <param name="value"></param>
         /// <param name="digit"></param>
         /// <returns></returns>
-        public static string RoundString(float value, int digit)
+        public static string RoundString(this float value, int digit)
         {
             var temp = Convert.ToSingle(Math.Round(value, digit));
             return temp.ToString($"F{digit}");
