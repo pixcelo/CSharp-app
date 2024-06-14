@@ -23,14 +23,14 @@ namespace DDD.Domain.Entities
         {            
             this.AreaId = areaId;
             this.DataDate = dataDate;
-            this.Condition = condition;
+            this.Condition = new Condition(condition);
             this.Temperature = new Temperature(temperature);
         }
 
         // プロパティはインスタンス生成時に設定された値を変更できないようにする
         public int AreaId { get; }        
         public DateTime DataDate { get; }
-        public int Condition { get; }
+        public Condition Condition { get; }
         public Temperature Temperature { get; }
     }
 }

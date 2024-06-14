@@ -45,6 +45,7 @@
     <Compile Include="Helpers\FloatHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositoriers\IWeatherRepository.cs" />
+    <Compile Include="ValueObjects\Condition.cs" />
     <Compile Include="ValueObjects\Temperature.cs" />
     <Compile Include="ValueObjects\ValueObject.cs" />
   </ItemGroup>
