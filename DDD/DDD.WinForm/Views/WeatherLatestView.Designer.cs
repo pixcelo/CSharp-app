@@ -36,7 +36,7 @@
             this.ConditionLabel = new System.Windows.Forms.Label();
             this.TemperatureLabel = new System.Windows.Forms.Label();
             this.AreaIdTextBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.LatestButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -109,21 +109,22 @@
             this.AreaIdTextBox.Size = new System.Drawing.Size(100, 19);
             this.AreaIdTextBox.TabIndex = 13;
             // 
-            // button1
+            // LatestButton
             // 
-            this.button1.Location = new System.Drawing.Point(186, 49);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "直近値";
-            this.button1.UseVisualStyleBackColor = true;            
+            this.LatestButton.Location = new System.Drawing.Point(186, 49);
+            this.LatestButton.Name = "LatestButton";
+            this.LatestButton.Size = new System.Drawing.Size(75, 23);
+            this.LatestButton.TabIndex = 14;
+            this.LatestButton.Text = "直近値";
+            this.LatestButton.UseVisualStyleBackColor = true;
+            this.LatestButton.Click += new System.EventHandler(this.LatestButton_Click);
             // 
             // WeatherLatestView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.LatestButton);
             this.Controls.Add(this.AreaIdTextBox);
             this.Controls.Add(this.TemperatureLabel);
             this.Controls.Add(this.ConditionLabel);
@@ -149,7 +150,7 @@
         private System.Windows.Forms.Label ConditionLabel;
         private System.Windows.Forms.Label TemperatureLabel;
         private System.Windows.Forms.TextBox AreaIdTextBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button LatestButton;
     }
 }
 

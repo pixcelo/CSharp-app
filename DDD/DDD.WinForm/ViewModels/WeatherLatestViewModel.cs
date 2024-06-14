@@ -3,16 +3,18 @@ using DDD.Infrastracture.SQLite;
 using DDD.WinForm.Common;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace DDD.WinForm.ViewModels
 {
-    public class WeatherLatestViewModel
+    public class WeatherLatestViewModel : INotifyPropertyChanged
     {
-        private IWeatherRepository weather;
+        private IWeatherRepository weather;        
 
         // 本番コード：引数無しコンストラクタを呼び出すとSQLiteが注入される
         // テストコード：引数付きコンストラクタを呼び出し、任意のリポジトリを注入する
@@ -38,11 +40,15 @@ namespace DDD.WinForm.ViewModels
         public string ConditionText { get; set; } = string.Empty;
         public string TemperatureText { get; set; } = string.Empty;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
         /// 直近の情報を取得する
         /// </summary>
         public void Search()
         {
+            if (string.IsNullOrEmpty(this.AreaIdText)) return;
+
             var entity = this.weather.GetLatest(Convert.ToInt32(this.AreaIdText));
 
             if (entity is null)
@@ -59,6 +65,19 @@ namespace DDD.WinForm.ViewModels
                 //CommonFunc.RoundString(entity.Temperature,
                 //CommonConst.TemperatureDigit) + " "
                 //+ CommonConst.TemperatureUnitName;
+
+            // すべてのプロパティを更新
+            this.OnPropertyChaged(string.Empty);
+        }
+
+        /// <summary>
+        /// 値の変更時にプロパティを同期する
+        /// </summary>
+        /// <param name="propertyName"></param>
+        public void OnPropertyChaged(string propertyName)
+        {
+            this.PropertyChanged?.Invoke(this,
+                new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>

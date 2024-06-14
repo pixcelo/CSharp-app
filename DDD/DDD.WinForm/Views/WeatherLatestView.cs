@@ -13,6 +13,32 @@ namespace DDD.WinForm
         public WeatherLatestView()
         {
             InitializeComponent();
+            DataBind();
+        }
+
+        /// <summary>
+        /// データソースの連動
+        /// </summary>
+        private void DataBind()
+        {
+            this.AreaIdTextBox.DataBindings.Add(
+                "Text", viewModel, nameof(viewModel.AreaIdText));
+            this.DataDateLabel.DataBindings.Add(
+                "Text", viewModel, nameof(viewModel.DataDateText));
+            this.ConditionLabel.DataBindings.Add(
+                "Text", viewModel, nameof(viewModel.ConditionText));
+            this.TemperatureLabel.DataBindings.Add(
+                "Text", viewModel, nameof(viewModel.TemperatureText));
+        }
+
+        /// <summary>
+        /// 直近値ボタン
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LatestButton_Click(object sender, EventArgs e)
+        {
+            viewModel.Search();
         }
 
         //private void button1_Click(object sender, EventArgs e)
