@@ -1,4 +1,5 @@
 ﻿using DDD.Domain.Repositoriers;
+using DDD.Infrastracture.SQLite;
 using DDD.WinForm.Common;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,16 @@ namespace DDD.WinForm.ViewModels
     public class WeatherLatestViewModel
     {
         private IWeatherRepository weather;
+
+        // 本番コード：引数無しコンストラクタを呼び出すとSQLiteが注入される
+        // テストコード：引数付きコンストラクタを呼び出し、任意のリポジトリを注入する
+
+        /// <summary>
+        /// コンストラクタ　thisで引数付きコンストラクタを呼び出す
+        /// </summary>
+        public WeatherLatestViewModel() : this(new WeatherSQLite())
+        {
+        }
 
         /// <summary>
         /// コンストラクタ
