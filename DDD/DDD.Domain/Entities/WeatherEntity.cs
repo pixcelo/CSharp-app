@@ -31,7 +31,7 @@ namespace DDD.Domain.Entities
             int condition,
             float temperature)
         {
-            this.AreaId = areaId;
+            this.AreaId = new AreaId(areaId);
             this.AreaName = areaName;
             this.DataDate = dataDate;
             this.Condition = new Condition(condition);
@@ -39,7 +39,7 @@ namespace DDD.Domain.Entities
         }
 
         // プロパティはインスタンス生成時に設定された値を変更できないようにする
-        public int AreaId { get; }
+        public AreaId AreaId { get; }
         public string AreaName { get; }
         public DateTime DataDate { get; }
         public Condition Condition { get; }

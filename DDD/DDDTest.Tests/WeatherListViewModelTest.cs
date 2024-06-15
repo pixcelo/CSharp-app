@@ -26,7 +26,7 @@ namespace DDDTest.Tests
 
             var viewModel = new WeatherListViewModel(weatherMock.Object);
             viewModel.Weathers.Count.Is(2);
-            viewModel.Weathers[0].AreaId.Is("1");
+            viewModel.Weathers[0].AreaId.Is("0001");
             viewModel.Weathers[0].AreaName.Is("東京");
             viewModel.Weathers[0].DataDate.Is("2024/06/10 4:39:10");
             viewModel.Weathers[0].Condition.Is("晴れ");

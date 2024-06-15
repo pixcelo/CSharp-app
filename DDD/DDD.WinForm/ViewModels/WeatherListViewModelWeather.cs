@@ -2,6 +2,9 @@
 
 namespace DDD.WinForm.ViewModels
 {
+    /// <summary>
+    /// 画面に表示する天気情報（各行はGridに文字列で表示する）
+    /// </summary>
     public class WeatherListViewModelWeather
     {
         private WeatherEntity entity;
@@ -11,7 +14,7 @@ namespace DDD.WinForm.ViewModels
             this.entity = entity;
         }
 
-        public string AreaId => entity.AreaId.ToString();
+        public string AreaId => entity.AreaId.DisplayValue;
         public string AreaName => entity.AreaName;
         public string DataDate => entity.DataDate.ToString();
         public string Condition => entity.Condition.DisplayValue;
