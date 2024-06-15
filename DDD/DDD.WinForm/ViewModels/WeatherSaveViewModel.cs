@@ -43,6 +43,14 @@ namespace DDD.WinForm.ViewModels
             //}
 
             Guard.IsNull(this.SelectedAreaId, "エリアを選択してください");
+
+            //float temperature;
+            //if(!float.TryParse(this.TemperatureValue, out temperature))
+            //{
+            //    throw new InputException("温度の入力に誤りがあります");
+            //}
+
+            Guard.IsFloat(this.TemperatureValue, "温度の入力に誤りがあります");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DDD.Domain.Exceptions;
+using System;
 
 namespace DDD.Domain.Helpers
 {
@@ -10,6 +11,17 @@ namespace DDD.Domain.Helpers
             {
                 throw new InputException(message);
             }
+        }
+
+        public static float IsFloat(string text, string message)
+        {
+            float floatValue;
+            if (!float.TryParse(text, out floatValue))
+            {
+                throw new InputException(message);
+            }
+
+            return floatValue;
         }
     }
 }

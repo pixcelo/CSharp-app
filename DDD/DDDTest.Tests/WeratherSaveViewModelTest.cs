@@ -43,6 +43,10 @@ namespace DDDTest.Tests
             // 登録の処理            
             var exception = AssertEx.Throws<InputException>(() => viewModel.Save());
             exception.Message.Is("エリアを選択してください");
+
+            viewModel.SelectedAreaId = 2;
+            exception = AssertEx.Throws<InputException>(() => viewModel.Save());
+            exception.Message.Is("温度の入力に誤りがあります");
         }
     }
 }
