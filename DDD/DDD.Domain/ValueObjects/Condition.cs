@@ -70,5 +70,20 @@ namespace DDD.Domain.ValueObjects
         {
             return this.Value.GetHashCode();
         }
+
+        /// <summary>
+        /// 一覧を取得する
+        /// </summary>
+        /// <returns></returns>
+        public static IList<Condition> ToList()
+        {
+            return new List<Condition>
+            {
+                None,
+                Sunny,
+                Cloudy,
+                Rainy
+            };
+        }
     }
 }
