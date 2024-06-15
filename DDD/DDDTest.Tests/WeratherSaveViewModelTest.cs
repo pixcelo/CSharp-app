@@ -1,4 +1,5 @@
 ﻿using DDD.Domain.Entities;
+using DDD.Domain.Exceptions;
 using DDD.Domain.Repositoriers;
 using DDD.WinForm.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -38,6 +39,10 @@ namespace DDDTest.Tests
             viewModel.TemperatureValue.Is("");
             viewModel.Areas.Count.Is(2);
             viewModel.Conditions.Count.Is(4);
+
+            // 登録の処理            
+            var exception = AssertEx.Throws<InputException>(() => viewModel.Save());
+            exception.Message.Is("エリアを選択してください");
         }
     }
 }

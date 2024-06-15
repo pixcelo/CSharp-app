@@ -1,4 +1,5 @@
 ﻿using DDD.Domain.Entities;
+using DDD.Domain.Exceptions;
 using DDD.Domain.Repositoriers;
 using DDD.Domain.ValueObjects;
 using System;
@@ -32,5 +33,13 @@ namespace DDD.WinForm.ViewModels
         public string TemperatureValue { get; set; }
         public BindingList<AreaEntity> Areas { get; set; } = new BindingList<AreaEntity>();
         public BindingList<Condition> Conditions { get; set; } = new BindingList<Condition>(Condition.ToList());
+
+        public void Save()
+        {
+            if (this.SelectedAreaId == null)
+            {
+                throw new InputException("エリアを選択してください");
+            }
+        }
     }
 }
