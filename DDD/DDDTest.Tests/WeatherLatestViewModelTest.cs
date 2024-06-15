@@ -4,6 +4,7 @@ using DDD.WinForm.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Collections.Generic;
 
 namespace DDDTest.Tests
 {
@@ -21,14 +22,27 @@ namespace DDDTest.Tests
                     Convert.ToDateTime("2024/06/10 4:39:10"),
                     2,
                     12.3f));
+            
+            var areasMock = new Mock<IAreasRepository>();
+            var areas = new List<AreaEntity>
+            {
+                new AreaEntity(1, "東京"),
+                new AreaEntity(2, "大阪")
+            };
+            areasMock.Setup(x => x.GetData()).Returns(areas);
 
-            var viewModel = new WeatherLatestViewModel(weatherMock.Object);
+            var viewModel = new WeatherLatestViewModel(
+                weatherMock.Object,
+                areasMock.Object);
 
             // 初期状態
             Assert.AreEqual("", viewModel.AreaIdText);
             Assert.AreEqual("", viewModel.DataDateText);
             Assert.AreEqual("", viewModel.ConditionText);
             Assert.AreEqual("", viewModel.TemperatureText);
+            Assert.AreEqual(2, viewModel.Areas.Count);
+            Assert.AreEqual(1, viewModel.Areas[0].AreaId);
+            Assert.AreEqual("東京", viewModel.Areas[0].AreaName);
 
             // 情報の取得
             viewModel.AreaIdText = "1";

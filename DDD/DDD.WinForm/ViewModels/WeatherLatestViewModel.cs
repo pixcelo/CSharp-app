@@ -9,12 +9,14 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using DDD.Domain.Entities;
 
 namespace DDD.WinForm.ViewModels
 {
     public class WeatherLatestViewModel : ViewModelBase
     {
-        private IWeatherRepository weather;        
+        private IWeatherRepository weather;
+        private IAreasRepository areas;
 
         // 本番コード：引数無しコンストラクタを呼び出すとSQLiteが注入される
         // テストコード：引数付きコンストラクタを呼び出し、任意のリポジトリを注入する
@@ -22,7 +24,7 @@ namespace DDD.WinForm.ViewModels
         /// <summary>
         /// コンストラクタ　thisで引数付きコンストラクタを呼び出す
         /// </summary>
-        public WeatherLatestViewModel() : this(new WeatherSQLite())
+        public WeatherLatestViewModel() : this(new WeatherSQLite(), null)
         {
         }
 
@@ -30,9 +32,17 @@ namespace DDD.WinForm.ViewModels
         /// コンストラクタ
         /// </summary>
         /// <param name="weather"></param>
-        public WeatherLatestViewModel(IWeatherRepository weather)
+        public WeatherLatestViewModel(
+            IWeatherRepository weather,
+            IAreasRepository areas)
         {
             this.weather = weather;
+            this.areas = areas;
+
+            foreach (var area in this.areas.GetData())
+            {
+                this.Areas.Add(new AreaEntity(area.AreaId, area.AreaName));
+            }
         }
 
         // 値が変更されたときにOnPropertyChagedを呼び出す
@@ -74,7 +84,9 @@ namespace DDD.WinForm.ViewModels
             {
                 SetProperty(ref temperatureText, value);
             }
-        }        
+        }
+
+        public BindingList<AreaEntity> Areas { get; set; } = new BindingList<AreaEntity>();
 
         /// <summary>
         /// 直近の情報を取得する
