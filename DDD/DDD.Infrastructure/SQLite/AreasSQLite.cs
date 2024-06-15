@@ -11,31 +11,59 @@ namespace DDD.Infrastructure.SQLite
         public IReadOnlyList<AreaEntity> GetData()
         {
             string sql = @"
-                SELECT AreaId, AreaName
-                FROM Areas                
-                ";
+                    SELECT AreaId, AreaName
+                    FROM Areas
+                    ";
 
-            var result = new List<AreaEntity>();
+            //return SQLiteHelper.Query<AreaEntity>(sql, CreateEntity);
 
-            using (var connection = new SQLiteConnection(SQLiteHelper.ConnectionString))
-            using (var command = new SQLiteCommand(sql, connection))
-            {
-                connection.Open();
-                
-                using (var reader = command.ExecuteReader())
+            // Queryの後のジェネリック型は省略できる
+            // 第二引数のデリゲートはCreateEntityメソッドを呼び出すだけなので、ラムダ式で置き換える
+            return SQLiteHelper.Query(
+                sql,
+                reader =>
                 {
-                    while (reader.Read())
-                    {
-                        result.Add(
-                            new AreaEntity(
-                                Convert.ToInt32(reader["AreaId"]),
-                                Convert.ToString(reader["AreaName"]))
-                            );
-                    }
-                }
-            }
-
-            return result.AsReadOnly();
+                    return new AreaEntity(
+                        Convert.ToInt32(reader["AreaId"]),
+                        Convert.ToString(reader["AreaName"]));
+                });
         }
+
+        //private AreaEntity CreateEntity(SQLiteDataReader reader)
+        //{
+        //    return new AreaEntity(
+        //        Convert.ToInt32(reader["AreaId"]),
+        //        Convert.ToString(reader["AreaName"]));
+        //}
+
+        //public IReadOnlyList<AreaEntity> GetData()
+        //{
+        //    string sql = @"
+        //        SELECT AreaId, AreaName
+        //        FROM Areas                
+        //        ";
+
+        //    var result = new List<AreaEntity>();
+
+        //    using (var connection = new SQLiteConnection(SQLiteHelper.ConnectionString))
+        //    using (var command = new SQLiteCommand(sql, connection))
+        //    {
+        //        connection.Open();
+
+        //        using (var reader = command.ExecuteReader())
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                result.Add(
+        //                    new AreaEntity(
+        //                        Convert.ToInt32(reader["AreaId"]),
+        //                        Convert.ToString(reader["AreaName"]))
+        //                    );
+        //            }
+        //        }
+        //    }
+
+        //    return result.AsReadOnly();
+        //}
     }
 }
