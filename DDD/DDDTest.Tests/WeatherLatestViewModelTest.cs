@@ -2,8 +2,8 @@
 using DDD.Domain.Repositoriers;
 using DDD.WinForm.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
-using System.Data;
 
 namespace DDDTest.Tests
 {
@@ -13,7 +13,16 @@ namespace DDDTest.Tests
         [TestMethod]
         public void シナリオ()
         {
-            var viewModel = new WeatherLatestViewModel(new WeatherMock());
+            // Moqを使うと、簡単にモックを作成することができる
+            var weatherMock = new Mock<IWeatherRepository>();
+            weatherMock.Setup(x => x.GetLatest(1)).Returns(
+                new WeatherEntity(
+                    1,
+                    Convert.ToDateTime("2024/06/10 4:39:10"),
+                    2,
+                    12.3f));
+
+            var viewModel = new WeatherLatestViewModel(weatherMock.Object);
 
             // 初期状態
             Assert.AreEqual("", viewModel.AreaIdText);
@@ -34,22 +43,22 @@ namespace DDDTest.Tests
     /// <summary>
     /// Weatherのモック
     /// </summary>
-    internal class WeatherMock : IWeatherRepository
-    {        
-        /// <summary>
-        /// 最新の天気情報を取得する
-        /// </summary>
-        /// <param name="areaId"></param>
-        /// <returns></returns>
-        public WeatherEntity GetLatest(int areaId)
-        {
-            return new WeatherEntity(
-                1,
-                Convert.ToDateTime("2024/06/10 4:39:10"),
-                2,
-                12.3f);
-        }
-    }
+    //internal class WeatherMock : IWeatherRepository
+    //{        
+    //    /// <summary>
+    //    /// 最新の天気情報を取得する
+    //    /// </summary>
+    //    /// <param name="areaId"></param>
+    //    /// <returns></returns>
+    //    public WeatherEntity GetLatest(int areaId)
+    //    {
+    //        return new WeatherEntity(
+    //            1,
+    //            Convert.ToDateTime("2024/06/10 4:39:10"),
+    //            2,
+    //            12.3f);
+    //    }
+    //}
 
     /// <summary>
     /// Weatherのモック
