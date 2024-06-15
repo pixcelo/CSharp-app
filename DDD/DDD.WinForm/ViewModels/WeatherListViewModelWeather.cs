@@ -5,7 +5,7 @@ namespace DDD.WinForm.ViewModels
     /// <summary>
     /// 画面に表示する天気情報（各行はGridに文字列で表示する）
     /// </summary>
-    public class WeatherListViewModelWeather
+    public class WeatherListViewModelWeather : ViewModelBase
     {
         private WeatherEntity entity;
 

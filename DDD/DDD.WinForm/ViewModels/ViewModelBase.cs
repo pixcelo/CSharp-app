@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace DDD.WinForm.ViewModels
@@ -33,6 +34,15 @@ namespace DDD.WinForm.ViewModels
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// テストのときはMoqを使って上書きするため、virtualにしておく
+        /// </summary>
+        /// <returns></returns>
+        public virtual DateTime GetDataTime()
+        {
+            return DateTime.Now;
         }
     }
 }
