@@ -12,7 +12,7 @@ using System.ComponentModel;
 
 namespace DDD.WinForm.ViewModels
 {
-    public class WeatherLatestViewModel : INotifyPropertyChanged
+    public class WeatherLatestViewModel : ViewModelBase
     {
         private IWeatherRepository weather;        
 
@@ -42,10 +42,7 @@ namespace DDD.WinForm.ViewModels
             get { return this.areaIdText; }
             set
             {
-                if (this.areaIdText == value) return;
-
-                this.areaIdText = value;
-                OnPropertyChaged(nameof(AreaIdText));
+                SetProperty(ref areaIdText, value);
             }
         }
 
@@ -55,10 +52,7 @@ namespace DDD.WinForm.ViewModels
             get { return this.dataDateText; }
             set
             {
-                if (this.dataDateText == value) return;
-
-                this.dataDateText = value;
-                OnPropertyChaged(nameof(DataDateText));
+                SetProperty(ref dataDateText, value);
             }
         }
 
@@ -68,10 +62,7 @@ namespace DDD.WinForm.ViewModels
             get { return this.conditionText; }
             set
             {
-                if (this.conditionText == value) return;
-
-                this.conditionText = value;
-                OnPropertyChaged(nameof(ConditionText));
+                SetProperty(ref conditionText, value);
             }
         }
 
@@ -81,19 +72,9 @@ namespace DDD.WinForm.ViewModels
             get { return this.temperatureText; }
             set
             {
-                if (this.temperatureText == value) return;
-
-                this.temperatureText = value;
-                OnPropertyChaged(nameof(TemperatureText));
+                SetProperty(ref temperatureText, value);
             }
-        }
-
-        //public string AreaIdText { get; set; } = string.Empty;
-        //public string DataDateText { get; set; } = string.Empty;
-        //public string ConditionText { get; set; } = string.Empty;
-        //public string TemperatureText { get; set; } = string.Empty;
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        }        
 
         /// <summary>
         /// 直近の情報を取得する
@@ -121,16 +102,6 @@ namespace DDD.WinForm.ViewModels
 
             // すべてのプロパティを更新
             //this.OnPropertyChaged(string.Empty);
-        }
-
-        /// <summary>
-        /// 値の変更時にプロパティを同期する
-        /// </summary>
-        /// <param name="propertyName"></param>
-        public void OnPropertyChaged(string propertyName)
-        {
-            this.PropertyChanged?.Invoke(this,
-                new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>

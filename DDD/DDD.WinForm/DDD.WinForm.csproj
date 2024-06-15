@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Common\CommonConst.cs" />
     <Compile Include="Common\CommonFunc.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WeatherLatestViewModel.cs" />
     <Compile Include="Views\WeatherLatestView.cs">
       <SubType>Form</SubType>
