@@ -20,15 +20,27 @@ namespace DDD.Domain.Entities
             DateTime dataDate,
             int condition,
             float temperature)
-        {            
+            : this(areaId, string.Empty, dataDate, condition, temperature)
+        {
+        }
+
+        public WeatherEntity(
+            int areaId,
+            string areaName,
+            DateTime dataDate,
+            int condition,
+            float temperature)
+        {
             this.AreaId = areaId;
+            this.AreaName = areaName;
             this.DataDate = dataDate;
             this.Condition = new Condition(condition);
             this.Temperature = new Temperature(temperature);
         }
 
         // プロパティはインスタンス生成時に設定された値を変更できないようにする
-        public int AreaId { get; }        
+        public int AreaId { get; }
+        public string AreaName { get; }
         public DateTime DataDate { get; }
         public Condition Condition { get; }
         public Temperature Temperature { get; }
