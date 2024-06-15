@@ -35,10 +35,63 @@ namespace DDD.WinForm.ViewModels
             this.weather = weather;
         }
 
-        public string AreaIdText { get; set; } = string.Empty;
-        public string DataDateText { get; set; } = string.Empty;
-        public string ConditionText { get; set; } = string.Empty;
-        public string TemperatureText { get; set; } = string.Empty;
+        // 値が変更されたときにOnPropertyChagedを呼び出す
+        private string areaIdText = string.Empty;
+        public string AreaIdText
+        {
+            get { return this.areaIdText; }
+            set
+            {
+                if (this.areaIdText == value) return;
+
+                this.areaIdText = value;
+                OnPropertyChaged(nameof(AreaIdText));
+            }
+        }
+
+        private string dataDateText = string.Empty;
+        public string DataDateText
+        {
+            get { return this.dataDateText; }
+            set
+            {
+                if (this.dataDateText == value) return;
+
+                this.dataDateText = value;
+                OnPropertyChaged(nameof(DataDateText));
+            }
+        }
+
+        private string conditionText = string.Empty;
+        public string ConditionText
+        {
+            get { return this.conditionText; }
+            set
+            {
+                if (this.conditionText == value) return;
+
+                this.conditionText = value;
+                OnPropertyChaged(nameof(ConditionText));
+            }
+        }
+
+        private string temperatureText = string.Empty;
+        public string TemperatureText
+        {
+            get { return this.temperatureText; }
+            set
+            {
+                if (this.temperatureText == value) return;
+
+                this.temperatureText = value;
+                OnPropertyChaged(nameof(TemperatureText));
+            }
+        }
+
+        //public string AreaIdText { get; set; } = string.Empty;
+        //public string DataDateText { get; set; } = string.Empty;
+        //public string ConditionText { get; set; } = string.Empty;
+        //public string TemperatureText { get; set; } = string.Empty;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -67,7 +120,7 @@ namespace DDD.WinForm.ViewModels
                 //+ CommonConst.TemperatureUnitName;
 
             // すべてのプロパティを更新
-            this.OnPropertyChaged(string.Empty);
+            //this.OnPropertyChaged(string.Empty);
         }
 
         /// <summary>
