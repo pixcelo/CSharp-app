@@ -18,6 +18,11 @@
             return this.Value == other.Value;
         }
 
+        protected override int GetHashCodeCore()
+        {
+            return this.Value.GetHashCode();
+        }
+
         /// <summary>
         /// 0埋めした値を取得
         /// </summary>

@@ -65,5 +65,10 @@ namespace DDD.Domain.ValueObjects
         {
             return this.Value == other.Value;
         }
+
+        protected override int GetHashCodeCore()
+        {
+            return this.Value.GetHashCode();
+        }
     }
 }

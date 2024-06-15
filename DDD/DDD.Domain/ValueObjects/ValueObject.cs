@@ -40,15 +40,20 @@
         }
 
         protected abstract bool EqualsCore(T other);
+        protected abstract int GetHashCodeCore();
 
         public override string ToString()
         {
             return base.ToString();
         }
 
+        /// <summary>
+        /// ハッシュ値も値オブジェクトの値を基に生成する
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.GetHashCodeCore();
         }
     }
 }

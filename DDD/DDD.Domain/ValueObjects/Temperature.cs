@@ -57,6 +57,11 @@ namespace DDD.Domain.ValueObjects
             return Value == other.Value;
         }
 
+        protected override int GetHashCodeCore()
+        {
+            return this.Value.GetHashCode();
+        }
+
         /// <summary>
         /// 値オブジェクト同士が等しいかどうかを判定する
         /// </summary>
