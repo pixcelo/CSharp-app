@@ -1,5 +1,6 @@
 ﻿using DDD.Domain.Entities;
 using DDD.Domain.Repositoriers;
+using DDD.Domain.ValueObjects;
 using DDD.Infrastructure.SQLite;
 using System;
 using System.Collections.Generic;
@@ -71,7 +72,28 @@ namespace DDD.Infrastracture.SQLite
 
         public IReadOnlyList<WeatherEntity> GetData()
         {
-            throw new NotImplementedException();
+            string sql = @"
+               SELECT 
+                    A.AreaId,
+                    IFNULL(B.AreaName, '') as AreaName,
+                    A.DataDate,
+                    A.Condition,
+                    A.Temperature
+                FROM Weather A
+                LEFT JOIN Areas B ON A.AreaId = B.AreaId                
+                ";
+
+            return SQLiteHelper.Query(
+                sql,
+                reader =>
+                {
+                    return new WeatherEntity(
+                        Convert.ToInt32(reader["AreaId"]),
+                        Convert.ToString(reader["AreaName"]),
+                        Convert.ToDateTime(reader["DataDate"]),
+                        Convert.ToInt32(reader["Condition"]),
+                        Convert.ToSingle(reader["Temperature"]));
+                });
         }
     }
 }

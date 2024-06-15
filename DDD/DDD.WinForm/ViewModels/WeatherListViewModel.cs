@@ -1,4 +1,5 @@
 ﻿using DDD.Domain.Repositoriers;
+using DDD.Infrastracture.SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +12,10 @@ namespace DDD.WinForm.ViewModels
     public class WeatherListViewModel : ViewModelBase
     {
         private IWeatherRepository weather;
+
+        public WeatherListViewModel() : this(new WeatherSQLite())
+        {      
+        }
 
         public WeatherListViewModel(IWeatherRepository weather)
         {

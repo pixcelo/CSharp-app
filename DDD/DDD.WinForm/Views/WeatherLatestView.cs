@@ -1,6 +1,7 @@
 ﻿using DDD.Domain.Entities;
 using DDD.WinForm.Common;
 using DDD.WinForm.ViewModels;
+using DDD.WinForm.Views;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -49,6 +50,19 @@ namespace DDD.WinForm
         private void LatestButton_Click(object sender, EventArgs e)
         {
             viewModel.Search();
+        }
+
+        /// <summary>
+        /// リストボタン
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListButton_Click(object sender, EventArgs e)
+        {
+            using (var form = new WeatherListView())
+            {
+                form.ShowDialog();
+            }
         }
 
         //private void button1_Click(object sender, EventArgs e)
