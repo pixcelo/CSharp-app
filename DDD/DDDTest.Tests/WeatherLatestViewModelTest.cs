@@ -36,7 +36,7 @@ namespace DDDTest.Tests
                 areasMock.Object);
 
             // 初期状態
-            Assert.AreEqual("", viewModel.AreaIdText);
+            Assert.IsNull(viewModel.SelectedAreaId);
             Assert.AreEqual("", viewModel.DataDateText);
             Assert.AreEqual("", viewModel.ConditionText);
             Assert.AreEqual("", viewModel.TemperatureText);
@@ -45,9 +45,9 @@ namespace DDDTest.Tests
             Assert.AreEqual("東京", viewModel.Areas[0].AreaName);
 
             // 情報の取得
-            viewModel.AreaIdText = "1";
+            viewModel.SelectedAreaId = 1;
             viewModel.Search();
-            Assert.AreEqual("1", viewModel.AreaIdText);
+            Assert.AreEqual(1, viewModel.SelectedAreaId);
             Assert.AreEqual("2024/06/10 4:39:10", viewModel.DataDateText);
             Assert.AreEqual("曇り", viewModel.ConditionText);
             Assert.AreEqual("12.30 ℃", viewModel.TemperatureText);

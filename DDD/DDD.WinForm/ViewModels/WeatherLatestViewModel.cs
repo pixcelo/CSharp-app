@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using DDD.Domain.Entities;
+using DDD.Infrastructure.SQLite;
 
 namespace DDD.WinForm.ViewModels
 {
@@ -24,7 +25,8 @@ namespace DDD.WinForm.ViewModels
         /// <summary>
         /// コンストラクタ　thisで引数付きコンストラクタを呼び出す
         /// </summary>
-        public WeatherLatestViewModel() : this(new WeatherSQLite(), null)
+        public WeatherLatestViewModel() 
+            : this(new WeatherSQLite(), new AreasSQLite())
         {
         }
 
@@ -46,13 +48,13 @@ namespace DDD.WinForm.ViewModels
         }
 
         // 値が変更されたときにOnPropertyChagedを呼び出す
-        private string areaIdText = string.Empty;
-        public string AreaIdText
+        private object selectedAreaId;
+        public object SelectedAreaId
         {
-            get { return this.areaIdText; }
+            get { return this.selectedAreaId; }
             set
             {
-                SetProperty(ref areaIdText, value);
+                SetProperty(ref selectedAreaId, value);
             }
         }
 
@@ -93,9 +95,9 @@ namespace DDD.WinForm.ViewModels
         /// </summary>
         public void Search()
         {
-            if (string.IsNullOrEmpty(this.AreaIdText)) return;
+            if (this.SelectedAreaId == null) return;
 
-            var entity = this.weather.GetLatest(Convert.ToInt32(this.AreaIdText));
+            var entity = this.weather.GetLatest(Convert.ToInt32(this.SelectedAreaId));
 
             if (entity is null)
             {

@@ -1,4 +1,5 @@
-﻿using DDD.WinForm.Common;
+﻿using DDD.Domain.Entities;
+using DDD.WinForm.Common;
 using DDD.WinForm.ViewModels;
 using System;
 using System.Linq;
@@ -21,8 +22,17 @@ namespace DDD.WinForm
         /// </summary>
         private void DataBind()
         {
-            this.AreaIdTextBox.DataBindings.Add(
-                "Text", viewModel, nameof(viewModel.AreaIdText));
+            this.AreasComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            // コンボボックスのデータソースを設定
+            this.AreasComboBox.DataBindings.Add(
+                "SelectedValue", viewModel, nameof(viewModel.SelectedAreaId));
+            this.AreasComboBox.DataBindings.Add(
+                "DataSource", viewModel, nameof(viewModel.Areas));
+            // コンボボックスの内部的な値はValueMemberで設定
+            this.AreasComboBox.ValueMember = nameof(AreaEntity.AreaId);
+            // コンボボックスの表示はDisplayMemberで設定
+            this.AreasComboBox.DisplayMember = nameof(AreaEntity.AreaName);
+
             this.DataDateLabel.DataBindings.Add(
                 "Text", viewModel, nameof(viewModel.DataDateText));
             this.ConditionLabel.DataBindings.Add(
