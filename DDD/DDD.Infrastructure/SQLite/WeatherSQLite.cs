@@ -46,7 +46,7 @@ namespace DDD.Infrastracture.SQLite
         //        ORDER BY DataDate DESC
         //        LIMIT 1
         //        ";
-            
+
         //    using (var connection = new SQLiteConnection(SQLiteHelper.ConnectionString))
         //    using (var command = new SQLiteCommand(sql, connection))
         //    {
@@ -68,5 +68,10 @@ namespace DDD.Infrastracture.SQLite
 
         //    return null;
         //}
+
+        public IReadOnlyList<WeatherEntity> GetData()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
