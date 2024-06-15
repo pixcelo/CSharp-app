@@ -17,5 +17,10 @@ namespace DDD.Domain.Repositoriers
         /// </summary>
         /// <returns></returns>
         IReadOnlyList<WeatherEntity> GetData();
+
+        /// <summary>
+        /// 天気情報を保存する
+        /// </summary>
+        void Save(WeatherEntity weather);
     }
 }

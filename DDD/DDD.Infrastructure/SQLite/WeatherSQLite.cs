@@ -95,5 +95,10 @@ namespace DDD.Infrastracture.SQLite
                         Convert.ToSingle(reader["Temperature"]));
                 });
         }
+
+        public void Save(WeatherEntity weather)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
