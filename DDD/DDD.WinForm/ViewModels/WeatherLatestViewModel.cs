@@ -101,7 +101,7 @@ namespace DDD.WinForm.ViewModels
 
             if (entity is null)
             {
-                this.DataDateText = "データなし";
+                this.DataDateText = string.Empty;
                 this.ConditionText = string.Empty;
                 this.TemperatureText = string.Empty;
                 return;
