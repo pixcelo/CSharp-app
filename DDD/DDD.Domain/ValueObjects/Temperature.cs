@@ -12,6 +12,7 @@ namespace DDD.Domain.ValueObjects
             this.Value = value;
         }
 
+        public static string Unitname { get; set; }
         public float Value { get; }
 
         /// <summary>

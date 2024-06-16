@@ -65,6 +65,19 @@ namespace DDD.WinForm
             }
         }
 
+        /// <summary>
+        /// 追加ボタン
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            using (var form = new WeatherSaveView())
+            {
+                form.ShowDialog();
+            }
+        }
+
         //private void button1_Click(object sender, EventArgs e)
         //{
         //    if (string.IsNullOrEmpty(this.AreaIdTextBox.Text)) return;

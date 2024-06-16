@@ -42,6 +42,7 @@ namespace DDDTest.Tests
             viewModel.TemperatureValue.Is("");
             viewModel.Areas.Count.Is(2);
             viewModel.Conditions.Count.Is(4);
+            viewModel.TemperatureUnitName.Is("℃");
 
             // 登録の処理            
             var exception = AssertEx.Throws<InputException>(() => viewModel.Save());
