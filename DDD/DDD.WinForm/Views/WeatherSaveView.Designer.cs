@@ -87,9 +87,11 @@
             // 
             // DateTimeTextBox
             // 
+            this.DateTimeTextBox.CustomFormat = "yyyy/MM/dd HH:mm:ss";
+            this.DateTimeTextBox.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.DateTimeTextBox.Location = new System.Drawing.Point(65, 95);
             this.DateTimeTextBox.Name = "DateTimeTextBox";
-            this.DateTimeTextBox.Size = new System.Drawing.Size(134, 19);
+            this.DateTimeTextBox.Size = new System.Drawing.Size(153, 19);
             this.DateTimeTextBox.TabIndex = 5;
             // 
             // AreaIdComboBox
