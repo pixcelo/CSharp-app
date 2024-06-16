@@ -98,7 +98,33 @@ namespace DDD.Infrastracture.SQLite
 
         public void Save(WeatherEntity weather)
         {
-            throw new NotImplementedException();
+            string insert = @"
+                INSERT INTO Weather
+                (AreaId, DataDate, Condition, Temperature)
+                VALUES
+                (@AreaId, @DataDate, @Condition, @Temperature);
+                ";
+
+            string update = @"
+                
+                UPDATE Weather 
+                SET
+                    Condition = @Condition,
+                    Temperature = @Temperature
+                WHERE
+                    AreaId = @AreaId
+                AND DataDate = @DataDate
+                ";
+
+            var args = new List<SQLiteParameter>
+            {
+                new SQLiteParameter("@AreaId", weather.AreaId.Value),
+                new SQLiteParameter("@DataDate", weather.DataDate),
+                new SQLiteParameter("@Condition", weather.Condition.Value),
+                new SQLiteParameter("@Temperature", weather.Temperature.Value),
+            };
+
+            SQLiteHelper.Execute(insert, update, args.ToArray());
         }
     }
 }
