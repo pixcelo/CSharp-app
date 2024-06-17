@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             splitContainer1 = new SplitContainer();
-            checkBox1 = new CheckBox();
             label1 = new Label();
+            checkBox1 = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.SuspendLayout();
@@ -39,6 +39,7 @@
             // splitContainer1
             // 
             splitContainer1.BackColor = SystemColors.ButtonShadow;
+            splitContainer1.Dock = DockStyle.Bottom;
             splitContainer1.Location = new Point(0, 263);
             splitContainer1.Name = "splitContainer1";
             // 
@@ -51,6 +52,15 @@
             splitContainer1.SplitterWidth = 10;
             splitContainer1.TabIndex = 0;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 0;
+            label1.Text = "label1";
+            // 
             // checkBox1
             // 
             checkBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -62,15 +72,6 @@
             checkBox1.Text = "checkBox1";
             checkBox1.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 0;
-            label1.Text = "label1";
-            // 
             // SubForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -79,6 +80,7 @@
             Controls.Add(splitContainer1);
             Name = "SubForm";
             Text = "SubForm";
+            Load += SubForm_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
