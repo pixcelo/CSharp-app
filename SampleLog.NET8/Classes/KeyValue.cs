@@ -19,6 +19,15 @@
             //return default(T);
             return default;
         }
+
+        /// <summary>
+        /// ジェネリックメソッド
+        /// </summary>
+        /// <param name="value"></param>
+        public Type? GenMethod<TValue>(TValue value)
+        {
+            return value?.GetType();
+        }
     }
 
     public class ClientKeyValue
