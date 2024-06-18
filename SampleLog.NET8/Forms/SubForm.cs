@@ -20,33 +20,36 @@ namespace SampleLog.NET8.Forms
         /// <exception cref="CsvException"></exception>
         private void productCsvButton_Click(object sender, EventArgs e)
         {
-            var lines = File.ReadAllLines("Product.csv");
-            bool isFirst = true;
-            var entities = new List<ProductEntity>();
-            foreach (var line in lines)
-            {
-                if (isFirst)
-                {
-                    isFirst = false;
-                    continue;
-                }
+            //var lines = File.ReadAllLines("Product.csv");
+            //bool isFirst = true;
+            //var entities = new List<ProductEntity>();
+            //foreach (var line in lines)
+            //{
+            //    if (isFirst)
+            //    {
+            //        isFirst = false;
+            //        continue;
+            //    }
 
-                var values = line.Split(',');
-                if (values.Length != 3)
-                {
-                    throw new CsvException();
-                }
+            //    var values = line.Split(',');
+            //    if (values.Length != 3)
+            //    {
+            //        throw new CsvException();
+            //    }
 
-                var product = new ProductEntity(
-                    Convert.ToInt32(values[0]),
-                    values[1],
-                    Convert.ToInt32(values[2])
-                );
+            //    var product = new ProductEntity(
+            //        Convert.ToInt32(values[0]),
+            //        values[1],
+            //        Convert.ToInt32(values[2])
+            //    );
 
-                entities.Add(product);
-            }
+            //    entities.Add(product);
+            //}
 
-            dataGridView1.DataSource = entities;
+            //dataGridView1.DataSource = entities;
+
+            var productCsv = new ProductCsv();
+            dataGridView1.DataSource = productCsv.GetData();
         }
 
         /// <summary>
@@ -56,32 +59,35 @@ namespace SampleLog.NET8.Forms
         /// <param name="e"></param>
         private void stockCsvButton_Click(object sender, EventArgs e)
         {
-            var lines = File.ReadAllLines("Stock.csv");
-            bool isFirst = true;
-            var entities = new List<StockEntity>();
-            foreach (var line in lines)
-            {
-                if (isFirst)
-                {
-                    isFirst = false;
-                    continue;
-                }
+            //var lines = File.ReadAllLines("Stock.csv");
+            //bool isFirst = true;
+            //var entities = new List<StockEntity>();
+            //foreach (var line in lines)
+            //{
+            //    if (isFirst)
+            //    {
+            //        isFirst = false;
+            //        continue;
+            //    }
 
-                var values = line.Split(',');
-                if (values.Length != 2)
-                {
-                    throw new CsvException();
-                }
+            //    var values = line.Split(',');
+            //    if (values.Length != 2)
+            //    {
+            //        throw new CsvException();
+            //    }
 
-                var stock = new StockEntity(
-                    Convert.ToInt32(values[0]),                    
-                    Convert.ToInt32(values[1])
-                );
+            //    var stock = new StockEntity(
+            //        Convert.ToInt32(values[0]),                    
+            //        Convert.ToInt32(values[1])
+            //    );
 
-                entities.Add(stock);
-            }
+            //    entities.Add(stock);
+            //}
 
-            dataGridView1.DataSource = entities;
+            //dataGridView1.DataSource = entities;
+
+            var stockCsv = new StockCsv();
+            dataGridView1.DataSource = stockCsv.GetData();
         }
         #endregion
 
@@ -172,6 +178,49 @@ namespace SampleLog.NET8.Forms
             /// <param name="values"></param>
             /// <returns></returns>
             protected abstract T GetEntity(string[] values);
+        }
+
+        public class ProductCsv : CsvBase<ProductEntity>
+        {
+            protected override ProductEntity GetEntity(string[] values)
+            {
+                return new ProductEntity(
+                    Convert.ToInt32(values[0]),
+                    values[1],
+                    Convert.ToInt32(values[2])
+                );
+            }
+
+            protected override int GetItemCount()
+            {
+                return 3;
+            }
+
+            protected override string GetPath()
+            {
+                return "Product.csv";
+            }
+        }
+
+        public class StockCsv : CsvBase<StockEntity>
+        {
+            protected override StockEntity GetEntity(string[] values)
+            {
+                return new StockEntity(
+                    Convert.ToInt32(values[0]),
+                    Convert.ToInt32(values[1])
+                );
+            }
+
+            protected override int GetItemCount()
+            {
+                return 2;
+            }
+
+            protected override string GetPath()
+            {
+                return "Stock.csv";
+            }
         }
     }
 }
