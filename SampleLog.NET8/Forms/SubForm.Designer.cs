@@ -84,6 +84,7 @@
             productCsvButton.TabIndex = 1;
             productCsvButton.Text = "product csv";
             productCsvButton.UseVisualStyleBackColor = true;
+            productCsvButton.Click += productCsvButton_Click;
             // 
             // dataGridView1
             // 
