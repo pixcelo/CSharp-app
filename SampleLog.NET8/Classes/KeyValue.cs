@@ -9,6 +9,16 @@
     {
         public string Key { get; set; }
         public T Value { get; set; }
+
+        /// <summary>
+        /// T型の初期値を返却できる
+        /// </summary>
+        /// <returns></returns>
+        public T? GetDate()
+        {
+            //return default(T);
+            return default;
+        }
     }
 
     public class ClientKeyValue
