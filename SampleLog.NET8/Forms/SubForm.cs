@@ -11,13 +11,13 @@ namespace SampleLog.NET8.Forms
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
-        private void SubForm_Load(object sender, EventArgs e)
-        {
-            var keyValue = new KeyValue<string>();
-            keyValue.Key = "Key";
-            keyValue.Value = "1";
-        }
-
+        #region イベントハンドラ        
+        /// <summary>
+        /// CSVファイルを読み込む
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="CsvException"></exception>
         private void productCsvButton_Click(object sender, EventArgs e)
         {
             var lines = File.ReadAllLines("Product.csv");
@@ -49,7 +49,44 @@ namespace SampleLog.NET8.Forms
             dataGridView1.DataSource = entities;
         }
 
-        public class CsvException : Exception {}
+        /// <summary>
+        /// CSVファイルを読み込む
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void stockCsvButton_Click(object sender, EventArgs e)
+        {
+            var lines = File.ReadAllLines("Stock.csv");
+            bool isFirst = true;
+            var entities = new List<StockEntity>();
+            foreach (var line in lines)
+            {
+                if (isFirst)
+                {
+                    isFirst = false;
+                    continue;
+                }
+
+                var values = line.Split(',');
+                if (values.Length != 2)
+                {
+                    throw new CsvException();
+                }
+
+                var stock = new StockEntity(
+                    Convert.ToInt32(values[0]),                    
+                    Convert.ToInt32(values[1])
+                );
+
+                entities.Add(stock);
+            }
+
+            dataGridView1.DataSource = entities;
+        }
+        #endregion
+
+        #region エンティティクラス
+        public class CsvException : Exception { }
 
         /// <summary>        
         /// CSVファイルの1行を表すクラス
@@ -67,5 +104,21 @@ namespace SampleLog.NET8.Forms
             public string ProductName { get; }
             public int Price { get; }
         }
+
+        /// <summary>        
+        /// CSVファイルの1行を表すクラス
+        /// </summary>
+        public class StockEntity
+        {
+            public StockEntity(int id, int stockCount)
+            {
+                this.Id = id;
+                this.StockCount = stockCount;
+            }
+
+            public int Id { get; }
+            public int StockCount { get; }
+        }
+        #endregion
     }
 }
