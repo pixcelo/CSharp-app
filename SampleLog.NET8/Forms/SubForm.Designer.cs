@@ -31,9 +31,13 @@
             splitContainer1 = new SplitContainer();
             label1 = new Label();
             checkBox1 = new CheckBox();
+            productCsvButton = new Button();
+            dataGridView1 = new DataGridView();
+            stockCsvButton = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // splitContainer1
@@ -72,11 +76,40 @@
             checkBox1.Text = "checkBox1";
             checkBox1.UseVisualStyleBackColor = true;
             // 
+            // productCsvButton
+            // 
+            productCsvButton.Location = new Point(12, 21);
+            productCsvButton.Name = "productCsvButton";
+            productCsvButton.Size = new Size(123, 23);
+            productCsvButton.TabIndex = 1;
+            productCsvButton.Text = "product csv";
+            productCsvButton.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(12, 60);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(512, 150);
+            dataGridView1.TabIndex = 2;
+            // 
+            // stockCsvButton
+            // 
+            stockCsvButton.Location = new Point(150, 21);
+            stockCsvButton.Name = "stockCsvButton";
+            stockCsvButton.Size = new Size(123, 23);
+            stockCsvButton.TabIndex = 3;
+            stockCsvButton.Text = "stock csv";
+            stockCsvButton.UseVisualStyleBackColor = true;
+            // 
             // SubForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(stockCsvButton);
+            Controls.Add(dataGridView1);
+            Controls.Add(productCsvButton);
             Controls.Add(splitContainer1);
             Name = "SubForm";
             Text = "SubForm";
@@ -85,6 +118,7 @@
             splitContainer1.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -93,5 +127,8 @@
         private SplitContainer splitContainer1;
         private CheckBox checkBox1;
         private Label label1;
+        private Button productCsvButton;
+        private DataGridView dataGridView1;
+        private Button stockCsvButton;
     }
 }
