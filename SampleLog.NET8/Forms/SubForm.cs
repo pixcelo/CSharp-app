@@ -120,5 +120,58 @@ namespace SampleLog.NET8.Forms
             public int StockCount { get; }
         }
         #endregion
+
+        /// <summary>
+        /// CSVファイルの読み込み処理を共通化する抽象クラス
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public abstract class CsvBase<T>
+        {
+            public IEnumerable<T> GetData()
+            {
+                var lines = File.ReadAllLines(GetPath());
+                bool isFirst = true;
+                var entities = new List<T>();
+                foreach (var line in lines)
+                {
+                    if (isFirst)
+                    {
+                        isFirst = false;
+                        continue;
+                    }
+
+                    var values = line.Split(',');
+                    if (values.Length != GetItemCount())
+                    {
+                        throw new CsvException();
+                    }
+
+                    var entity = GetEntity(values);
+                    entities.Add(entity);
+                }
+
+                return entities;
+            }
+
+            // 個別の処理は派生クラスに実装する
+            /// <summary>
+            /// CSVファイルのパスを取得する
+            /// </summary>
+            /// <returns></returns>
+            protected abstract string GetPath();
+
+            /// <summary>
+            /// CSVファイルの列数を取得する
+            /// </summary>
+            /// <returns></returns>
+            protected abstract int GetItemCount();
+
+            /// <summary>
+            /// CSVの1行からエンティティを取得する
+            /// </summary>
+            /// <param name="values"></param>
+            /// <returns></returns>
+            protected abstract T GetEntity(string[] values);
+        }
     }
 }
