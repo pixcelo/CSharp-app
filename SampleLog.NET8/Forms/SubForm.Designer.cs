@@ -33,6 +33,7 @@
             checkBox1 = new CheckBox();
             productCsvButton = new Button();
             dataGridView1 = new DataGridView();
+            Checked = new DataGridViewCheckBoxColumn();
             stockCsvButton = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -89,10 +90,20 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Checked });
             dataGridView1.Location = new Point(12, 60);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.Size = new Size(512, 150);
             dataGridView1.TabIndex = 2;
+            // 
+            // Checked
+            // 
+            Checked.Frozen = true;
+            Checked.HeaderText = "";
+            Checked.Name = "Checked";
+            Checked.Resizable = DataGridViewTriState.True;
+            Checked.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // stockCsvButton
             // 
@@ -130,5 +141,6 @@
         private Button productCsvButton;
         private DataGridView dataGridView1;
         private Button stockCsvButton;
+        private DataGridViewCheckBoxColumn Checked;
     }
 }
