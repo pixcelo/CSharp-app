@@ -47,6 +47,8 @@
     <Compile Include="Basis\DictionaryTips.cs" />
     <Compile Include="Basis\LiteralTips.cs" />
     <Compile Include="Basis\SwitchTips.cs" />
+    <Compile Include="Classes\Price.cs" />
+    <Compile Include="Classes\SystemSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTest\Calc.cs" />
