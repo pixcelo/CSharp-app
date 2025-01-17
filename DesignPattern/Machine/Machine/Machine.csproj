@@ -41,11 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Box.cs" />
-    <Compile Include="Camera.cs" />
-    <Compile Include="Fan.cs" />
-    <Compile Include="FanEntity.cs" />
-    <Compile Include="Power.cs" />
+    <Compile Include="Objects\Box.cs" />
+    <Compile Include="Objects\Camera.cs" />
+    <Compile Include="Objects\Fan.cs" />
+    <Compile Include="Objects\FanEntity.cs" />
+    <Compile Include="MachineFacade.cs" />
+    <Compile Include="Objects\Power.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
