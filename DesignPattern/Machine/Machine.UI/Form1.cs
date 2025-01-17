@@ -19,7 +19,7 @@ namespace Machine.UI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            MachineFacade.PowerOn();            
+            UIShared.MachineFacade.PowerOn();
         }
     }
 }

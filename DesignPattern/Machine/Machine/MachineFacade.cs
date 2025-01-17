@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Machine
 {
@@ -12,15 +8,15 @@ namespace Machine
     /// クライアント側に知識がなくても、サブシステムを利用できるようにする
     /// </remarks>
     /// </summary>
-    public static class MachineFacade
+    public class MachineFacade : IMachineFacade
     {
-        private static int _fanStopValue;
+        private int _fanStopValue;
 
         /// <summary>
         /// 同じようなAPIは、語尾を変えてクライアント側に提供する
         /// </summary>
         /// <returns></returns>
-        public static int BoxInternalTemperatureFunStop()
+        public int BoxInternalTemperatureFunStop()
         {
             FanStop(0);
 
@@ -37,22 +33,22 @@ namespace Machine
             }
         }
 
-        public static int BoxGetInternalTemperature()
+        public int BoxGetInternalTemperature()
         {
             return new Box().GetInternalTemperature();
         }
 
-        public static int BoxGetInternalTemperatureInMemory()
+        public int BoxGetInternalTemperatureInMemory()
         {
             return _fanStopValue;
         }
 
-        public static int BoxGetExternalTemperature()
+        public int BoxGetExternalTemperature()
         {
             return new Box().GetExternalTemperature();
         }
 
-        public static void CameraTake()
+        public void CameraTake()
         {
             // メソッドに利用手順がある場合にもファサードで吸収する
             // クライアントは利用手順を知らなくてもよい
@@ -64,32 +60,32 @@ namespace Machine
             new Camera().Take();
         }
 
-        public static FanEntity FanSpin(int fanId)
+        public FanEntity FanSpin(int fanId)
         {
             return new Fan().GetSpin(fanId);
         }
 
-        public static void FanStart(int fanId)
+        public void FanStart(int fanId)
         {
             new Fan().Start(fanId);
         }
 
-        public static void FanStop(int fanId)
+        public void FanStop(int fanId)
         {
             new Fan().Stop(fanId);
         }
 
-        public static void PowerOn()
+        public void PowerOn()
         {
             new Power().On();
         }
 
-        public static void PowerOff()
+        public void PowerOff()
         {
             new Power().Off();
         }
 
-        public static void BacklightOff()
+        public void BacklightOff()
         {
             new Power().BacklightOff();
         }
