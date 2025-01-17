@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Machine
 {
-    public class Box
+    internal class Box
     {
         private Random _random = new Random();
         public int GetInternalTemperature()

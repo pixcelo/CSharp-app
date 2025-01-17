@@ -2,7 +2,7 @@
 
 namespace Machine
 {
-    public class Fan
+    internal class Fan
     {
         private Random _random = new Random();
         public FanEntity GetSpin(int fanId)

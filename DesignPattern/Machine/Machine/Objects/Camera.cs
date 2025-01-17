@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Machine
 {
-    public class Camera
+    internal class Camera
     {
         public void Take()
         {

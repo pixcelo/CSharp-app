@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Machine
 {
-    public class Power
+    internal class Power
     {
         public void On()
         { }
